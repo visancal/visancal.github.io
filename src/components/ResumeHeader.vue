@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 class="vs_top my-2">
+  <v-flex xs12 class="vs_top mt-3 mb-2">
     <v-layout row wrap>
       <v-flex xs2 md1 class="vs_avatar">
         <img src="https://pbs.twimg.com/profile_images/917405606872584192/2ODysIaf_400x400.jpg" alt />

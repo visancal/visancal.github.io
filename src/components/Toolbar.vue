@@ -1,23 +1,19 @@
 <template>
   <v-app-bar app color="indigo" dark flat dense class="vs_toolbar">
-    <v-toolbar-title class="ml-4">Vicent Sanjaime</v-toolbar-title>
+    <v-toolbar-title class="ml-4 vs_title">Vicent Sanjaime</v-toolbar-title>
     <div class="flex-grow-1"></div>
 
-    <v-btn text small class="mx-2" @click="goHome">Home</v-btn>
-    <v-btn text small class="mx-2" @click="goResume">Resume</v-btn>
+    <v-btn text small class="mx-2" @click="goHome">{{$t('home')}}</v-btn>
+    <v-btn text small class="mx-2" @click="goResume">{{$t('resume')}}</v-btn>
     <div class="flex-grow-1"></div>
-    <v-btn icon>
-      <a target="_blank" href="https://twitter.com/visancal"></a>
+    <v-btn icon @click="goTwitter" title="{{$t('twitter')}}">
       <v-icon>mdi-twitter</v-icon>
     </v-btn>
-    <v-btn icon>
-      <a target="_blank" href></a>
+    <v-btn icon @click="goLinkedin">
       <v-icon>mdi-linkedin</v-icon>
     </v-btn>
-    <v-btn icon>
-      <a target="_blank" href="https://www.instagram.com/visancal/?hl=es">
-        <v-icon>mdi-instagram</v-icon>
-      </a>
+    <v-btn icon @click="goInstagram">
+      <v-icon>mdi-instagram</v-icon>
     </v-btn>
   </v-app-bar>
 </template>
@@ -32,6 +28,29 @@ export default {
     },
     goResume() {
       this.$router.push("/resume");
+    },
+    openInNewTab(url) {
+      window.open(url, "_blank").focus();
+    },
+    goTwitter() {
+      this.openInNewTab("https://twitter.com/visancal");
+    },
+    goLinkedin() {
+      this.openInNewTab("https://www.linkedin.com/in/vsanjaime/");
+    },
+    goInstagram() {
+      this.openInNewTab("https://www.instagram.com/visancal/?hl=es");
+    }
+  },
+  computed: {
+    twitterTitle() {
+      return this.$t("twitter");
+    },
+    linkedinTitle() {
+      return this.$t("linkedin");
+    },
+    instagramTitle() {
+      return this.$t("instagram");
     }
   }
 };
@@ -40,4 +59,9 @@ export default {
 <style scoped>
 .vs_toolbar {
 }
-</style>;
+.vs_title {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+</style>
+
