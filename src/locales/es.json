@@ -1,7 +1,10 @@
 {
 	"home": "Intro",
 	"resume": "CV",
-	"twitter": "Enlace Twitter",
-	"linkedin": "Enlace LinkedIn",
-	"instagram": "Enlace Instagram"
+	"courses": "Cursos",
+	"twitter": "Mi Twitter",
+	"linkedin": "Mi LinkedIn",
+	"instagram": "Mis fotos en Instagram",
+	"name": "Vicent Sanjaime Calvet",
+	"subtitle": "Programador front-end, consultor SIG y responsable de producto en Prodevelop"
 }

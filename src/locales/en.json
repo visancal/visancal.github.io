@@ -1,7 +1,10 @@
 {
 	"home": "Home",
 	"resume": "Resume",
+	"courses": "Courses",
 	"twitter": "Link Twitter",
 	"linkedin": "Link LinkedIn",
-	"instagram": "Link Instagram"
+	"instagram": "Link Instagram",
+	"name": "Vicent Sanjaime Calvet",
+	"subtitle": "Front-end developer, GIS consultant and product manager at Prodevelop"
 }

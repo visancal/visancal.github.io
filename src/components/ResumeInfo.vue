@@ -1,8 +1,8 @@
 <template>
   <v-flex xs12 class="vs_info my-2">
-    <v-layout row wrap>
+    <v-layout row wrap class="mx-2">
       <!-- INFO -->
-      <v-flex xs10 class="pl-2 pr-5">
+      <v-flex xs12 md8 lg10 class="pl-2 pr-5">
         <!-- Perfil -->
         <v-layout column class="my-4">
           <v-flex xs12 class="vs_section_title">Perfil</v-flex>
@@ -62,7 +62,7 @@
         </v-layout>
       </v-flex>
       <!-- SKILLSETS -->
-      <v-flex xs2 class="vs_rightsection pa-5">
+      <v-flex xs12 md4 lg2 class="vs_rightsection pa-5">
         <!-- Competencias -->
         <v-layout column class="my-3">
           <v-flex xs12 class="vs_section_title">Competencias</v-flex>
@@ -124,28 +124,32 @@ export default {
 </script>
 
 
-<style scoped>
-.vs_section_title {
-  color: #283593;
-  font-size: 1.4rem;
-  font-weight: bold;
-}
-.vs_section_subtitle {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-left: 2rem;
-}
-.vs_section_dates {
-  font-size: 1rem;
-  color: gray;
-  margin-left: 2rem;
-}
-.vs_section_text {
-  font-size: 1rem;
-  margin-left: 2rem;
-}
-.vs_rightsection {
-  background-color: #f5f5f5;
-  border-radius: 5px;
+<style lang="postcss" scoped>
+.vs_info {
+  overflow-y: auto !important;
+
+  & .vs_section_title {
+    color: #283593;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  & .vs_section_subtitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-left: 2rem;
+  }
+  & .vs_section_dates {
+    font-size: 1rem;
+    color: gray;
+    margin-left: 2rem;
+  }
+  & .vs_section_text {
+    font-size: 1rem;
+    margin-left: 2rem;
+  }
+  & .vs_rightsection {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
 }
 </style>
