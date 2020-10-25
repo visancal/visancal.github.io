@@ -1,6 +1,6 @@
 <template>
 	<div class="vs_home">
-		<v-carousel :height="imgHeight" :show-arrows="false">
+		<v-carousel cycle continuous :interval="10000" hide-delimiters :height="imgHeight" :show-arrows="false">
 			<v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" reverse-transition="fade-transition" transition="fade-transition">
 				<Header />
 				<v-container>
@@ -36,10 +36,10 @@ import Header from '@/components/Header.vue'; // @ is an alias to /src
 		return {
 			items: [
 				{
-					src: require('../assets/intro.jpg')
+					src: require('../assets/home/intro.webp')
 				},
 				{
-					src: require('../assets/intro3.jpg')
+					src: require('../assets/home/intro2.webp')
 				}
 			]
 		};

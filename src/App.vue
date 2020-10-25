@@ -19,7 +19,7 @@ export default Vue.extend({
 </script>
 <style>
 html {
-	overflow-y: hidden;
+	overflow-y: hidden !important;
 	font-weight: 300;
 }
 body {
@@ -51,8 +51,5 @@ ul li::before {
 	display: inline-block; /* Needed to add space between the bullet and the text */
 	width: 1.4em; /* Also needed for space (tweak if needed) */
 	margin-left: -1.3em; /* Also needed for space (tweak if needed) */
-}
-.v-carousel__controls {
-	display: none !important;
 }
 </style>

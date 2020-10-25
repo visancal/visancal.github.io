@@ -21,13 +21,13 @@ const routes: Array<RouteConfig> = [
     name: "background",
     component: () =>
       import( "../views/Background.vue")
-  },
+  }/*,
   {
     path: "/trips",
     name: "trips",
     component: () =>
       import( "../views/Trips.vue")
-  }
+  }*/
 ];
 
 const router = new VueRouter({

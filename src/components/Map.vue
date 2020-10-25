@@ -18,15 +18,15 @@ import { BitmapLayer, PathLayer } from '@deck.gl/layers';
 		};
 	},
 	computed: {
-		venuesData() {
+		venuesData(): object[] {
 			return this.$store.getters.venues;
 		}
 	},
 	methods: {
-		createMap() {
+		createMap(): void {
 			const showBorder = false;
 
-			const devicePixelRatio = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
+			const devicePixelRatio: number = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
 			const INITIAL_VIEW_STATE = {
 				latitude: 0,
 				longitude: 0,
@@ -54,12 +54,12 @@ import { BitmapLayer, PathLayer } from '@deck.gl/layers';
 				// getIcon: return a string
 				iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
 				iconMapping: ICON_MAPPING,
-				getIcon: (d) => 'marker',
+				getIcon: (d: any) => 'marker',
 
 				sizeScale: 15,
-				getPosition: (d) => d.coordinates,
-				getSize: (d) => 5,
-				getColor: (d) => [Math.sqrt(d.exits), 140, 0]
+				getPosition: (d: any) => d.coordinates,
+				getSize: (d: any) => 5,
+				getColor: (d: any) => [Math.sqrt(d.exits), 140, 0]
 			});
 			const osmLayer = new TileLayer({
 				// https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Tile_servers
@@ -82,7 +82,7 @@ import { BitmapLayer, PathLayer } from '@deck.gl/layers';
 				maxZoom: 19,
 				tileSize: 512 / devicePixelRatio,
 
-				renderSubLayers: (props) => {
+				renderSubLayers: (props: any) => {
 					const {
 						bbox: { west, south, east, north }
 					} = props.tile;
@@ -106,7 +106,7 @@ import { BitmapLayer, PathLayer } from '@deck.gl/layers';
 										[west, north]
 									]
 								],
-								getPath: (d) => d,
+								getPath: (d: any) => d,
 								getColor: [255, 0, 0],
 								widthMinPixels: 4
 							})
@@ -114,7 +114,7 @@ import { BitmapLayer, PathLayer } from '@deck.gl/layers';
 				}
 			});
 
-			this.deck = new Deck({
+			(this as any).deck = new Deck({
 				canvas: 'map',
 				views: [new MapView({ id: 'osm', repeat: true, height: '80%' })],
 				initialViewState: INITIAL_VIEW_STATE,
@@ -123,17 +123,17 @@ import { BitmapLayer, PathLayer } from '@deck.gl/layers';
 			});
 		},
 		deckInit: function() {
-			this.createMap();
+			(this as any).createMap();
 		},
 		deckDestroy() {
-			this.deck.finalize();
+			(this as any).deck.finalize();
 		}
 	},
 	mounted() {
-		this.deckInit();
+		(this as any).deckInit();
 	},
 	beforeDestroy() {
-		this.deckDestroy();
+		(this as any).deckDestroy();
 	}
 })
 export default class Logo extends Vue {}

@@ -18,7 +18,7 @@
 					<!--<v-icon left class="mr-2">
 						mdi-book-open-page-variant
 					</v-icon>-->
-					Background
+					Professional background
 				</v-btn>
 				<v-btn
 					color="light-blue darken-4"
@@ -32,12 +32,9 @@
 					</v-icon>-->
 					Projects
 				</v-btn>
-				<v-btn color="light-blue darken-4" text class="mr-2 elevation-0 vs_header_btn" @click="goTrips" :outlined="selectedTab === 'trips'">
-					<!--<v-icon left class="mr-2">
-						mdi-rocket-launch
-					</v-icon>-->
+				<!--<v-btn color="light-blue darken-4" text class="mr-2 elevation-0 vs_header_btn" @click="goTrips" :outlined="selectedTab === 'trips'">
 					Trips
-				</v-btn>
+				</v-btn>-->
 			</v-row>
 		</v-app-bar>
 		<v-app-bar dense flat color="rgba(255,255,255,0.2)" v-show="isHome">
@@ -71,40 +68,40 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
 	computed: {
-		selectedTab() {
+		selectedTab(): string {
 			return this.$store.getters.currentTab;
 		},
-		isHome() {
-			return this.selectedTab === 'home';
+		isHome(): boolean {
+			return this.$store.getters.currentTab === 'home';
 		}
 	},
 	methods: {
-		goHome() {
+		goHome(): void {
 			this.$store.commit('changeCurrentTab', 'home');
 			this.$router.push({ path: '/' });
 		},
-		goBackground() {
+		goBackground(): void {
 			this.$store.commit('changeCurrentTab', 'background');
 			this.$router.push({ path: 'background' });
 		},
-		goProjects() {
+		goProjects(): void {
 			this.$store.commit('changeCurrentTab', 'projects');
 			this.$router.push({ path: 'projects' });
 		},
-		goTrips() {
+		goTrips(): void {
 			this.$store.commit('changeCurrentTab', 'trips');
 			this.$router.push({ path: 'trips' });
 		},
-		goTwitter() {
+		goTwitter(): void {
 			window.open('https://twitter.com/visancal');
 		},
-		goInstagram() {
+		goInstagram(): void {
 			window.open('https://www.instagram.com/visancal/');
 		},
-		goLinkedin() {
+		goLinkedin(): void {
 			window.open('https://www.linkedin.com/in/vsanjaime/');
 		},
-		goGithub() {
+		goGithub(): void {
 			window.open('https://github.com/visancal');
 		}
 	},

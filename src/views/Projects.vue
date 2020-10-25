@@ -1,52 +1,110 @@
 <template>
 	<div class="vs_projects pb-5">
-		<Header />
-		<v-carousel :height="200" :show-arrows="false">
-			<v-carousel-item
-				v-for="(item, i) in items"
-				:key="i"
-				:src="item.src"
-				reverse-transition="fade-transition"
-				transition="fade-transition"
-			></v-carousel-item>
-		</v-carousel>
-		<v-container>
-			<v-timeline>
-				<v-timeline-item small>timeline item</v-timeline-item>
-				<v-timeline-item small class="text-right">
-					timeline item
-				</v-timeline-item>
-				<v-timeline-item small>timeline item</v-timeline-item>
-				<v-timeline-item small class="text-right">
-					timeline item
-				</v-timeline-item>
-				<v-timeline-item small>timeline item</v-timeline-item>
-			</v-timeline>
-		</v-container>
+		<section>
+			<Header />
+			<v-carousel cycle continuous hide-delimiters :height="220" :show-arrows="false">
+				<v-carousel-item
+					v-for="(item, i) in items"
+					:key="i"
+					:src="item.src"
+					reverse-transition="fade-transition"
+					transition="fade-transition"
+				></v-carousel-item>
+			</v-carousel>
+		</section>
+		<section class="vs_timeline_info">
+			<v-container>
+				<v-row class="ma-5">
+					<p>
+						Since I started my professional career I have had the opportunity to work in a bunch of different GIS projects with differents
+						technologies. On the timeline below shows the main projects in which I have participated and the technologies used. This list
+						also includes some personal and R&D projects.
+					</p>
+				</v-row>
+				<v-row justify="center">
+					<v-timeline class="vs_timeline">
+						<v-timeline-item small v-for="(project, index) in projects" :key="index" color="#b21b57">
+							<template v-slot:opposite>
+								<v-row :justify="startEnd(index)">
+									<v-chip small chip label class="white--text" color="#1b237b"
+										><v-icon small left class="white--text"> mdi-calendar-month </v-icon>{{ project.date }}</v-chip
+									>
+								</v-row>
+								<v-row :justify="startEnd(index)">
+									<v-chip small chip label class="white--text mt-1" :color="isPersonal(project.company)">{{
+										project.company
+									}}</v-chip>
+								</v-row>
+								<v-row v-if="project.rd" :justify="startEnd(index)">
+									<v-chip small chip label class="white--text mt-1" color="#EF6C00">R&D</v-chip>
+								</v-row>
+							</template>
+							<v-card class="elevation-1 px-4" :class="{ vs_card_odd: isOdd(index), vs_card_even: !isOdd(index) }">
+								<v-card-text>
+									<v-row class="vs_project_title">{{ project.title }} </v-row>
+									<v-row class="mt-2 vs_project_description"> {{ project.description }} </v-row>
+									<v-row class="mt-2 vs_project_url">
+										<a target="_blank" :href="project.url">{{ project.url }}</a>
+									</v-row>
+									<v-row class="mt-2 vs_project_technologies">
+										<v-chip
+											v-for="(tech, index2) in project.technologies"
+											:key="index2"
+											class="vs_tech ml-1 mt-1"
+											small
+											color="purple darken-1 white--text"
+											label
+											outlined
+										>
+											{{ tech }}</v-chip
+										>
+									</v-row>
+								</v-card-text>
+							</v-card>
+						</v-timeline-item>
+					</v-timeline>
+				</v-row>
+			</v-container>
+		</section>
+		<Footer />
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Header from '@/components/Header.vue'; // @ is an alias to /src
+import Footer from '@/components/Footer.vue'; // @ is an alias to /src
 
 @Component({
 	components: {
-		Header
+		Header,
+		Footer
 	},
 	data() {
 		return {
 			items: [
 				{
-					src: require('../assets/back2.jpg')
-				},
-				{
-					src: require('../assets/back1.jpg')
+					src: require('../assets/back/back5.webp')
 				}
 			]
 		};
 	},
-	computed: {},
+	computed: {
+		projects() {
+			return this.$store.getters.projects;
+		}
+	},
+	methods: {
+		startEnd(index: number): string {
+			return index % 2 === 1 ? 'start' : 'end';
+		},
+		isOdd(index: number): boolean {
+			return index % 2 === 1 ? true : false;
+		},
+		isPersonal(type: string): string {
+			return type === 'Personal' ? '#0277BD' : '#b21b57';
+		}
+	},
 	created() {
 		this.$store.commit('changeCurrentTab', this.$route.name);
 	}
@@ -59,27 +117,24 @@ export default class Home extends Vue {}
 	height: calc(100vh);
 	width: 100%;
 }
-.vs_section1 {
-}
-.vs_section2 {
-}
-.vs_skill {
-}
-.vs_bio {
-	font-size: 1.1rem;
+.vs_project_title {
 	font-weight: 300 !important;
-	color: black !important;
-}
-.title_section {
+	font-size: 1.7rem !important;
 	color: #1b237b;
-	font-size: 1.7rem;
-	font-weight: 300;
-	font-family: 'Special Elite', sans-serif;
 }
-
-.title_section_dark {
-	color: #40333e;
-	font-size: 2rem;
-	font-weight: 300;
+.vs_project_description {
+	font-weight: 300 !important;
+	font-size: 0.9rem !important;
+}
+.vs_project_technologies {
+	font-weight: 300 !important;
+	font-size: 1rem !important;
+}
+.vs_timeline {
+	width: 100%;
+}
+.vs_timeline_info {
+	max-height: calc(100vh - 220px - 100px - 30px) !important;
+	overflow-y: auto;
 }
 </style>

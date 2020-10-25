@@ -7,10 +7,13 @@ import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
 	data: function() {
-		return { width: 110, height: 110 };
+		return {
+			width: 110 as number,
+			height: 110 as number
+		};
 	},
 	methods: {
-		goHome() {
+		goHome(): void {
 			this.$store.commit('changeCurrentTab', 'home');
 			this.$router.push({ path: '/' });
 		}
@@ -18,8 +21,8 @@ import { Component, Vue } from 'vue-property-decorator';
 	computed: {},
 	created() {
 		window.addEventListener('resize', () => {
-			this.width = window.innerWidth < 700 ? 70 : 110;
-			this.height = window.innerWidth < 700 ? 70 : 110;
+			(this as any).width = window.innerWidth < 700 ? 70 : 110;
+			(this as any).height = window.innerWidth < 700 ? 70 : 110;
 		});
 	}
 })

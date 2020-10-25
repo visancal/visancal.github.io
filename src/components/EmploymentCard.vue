@@ -1,7 +1,7 @@
 <template>
 	<v-col class="text-center col-xs-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
-		<v-card shaped class="elevation-0">
-			<v-img eager :src="info.img" height="110px" aspect-ratio="1.5"></v-img>
+		<v-card class="elevation-1">
+			<v-img eager :src="info.img" height="100px" aspect-ratio="1.5" class="mt-3"></v-img>
 			<v-card-title class="card_title">{{ info.title }}</v-card-title>
 
 			<v-card-subtitle class="text-left center_title">
@@ -17,7 +17,7 @@
 			>
 			<v-card-text class="text-left">
 				<ul>
-					<li v-for="(task, index) in info.tasks" :key="index">{{ task }}</li>
+					<li v-for="(task, index) in info.tasks" :key="index" class="body-1">{{ task }}</li>
 				</ul>
 			</v-card-text>
 		</v-card>

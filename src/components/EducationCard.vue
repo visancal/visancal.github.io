@@ -1,7 +1,7 @@
 <template>
 	<v-col class="text-center col-xs-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
-		<v-card class="elevation-0">
-			<v-img eager :src="info.img" height="110px" aspect-ratio="1.0"></v-img>
+		<v-card class="elevation-1 ">
+			<v-img eager :src="info.img" height="120px" aspect-ratio="1.0"></v-img>
 			<v-card-title class="card_title">{{ info.title }}</v-card-title>
 
 			<v-card-subtitle class="text-left card_subtitle">{{ info.subtitle }} </v-card-subtitle>
@@ -10,10 +10,11 @@
 					<a :href="info.url" target="_blank">{{ info.center }}</a>
 				</div>
 				<div class="mt-1">
-					<v-chip small chip label class="white--text" color="#1b237b"
+					<v-chip small chip label class="white--text vs_edu_date" color="#1b237b"
 						><v-icon small left class="white--text"> mdi-calendar-month </v-icon>{{ info.date }}</v-chip
 					>
 				</div>
+				<img class="vs_edu_icon" :src="info.icon" alt="UPV" />
 			</v-card-text>
 		</v-card>
 	</v-col>
@@ -50,5 +51,13 @@ export default class EducationCard extends Vue {}
 .center_title a:visited,
 .center_title a:hover {
 	color: #b21b57;
+}
+.vs_edu_icon {
+	width: 55px;
+	height: 55px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	border-radius: 50px;
 }
 </style>
