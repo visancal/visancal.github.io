@@ -2,15 +2,36 @@
 	<div class="vs_background pb-5">
 		<section>
 			<Header />
-			<v-carousel cycle continuous :interval="10000" hide-delimiters :height="220" :show-arrows="false">
+			<v-carousel cycle continuous :interval="10000" hide-delimiters :height="corouselHeight" :show-arrows="false">
 				<v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" transition="fade-transition"></v-carousel-item>
 			</v-carousel>
 		</section>
-		<section class="vs_bio_info">
+		<section class="vs_bio_info" :class="{ vs_bio_info_mobile: isMobile }">
 			<v-container>
-				<v-row class="px-5 section1">
-					<v-col class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-						<v-card class="elevation-0  mx-5 px-5">
+				<!-- BIO -->
+				<v-row
+					class="section1"
+					:class="{
+						'px-1': $vuetify.breakpoint.smAndDown,
+						'px-3': $vuetify.breakpoint.mdAndUp
+					}"
+				>
+					<v-col
+						class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+						:class="{
+							'mx-0': $vuetify.breakpoint.smAndDown,
+							'px-0': $vuetify.breakpoint.smAndDown
+						}"
+					>
+						<v-card
+							class="elevation-0"
+							:class="{
+								'mx-0': $vuetify.breakpoint.smAndDown,
+								'mx-5': $vuetify.breakpoint.mdAndUp,
+								'px-0': $vuetify.breakpoint.smAndDown,
+								'px-5': $vuetify.breakpoint.mdAndUp
+							}"
+						>
 							<v-card-title class="title_section"> Bio</v-card-title>
 							<v-card-text class="vs_bio"
 								>Developer of geospatial applications,
@@ -53,40 +74,103 @@
 						</v-card>
 					</v-col>
 				</v-row>
-				<v-row class="px-5 section1">
-					<v-col class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-3">
-						<v-card class="elevation-0 mt-5 mx-5 px-5">
+				<!-- EDUCATION -->
+				<v-row
+					class="section2  pt-3"
+					:class="{
+						'px-1': $vuetify.breakpoint.smAndDown,
+						'px-3': $vuetify.breakpoint.mdAndUp
+					}"
+				>
+					<v-col
+						class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+						:class="{
+							'mx-0': $vuetify.breakpoint.smAndDown,
+							'px-0': $vuetify.breakpoint.smAndDown
+						}"
+					>
+						<v-card
+							class="elevation-0 mt-4"
+							:class="{
+								'mx-0': $vuetify.breakpoint.smAndDown,
+								'mx-5': $vuetify.breakpoint.mdAndUp,
+								'px-0': $vuetify.breakpoint.smAndDown,
+								'px-5': $vuetify.breakpoint.mdAndUp
+							}"
+						>
 							<v-card-title class="title_section"> Education</v-card-title>
 							<v-card-text>
-								<v-row class="mx-2">
+								<v-row
+									:class="{
+										'mx-0 ': $vuetify.breakpoint.smAndDown,
+										'mx-2 ': $vuetify.breakpoint.mdAndUp
+									}"
+								>
 									<EducationCard v-for="info in educationInfo" :key="info.id" :info="info" />
 								</v-row>
 							</v-card-text>
 						</v-card>
 					</v-col>
 				</v-row>
-				<v-row class="px-5 section2">
-					<v-col class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-						<v-card class="elevation-0 mt-5 mx-5 px-5">
+				<!-- EMPLOYMENT -->
+				<v-row
+					class="section3"
+					:class="{
+						'px-1': $vuetify.breakpoint.smAndDown,
+						'px-3': $vuetify.breakpoint.mdAndUp
+					}"
+				>
+					<v-col
+						class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+						:class="{
+							'mx-0': $vuetify.breakpoint.smAndDown,
+							'px-0': $vuetify.breakpoint.smAndDown
+						}"
+					>
+						<v-card
+							class="elevation-0 mt-5"
+							:class="{
+								'px-0': $vuetify.breakpoint.smAndDown,
+								'px-3': $vuetify.breakpoint.mdAndUp
+							}"
+						>
 							<v-card-title class="title_section"> Employment history </v-card-title>
 							<v-card-text>
-								<v-row class="mx-2">
+								<v-row
+									:class="{
+										'mx-0 ': $vuetify.breakpoint.smAndDown,
+										'mx-2 ': $vuetify.breakpoint.mdAndUp
+									}"
+								>
 									<EmploymentCard v-for="info in employmentInfo" :key="info.id" :info="info" />
 								</v-row>
 							</v-card-text>
 						</v-card>
 					</v-col>
 				</v-row>
-				<v-row class="px-5 section3">
-					<v-col class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-						<v-card class="elevation-0 mt-5 mx-5 px-5">
+				<!-- LANGUAGES -->
+				<v-row class="section4">
+					<v-col
+						class="text-center col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+						:class="{
+							'mx-0': $vuetify.breakpoint.smAndDown,
+							'px-0': $vuetify.breakpoint.smAndDown
+						}"
+					>
+						<v-card
+							class="elevation-0 mt-5"
+							:class="{
+								'px-0': $vuetify.breakpoint.smAndDown,
+								'px-3': $vuetify.breakpoint.mdAndUp
+							}"
+						>
 							<v-card-title class="title_section"> Languages </v-card-title>
 							<v-card-text>
 								<v-row class="mx-5 mt-2 vs_progress_title">
 									Spanish
 								</v-row>
 								<v-row class="mx-5 mt-2 vs_progress">
-									<v-progress-linear rounded value="100" height="20" color="#B71C1C" class="white--text">
+									<v-progress-linear rounded value="100" height="20" color="#b21b57" class="white--text">
 										<template>
 											Native
 										</template>
@@ -96,7 +180,7 @@
 									English
 								</v-row>
 								<v-row class="mx-5 mt-2 vs_progress">
-									<v-progress-linear rounded value="65" height="20" color="#1b237b" class="white--text"
+									<v-progress-linear rounded value="70" height="20" color="#b21b57" class="white--text"
 										><template>
 											Upper-Intermediate
 										</template></v-progress-linear
@@ -106,7 +190,7 @@
 									Catalan
 								</v-row>
 								<v-row class="mx-5 mt-2 vs_progress">
-									<v-progress-linear rounded value="100" height="20" color="#2196F3" class="white--text"
+									<v-progress-linear rounded value="100" height="20" color="#b21b57" class="white--text"
 										><template>
 											Native
 										</template></v-progress-linear
@@ -160,6 +244,12 @@ import Footer from '@/components/Footer.vue'; // @ is an alias to /src
 		},
 		skills() {
 			return this.$store.getters.skills;
+		},
+		isMobile() {
+			return window.innerWidth < 600 ? true : false;
+		},
+		corouselHeight() {
+			return window.innerWidth < 600 ? 110 : 220;
 		}
 	},
 	created() {
@@ -170,6 +260,7 @@ export default class Home extends Vue {}
 </script>
 
 <style lang="css" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 .vs_background {
 	height: calc(100vh);
 	width: 100%;
@@ -177,6 +268,9 @@ export default class Home extends Vue {}
 .vs_bio_info {
 	max-height: calc(100vh - 220px - 100px - 30px) !important;
 	overflow-y: auto;
+}
+.vs_bio_info_mobile {
+	max-height: calc(100vh - 100px - 110px) !important;
 }
 .vs_list_skills li:before {
 	content: '' !important;
@@ -191,12 +285,6 @@ export default class Home extends Vue {}
 	font-size: 1.9rem;
 	font-weight: 300;
 	font-family: 'Special Elite', sans-serif;
-}
-
-.title_section_dark {
-	color: #40333e;
-	font-size: 2rem;
-	font-weight: 300;
 }
 .vs_progress_title {
 	font-size: 1.2rem;
