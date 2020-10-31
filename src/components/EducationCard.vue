@@ -7,7 +7,7 @@
 			<v-card-subtitle class="text-left card_subtitle">{{ info.subtitle }} </v-card-subtitle>
 			<v-card-text class="text-left center_title">
 				<div>
-					<a :href="info.url" target="_blank">{{ info.center }}</a>
+					<a rel="noopener noreferrer" :href="info.url" target="_blank">{{ info.center }}</a>
 				</div>
 				<div class="mt-1">
 					<v-chip small chip label class="white--text vs_edu_date" color="#1b237b"

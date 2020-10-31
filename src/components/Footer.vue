@@ -2,24 +2,24 @@
 	<v-row class="vs_footer">
 		<v-container class="mt-0 pt-0">
 			<v-row class="mt-0 pt-0">
-				<v-col align-content="start" class="mt-0 pt-0"></v-col>
+				<v-col align-content="start" class="mt-0 pt-0 vs_footer_start"></v-col>
 				<v-col align-content="center" class="mt-0 pt-0 text-center">
-					<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goTwitter">
+					<v-btn aria-label="Twitter" icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goTwitter">
 						<v-icon>
 							mdi-twitter
 						</v-icon>
 					</v-btn>
-					<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goInstagram">
+					<v-btn aria-label="Instagram" icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goInstagram">
 						<v-icon>
 							mdi-instagram
 						</v-icon>
 					</v-btn>
-					<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goLinkedin">
+					<v-btn aria-label="Linkedin" icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goLinkedin">
 						<v-icon>
 							mdi-linkedin
 						</v-icon>
 					</v-btn>
-					<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goGithub">
+					<v-btn aria-label="Github" icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goGithub">
 						<v-icon>
 							mdi-github
 						</v-icon>
@@ -72,5 +72,13 @@ export default class Header extends Vue {}
 	padding: 0px 5px;
 	font-size: 1rem;
 	margin-top: -3px;
+}
+@media (max-width: 600px) {
+	.vs_footer {
+		display: none;
+	}
+	.vs_description {
+		font-size: 1.2rem;
+	}
 }
 </style>

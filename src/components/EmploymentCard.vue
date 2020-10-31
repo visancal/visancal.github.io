@@ -6,7 +6,7 @@
 
 			<v-card-subtitle class="text-left center_title">
 				<div>
-					<a :href="info.url" target="_blank">{{ info.center }}</a>
+					<a rel="noopener noreferrer" :href="info.url" target="_blank">{{ info.center }}</a>
 				</div>
 			</v-card-subtitle>
 
