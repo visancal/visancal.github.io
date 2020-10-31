@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /background
+Allow: /projects
+
+Sitemap: http://visancal.io 
