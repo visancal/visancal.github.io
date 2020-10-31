@@ -52,4 +52,7 @@ ul li::before {
 	width: 1.4em; /* Also needed for space (tweak if needed) */
 	margin-left: -1.3em; /* Also needed for space (tweak if needed) */
 }
+.theme--light.v-timeline::before {
+	background-color: hsla(336, 74%, 40%, 0.3) !important;
+}
 </style>
