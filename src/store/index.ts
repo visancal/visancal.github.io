@@ -91,6 +91,16 @@ export default new Vuex.Store({
   ],
     projects:[
       {
+        title:'Personal website',
+        date: '2020',
+        technologies:['Github Pages','Vue','Vuetify','Webpack','Deck.gl'],
+        img: '',
+        company:'Personal',
+        url: '',
+        description:'My personal website',
+        rd: false
+      },
+      {
         title:'Mia tracking',
         date: '2019-Present',
         technologies:['CARTO','Vue','AWS','Kafka','Java','PostGIS','Spring'],
@@ -173,7 +183,7 @@ export default new Vuex.Store({
       {
         title:'Traycco',
         date: '2014',
-        technologies:['Javascrit','OpenLayers'],
+        technologies:['Javascript','OpenLayers'],
         img: '',
         company:'Prodevelop',
         url: '',
@@ -253,7 +263,7 @@ export default new Vuex.Store({
       {
         title:'Aventura Oceanica',
         date: '2009',
-        technologies:['OpenLayers','PostGIS'],
+        technologies:['OpenLayers','PostGIS','Javascript'],
         img: '',
         company:'Prodevelop',
         url: 'http://aventuraoceanica.es/',
