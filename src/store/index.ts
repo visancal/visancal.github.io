@@ -93,7 +93,7 @@ export default new Vuex.Store({
       {
         title:'Personal website',
         date: '2020',
-        technologies:['Github Pages','Vue','Vuetify','Webpack','Deck.gl'],
+        technologies:['Github Pages','Vue','Vuetify','Webpack','Deck.gl','Typescript'],
         img: '',
         company:'Personal',
         url: '',

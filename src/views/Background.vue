@@ -2,9 +2,7 @@
 	<div class="vs_background pb-5">
 		<section>
 			<Header />
-			<v-carousel cycle continuous :interval="10000" hide-delimiters :height="corouselHeight" :show-arrows="false">
-				<v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" transition="fade-transition"></v-carousel-item>
-			</v-carousel>
+			<BannerImages :images="images" :interval="10000" />
 		</section>
 		<section class="vs_bio_info" :class="{ vs_bio_info_mobile: isMobile }">
 			<v-container>
@@ -119,6 +117,9 @@ import EducationCard from '@/components/EducationCard.vue';
 import EmploymentCard from '@/components/EmploymentCard.vue';
 import Header from '@/components/Header.vue'; // @ is an alias to /src
 import Footer from '@/components/Footer.vue'; // @ is an alias to /src
+import BannerImages from '@/components/BannerImages.vue'; // @ is an alias to /src
+
+BannerImages;
 
 @Component({
 	components: {
@@ -126,11 +127,12 @@ import Footer from '@/components/Footer.vue'; // @ is an alias to /src
 		EmploymentCard,
 		Header,
 		Footer,
-		SectionBackground
+		SectionBackground,
+		BannerImages
 	},
 	data() {
 		return {
-			items: [
+			images: [
 				{
 					src: require('../assets/back/back5.webp')
 				},
