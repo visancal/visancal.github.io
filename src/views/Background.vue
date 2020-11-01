@@ -157,9 +157,6 @@ BannerImages;
 		},
 		isMobile() {
 			return window.innerWidth < 600 ? true : false;
-		},
-		corouselHeight() {
-			return window.innerWidth < 600 ? 110 : 220;
 		}
 	},
 	created() {

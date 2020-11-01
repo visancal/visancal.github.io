@@ -21,7 +21,7 @@
 				</v-row>
 				<v-row justify="center">
 					<v-timeline class="vs_timeline" :dense="isMobile">
-						<v-timeline-item small v-for="(project, index) in projects" :key="index" color="#b21b57">
+						<v-timeline-item small v-for="(project, index) in projects" :key="index" color="#b21b57" class="vs_timeline_item mx-2">
 							<template v-slot:opposite>
 								<v-row :justify="startEnd(index)">
 									<v-chip small chip label class="white--text" color="#1b237b"
@@ -37,37 +37,7 @@
 									<v-chip small chip label class="white--text mt-1" color="#EF6C00">R&D</v-chip>
 								</v-row>
 							</template>
-							<v-card class="elevation-1 px-4 mr-3" :class="{ vs_card_odd: isOdd(index), vs_card_even: !isOdd(index) }">
-								<v-card-text>
-									<v-row class="vs_project_title mb-3">{{ project.title }} </v-row>
-									<v-row class="mt-2 vs_project_description"> {{ project.description }} </v-row>
-									<v-row class="mt-2 vs_project_url mb-2">
-										<a target="_blank" :href="project.url">{{ project.url }}</a>
-									</v-row>
-									<v-row v-if="isMobile">
-										<v-chip small chip label class="white--text mt-1" color="#1b237b"
-											><v-icon small left class="white--text"> mdi-calendar-month </v-icon>{{ project.date }}</v-chip
-										>
-										<v-chip small chip label class="white--text ml-1 mt-1" :color="isPersonal(project.company)">{{
-											project.company
-										}}</v-chip>
-										<v-chip small chip label class="white--text ml-1 mt-1" color="#EF6C00" v-if="project.rd">R&D</v-chip>
-									</v-row>
-									<v-row class="mt-2 vs_project_technologies">
-										<v-chip
-											v-for="(tech, index2) in project.technologies"
-											:key="index2"
-											class="vs_tech ml-1 mt-1"
-											small
-											color="purple darken-1 white--text"
-											label
-											outlined
-										>
-											{{ tech }}</v-chip
-										>
-									</v-row>
-								</v-card-text>
-							</v-card>
+							<TimelineCard :project="project" />
 						</v-timeline-item>
 					</v-timeline>
 				</v-row>
@@ -82,12 +52,14 @@ import { Component, Vue } from 'vue-property-decorator';
 import Header from '@/components/Header.vue'; // @ is an alias to /src
 import Footer from '@/components/Footer.vue'; // @ is an alias to /src
 import BannerImages from '@/components/BannerImages.vue';
+import TimelineCard from '@/components/TimelineCard.vue';
 
 @Component({
 	components: {
 		Header,
 		Footer,
-		BannerImages
+		BannerImages,
+		TimelineCard
 	},
 	data() {
 		return {
@@ -113,9 +85,6 @@ import BannerImages from '@/components/BannerImages.vue';
 		startEnd(index: number): string {
 			return index % 2 === 1 ? 'start' : 'end';
 		},
-		isOdd(index: number): boolean {
-			return index % 2 === 1 ? true : false;
-		},
 		isPersonal(type: string): string {
 			return type === 'Personal' ? '#0277BD' : '#b21b57';
 		}
@@ -139,12 +108,7 @@ export default class Home extends Vue {}
 	font-weight: 300;
 	font-family: 'Special Elite', sans-serif;
 }
-.vs_project_title {
-	font-weight: 300 !important;
-	font-size: 1.7rem !important;
-	color: #1b237b;
-	line-height: 2rem;
-}
+
 .vs_project_description {
 	font-weight: 300 !important;
 	font-size: 0.9rem !important;
@@ -156,9 +120,11 @@ export default class Home extends Vue {}
 .vs_timeline {
 	width: 100%;
 }
+
 .vs_timeline_info {
 	max-height: calc(100vh - 220px - 100px - 30px) !important;
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 .vs_timeline_info_mobile {
 	max-height: calc(100vh - 100px - 110px) !important;
