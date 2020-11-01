@@ -277,7 +277,7 @@ export default new Vuex.Store({
         img: '',
         company:'Prodevelop',
         url: 'http://www.gvsig.com/es',
-        description:'Development of extensions for gvSIG 1.x y gvSIG 2.x: Geocoding, Connector Oracle (2.x), Phone Cache and Georesources',
+        description:'Development of extensions for gvSIG 1.x y gvSIG 2.x: Geocoding, Connector Oracle (2.x), Phone Cache and GeoResources',
         rd: false
       }
       
