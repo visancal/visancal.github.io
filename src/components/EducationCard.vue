@@ -1,6 +1,6 @@
 <template>
-	<v-col class="text-center col-xs-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
-		<v-card class="elevation-1 ">
+	<v-col class="text-center" cols="12" xs="12" sm="12" md="6" lg="6" xl="4">
+		<v-card class="elevation-1">
 			<v-img eager :src="info.img" height="120px" aspect-ratio="1.0"></v-img>
 			<v-card-title class="card_title">{{ info.title }}</v-card-title>
 
