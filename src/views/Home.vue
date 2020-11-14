@@ -49,6 +49,7 @@
 						</v-col>
 					</v-row>
 				</v-container>
+				<Credits :link="item.link" :name="item.credits" :place="item.place" />
 			</v-carousel-item>
 		</v-carousel>
 	</div>
@@ -57,19 +58,27 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Header from '@/components/Header.vue'; // @ is an alias to /src
+import Credits from '@/components/Credits.vue';
 
 @Component({
 	components: {
-		Header
+		Header,
+		Credits
 	},
 	data() {
 		return {
 			items: [
 				{
-					src: require('../assets/home/intro.webp')
+					src: require('../assets/home/intro.webp'),
+					credits: '@xurxosanz',
+					link: 'https://twitter.com/xurxosanz',
+					place: 'Griffith Observatory, LA'
 				},
 				{
-					src: require('../assets/home/intro2.webp')
+					src: require('../assets/home/intro2.webp'),
+					credits: '@xurxosanz',
+					link: 'https://twitter.com/xurxosanz',
+					place: 'Badwater Basin, Death Valley, NE'
 				}
 			]
 		};
@@ -111,6 +120,7 @@ export default class Home extends Vue {}
 	font-weight: 300;
 	animation: btn-change 5s infinite;
 }
+
 @keyframes btn-change {
 	0% {
 		color: #1b237b !important;
