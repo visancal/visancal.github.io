@@ -1,5 +1,5 @@
 <template>
-	<v-card class="elevation-1 px-3">
+	<v-card class="elevation-3 px-3 mr-1">
 		<v-card-text>
 			<v-row class="vs_project_title mb-3">{{ project.title }} </v-row>
 			<v-row class="mt-2 vs_project_description"> {{ project.description }} </v-row>
@@ -65,5 +65,9 @@ export default class TimelineCard extends Vue {}
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+.vs_project_description {
+	font-weight: 300 !important;
+	color: black !important;
 }
 </style>

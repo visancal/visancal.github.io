@@ -65,7 +65,7 @@ export default new Vuex.Store({
         location: 'Valencia',
         icon:require('../assets/education/upv.webp'),
         subtitle:
-          'Proficient at Remote Sensing and GIS'
+          'Proficient in Remote Sensing and GIS'
       },
       {
         center: 'University of Valencia',
@@ -75,7 +75,7 @@ export default new Vuex.Store({
         title: 'Graduate in Geography',
         location: 'Valencia',
         icon:require('../assets/education/uv.webp'),
-        subtitle: 'Proficient at physical geography'
+        subtitle: 'Proficient in physical geography'
       }
     ],
     skills:[

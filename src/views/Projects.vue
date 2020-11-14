@@ -2,10 +2,10 @@
 	<div class="vs_projects pb-5">
 		<section>
 			<Header />
-			<BannerImages :images="images" :interval="10000" />
+			<BannerImages :images="images" :interval="10000" :over="isOver" />
 		</section>
-		<section class="vs_timeline_info" :class="{ vs_timeline_info_mobile: isMobile }">
-			<v-container>
+		<section id="vs_timeline_info" class="vs_timeline_info" :class="{ vs_timeline_info_mobile: isMobile }">
+			<v-container v-scroll:#vs_timeline_info="onScroll">
 				<v-row
 					:class="{
 						'ma-1': $vuetify.breakpoint.smAndDown,
@@ -54,6 +54,9 @@ import Footer from '@/components/Footer.vue'; // @ is an alias to /src
 import BannerImages from '@/components/BannerImages.vue';
 import TimelineCard from '@/components/TimelineCard.vue';
 
+import imageOver from '@/mixins/imageOver';
+import mobileUtils from '@/mixins/mobileUtils';
+
 @Component({
 	components: {
 		Header,
@@ -61,6 +64,7 @@ import TimelineCard from '@/components/TimelineCard.vue';
 		BannerImages,
 		TimelineCard
 	},
+	mixins: [imageOver, mobileUtils],
 	data() {
 		return {
 			images: [
@@ -76,9 +80,6 @@ import TimelineCard from '@/components/TimelineCard.vue';
 	computed: {
 		projects() {
 			return this.$store.getters.projects;
-		},
-		isMobile() {
-			return window.innerWidth < 600 ? true : false;
 		}
 	},
 	methods: {
@@ -122,11 +123,11 @@ export default class Home extends Vue {}
 }
 
 .vs_timeline_info {
-	max-height: calc(100vh - 220px - 100px - 30px) !important;
+	max-height: calc(100vh - 180px - 100px - 30px) !important;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
 .vs_timeline_info_mobile {
-	max-height: calc(100vh - 100px - 110px) !important;
+	max-height: calc(100vh - 100px - 90px) !important;
 }
 </style>

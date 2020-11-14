@@ -136,7 +136,7 @@ export default class Header extends Vue {}
 }
 .vs_title {
 	font-family: 'Special Elite', sans-serif;
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 2.1rem;
 	animation: color-change 15s infinite;
 }
@@ -154,6 +154,12 @@ export default class Header extends Vue {}
 @media (max-width: 600px) {
 	.vs_title {
 		font-size: 1.5rem;
+	}
+}
+@media (max-width: 750px) {
+	.vs_header_btn {
+		padding-left: 7px !important;
+		padding-right: 7px !important;
 	}
 }
 </style>

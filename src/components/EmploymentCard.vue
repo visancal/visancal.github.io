@@ -41,7 +41,7 @@ export default class EmploymentCard extends Vue {}
 <style scoped>
 .card_title {
 	color: #b21b57;
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 1.4rem;
 }
 .card_subtitle {

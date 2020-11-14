@@ -32,12 +32,13 @@ export default class Credits extends Vue {}
 <style lang="postcss" scoped>
 .vs_credits {
 	position: absolute;
-	bottom: 25px;
-	left: 25px;
+	bottom: 15px;
+	left: 15px;
 	color: #1b237b;
 	border-radius: 2px;
 	background-color: rgba(255, 255, 255, 0.4);
-	font-size: 0.8rem;
+	font-size: 0.7rem;
+	font-weight: 300;
 }
 .vs_credits div {
 	margin-left: 5px;

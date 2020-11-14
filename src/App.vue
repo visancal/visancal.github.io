@@ -37,7 +37,7 @@ body {
 	border-bottom-color: #b21b57 !important;
 	border-top-color: #b21b57 !important;
 	color: #1b237b !important;
-	font-weight: 800;
+	font-weight: 900;
 }
 
 ul {

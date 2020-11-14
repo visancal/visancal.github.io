@@ -2,10 +2,10 @@
 	<div class="vs_background pb-5">
 		<section>
 			<Header />
-			<BannerImages :images="images" :interval="10000" />
+			<BannerImages :images="images" :interval="10000" :over="isOver" />
 		</section>
-		<section class="vs_bio_info" :class="{ vs_bio_info_mobile: isMobile }">
-			<v-container>
+		<section id="vs_bio_info" class="vs_bio_info" :class="{ vs_bio_info_mobile: isMobile }">
+			<v-container v-scroll:#vs_bio_info="onScroll">
 				<!-- BIO -->
 				<SectionBackground title="Bio">
 					<div class="vs_bio mx-5">
@@ -119,6 +119,9 @@ import Header from '@/components/Header.vue'; // @ is an alias to /src
 import Footer from '@/components/Footer.vue'; // @ is an alias to /src
 import BannerImages from '@/components/BannerImages.vue'; // @ is an alias to /src
 
+import imageOver from '@/mixins/imageOver';
+import mobileUtils from '@/mixins/mobileUtils';
+
 BannerImages;
 
 @Component({
@@ -130,6 +133,7 @@ BannerImages;
 		SectionBackground,
 		BannerImages
 	},
+	mixins: [imageOver, mobileUtils],
 	data() {
 		return {
 			images: [
@@ -154,9 +158,6 @@ BannerImages;
 		},
 		skills() {
 			return this.$store.getters.skills;
-		},
-		isMobile() {
-			return window.innerWidth < 600 ? true : false;
 		}
 	},
 	created() {
@@ -173,11 +174,11 @@ export default class Home extends Vue {}
 	width: 100%;
 }
 .vs_bio_info {
-	max-height: calc(100vh - 220px - 100px - 30px) !important;
+	max-height: calc(100vh - 180px - 100px - 30px) !important;
 	overflow-y: auto;
 }
 .vs_bio_info_mobile {
-	max-height: calc(100vh - 100px - 110px) !important;
+	max-height: calc(100vh - 100px - 90px) !important;
 }
 .vs_list_skills li:before {
 	content: '' !important;

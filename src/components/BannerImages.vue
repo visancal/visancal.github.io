@@ -1,5 +1,14 @@
 <template>
-	<v-carousel cycle continuous hide-delimiters :height="carouselHeight" :show-arrows="false" class="vs_banner_images" :interval="interval">
+	<v-carousel
+		cycle
+		continuous
+		hide-delimiters
+		:height="carouselHeight"
+		:show-arrows="false"
+		class="vs_banner_images"
+		:interval="interval"
+		:class="{ vs_banner_images_over: over }"
+	>
 		<v-carousel-item
 			v-for="(image, i) in images"
 			:key="i"
@@ -19,11 +28,12 @@ import { Component, Vue } from 'vue-property-decorator';
 	},
 	props: {
 		images: Array,
-		interval: Number
+		interval: Number,
+		over: Boolean
 	},
 	computed: {
 		carouselHeight() {
-			return window.innerWidth < 600 ? 110 : 220;
+			return window.innerWidth < 600 ? 90 : 180;
 		}
 	}
 })
@@ -31,6 +41,10 @@ export default class BannerImages extends Vue {}
 </script>
 
 <style lang="postcss" scoped>
-.vs_banner_images {
+.vs_banner_images_over {
+	-webkit-box-shadow: -2px 10px 5px -6px rgba(138, 134, 138, 1);
+	-moz-box-shadow: -2px 10px 5px -6px rgba(138, 134, 138, 1);
+	box-shadow: -2px 10px 5px -6px rgba(138, 134, 138, 1);
+	z-index: 1000;
 }
 </style>
