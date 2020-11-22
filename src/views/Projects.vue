@@ -1,7 +1,6 @@
 <template>
 	<div class="vs_projects pb-5">
 		<section>
-			<Header />
 			<BannerImages :images="images" :interval="10000" :over="isOver" />
 		</section>
 		<section id="vs_timeline_info" class="vs_timeline_info" :class="{ vs_timeline_info_mobile: isMobile }">
@@ -41,6 +40,7 @@
 						</v-timeline-item>
 					</v-timeline>
 				</v-row>
+				<div class="vs_projects_footer"></div>
 			</v-container>
 		</section>
 		<Footer />
@@ -59,7 +59,6 @@ import mobileUtils from '@/mixins/mobileUtils';
 
 @Component({
 	components: {
-		Header,
 		Footer,
 		BannerImages,
 		TimelineCard
@@ -118,16 +117,19 @@ export default class Home extends Vue {}
 	font-weight: 300 !important;
 	font-size: 1rem !important;
 }
+.vs_projects_footer {
+	height: 20px;
+}
 .vs_timeline {
 	width: 100%;
 }
 
 .vs_timeline_info {
-	max-height: calc(100vh - 180px - 100px - 30px) !important;
+	max-height: calc(100vh - 230px) !important;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
 .vs_timeline_info_mobile {
-	max-height: calc(100vh - 100px - 90px) !important;
+	max-height: calc(100vh - 110px) !important;
 }
 </style>

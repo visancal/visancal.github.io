@@ -2,8 +2,7 @@
 	<div class="vs_home">
 		<v-carousel cycle continuous :interval="15000" hide-delimiters :height="imgHeight" :show-arrows="false">
 			<v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" reverse-transition="fade-transition" transition="fade-transition">
-				<Header />
-				<v-container>
+				<v-container class="vs_margintopheader">
 					<v-row>
 						<v-col class="col-xs-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
 							<v-card
@@ -57,12 +56,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Header from '@/components/Header.vue'; // @ is an alias to /src
 import Credits from '@/components/Credits.vue';
 
 @Component({
 	components: {
-		Header,
 		Credits
 	},
 	data() {
@@ -102,6 +99,16 @@ export default class Home extends Vue {}
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+.vs_home {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100vh;
+}
+.vs_margintopheader {
+	margin-top: 180px;
+}
 .vs_hello {
 	font-family: 'Special Elite', sans-serif;
 	font-size: 3.3rem;
@@ -138,6 +145,9 @@ export default class Home extends Vue {}
 	}
 	.vs_description {
 		font-size: 1.2rem;
+	}
+	.vs_margintopheader {
+		margin-top: 100px;
 	}
 }
 </style>

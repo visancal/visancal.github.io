@@ -1,6 +1,7 @@
 <template>
 	<v-app>
 		<v-main>
+			<Header />
 			<router-view></router-view>
 		</v-main>
 	</v-app>
@@ -8,13 +9,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Header from '@/components/Header.vue'; // @ is an alias to /src
 
 export default Vue.extend({
 	name: 'App',
-
-	data: () => ({
-		//
-	})
+	components: { Header },
+	data: () => ({})
 });
 </script>
 <style>
@@ -23,11 +23,9 @@ html {
 	font-weight: 300;
 }
 body {
-	font-family: 'Mate', Roboto, sans-serif;
-
+	font-family: Roboto, sans-serif;
 	font-weight: 300 !important;
 }
-
 .v-btn.v-btn--outlined {
 	border-radius: 0px !important;
 	border-top-width: 0px !important;
@@ -39,11 +37,9 @@ body {
 	color: #1b237b !important;
 	font-weight: 900;
 }
-
 ul {
 	list-style: none; /* Remove default bullets */
 }
-
 ul li::before {
 	content: '\2022'; /* Add content: \2022 is the CSS Code/unicode for a bullet */
 	color: #d03c3b; /* Change the color */
@@ -54,5 +50,12 @@ ul li::before {
 }
 .theme--light.v-timeline::before {
 	background-color: hsla(336, 74%, 40%, 0.3) !important;
+}
+.v-list-item__title {
+	color: #1b237b !important;
+	font-size: 1.5rem;
+}
+.v-navigation-drawer__content {
+	z-index: 2000000 !important;
 }
 </style>

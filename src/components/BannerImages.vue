@@ -33,7 +33,7 @@ import { Component, Vue } from 'vue-property-decorator';
 	},
 	computed: {
 		carouselHeight() {
-			return window.innerWidth < 600 ? 90 : 180;
+			return window.innerWidth < 600 ? 50 : 140;
 		}
 	}
 })

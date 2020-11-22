@@ -8,6 +8,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     currentTab: 'home',
+    views:{
+      header: {
+        height: {
+          mobile: 60,
+          desktop: 80
+        }
+      }
+    },
     employment:[
       {
         id:1,
@@ -290,7 +298,8 @@ export default new Vuex.Store({
     employmentInfo: state => state.employment ,
     venues: state => state.venues,
     skills: state => state.skills,
-    projects: state => state.projects   
+    projects: state => state.projects,
+    headerHeight: state => state.views.header.height
   },
   mutations: {
     changeCurrentTab (state, tab) {

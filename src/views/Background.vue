@@ -1,7 +1,6 @@
 <template>
 	<div class="vs_background pb-5">
 		<section>
-			<Header />
 			<BannerImages :images="images" :interval="10000" :over="isOver" />
 		</section>
 		<section id="vs_bio_info" class="vs_bio_info" :class="{ vs_bio_info_mobile: isMobile }">
@@ -104,9 +103,9 @@
 						>
 					</v-row>
 				</SectionBackground>
+				<div class="vs_back_footer"></div>
 			</v-container>
 		</section>
-		<Footer />
 	</div>
 </template>
 
@@ -115,7 +114,6 @@ import { Component, Vue } from 'vue-property-decorator';
 import SectionBackground from '@/components/SectionBackground.vue';
 import EducationCard from '@/components/EducationCard.vue';
 import EmploymentCard from '@/components/EmploymentCard.vue';
-import Header from '@/components/Header.vue'; // @ is an alias to /src
 import Footer from '@/components/Footer.vue'; // @ is an alias to /src
 import BannerImages from '@/components/BannerImages.vue'; // @ is an alias to /src
 
@@ -128,8 +126,6 @@ BannerImages;
 	components: {
 		EducationCard,
 		EmploymentCard,
-		Header,
-		Footer,
 		SectionBackground,
 		BannerImages
 	},
@@ -174,11 +170,11 @@ export default class Home extends Vue {}
 	width: 100%;
 }
 .vs_bio_info {
-	max-height: calc(100vh - 180px - 100px - 30px) !important;
+	max-height: calc(100vh - 230px) !important;
 	overflow-y: auto;
 }
 .vs_bio_info_mobile {
-	max-height: calc(100vh - 100px - 90px) !important;
+	max-height: calc(100vh - 110px) !important;
 }
 .vs_list_skills li:before {
 	content: '' !important;
@@ -187,6 +183,9 @@ export default class Home extends Vue {}
 	font-size: 1.1rem;
 	font-weight: 300 !important;
 	color: black !important;
+}
+.vs_back_footer {
+	height: 100px;
 }
 .title_section {
 	color: #1b237b;
