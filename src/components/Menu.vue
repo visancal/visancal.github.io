@@ -53,6 +53,10 @@
 						<v-list-item>
 							<v-list-item-title class="vs_item_drawer" @click="goProjects">Projects</v-list-item-title>
 						</v-list-item>
+
+						<!--<v-list-item>
+							<v-list-item-title class="vs_item_drawer">Trips</v-list-item-title>
+						</v-list-item>-->
 					</v-list-item-group>
 				</v-list>
 			</v-navigation-drawer>
@@ -75,20 +79,28 @@ import mobileUtils from '@/mixins/mobileUtils';
 	props: {},
 	methods: {
 		goHome(): void {
-			this.$store.commit('changeCurrentTab', 'home');
-			this.$router.push({ path: '/' });
+			if (this.$router.currentRoute.name !== 'home') {
+				this.$store.commit('changeCurrentTab', 'home');
+				this.$router.push({ path: '/' });
+			}
 		},
 		goBackground(): void {
-			this.$store.commit('changeCurrentTab', 'background');
-			this.$router.push({ path: 'background' });
+			if (this.$router.currentRoute.name !== 'background') {
+				this.$store.commit('changeCurrentTab', 'background');
+				this.$router.push({ path: 'background' });
+			}
 		},
 		goProjects(): void {
-			this.$store.commit('changeCurrentTab', 'projects');
-			this.$router.push({ path: 'projects' });
+			if (this.$router.currentRoute.name !== 'projects') {
+				this.$store.commit('changeCurrentTab', 'projects');
+				this.$router.push({ path: 'projects' });
+			}
 		},
 		goTrips(): void {
-			this.$store.commit('changeCurrentTab', 'trips');
-			this.$router.push({ path: 'trips' });
+			if (this.$router.currentRoute.name !== 'trips') {
+				this.$store.commit('changeCurrentTab', 'trips');
+				this.$router.push({ path: 'trips' });
+			}
 		}
 	},
 	computed: {
@@ -134,12 +146,12 @@ export default class Menu extends Vue {}
 	padding: 5px;
 	padding-top: 15px !important;
 	padding-bottom: 15px !important;
-	padding-left: 15px;
+	padding-left: 20px;
 	font-size: 1.2rem !important;
 	font-weight: 300 !important;
 	margin-top: 5px;
 }
 .vs_active_drawer {
-	color: red;
+	background-color: white !important;
 }
 </style>

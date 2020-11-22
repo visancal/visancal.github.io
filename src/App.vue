@@ -55,7 +55,13 @@ ul li::before {
 	color: #1b237b !important;
 	font-size: 1.5rem;
 }
-.v-navigation-drawer__content {
-	z-index: 2000000 !important;
+
+.v-list-item--active {
+	background-color: white !important;
+	border: 1px solid rgb(185, 54, 107) !important;
+}
+
+.v-list-item--link:before {
+	background-color: white !important;
 }
 </style>

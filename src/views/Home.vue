@@ -2,7 +2,7 @@
 	<div class="vs_home">
 		<v-carousel cycle continuous :interval="15000" hide-delimiters :height="imgHeight" :show-arrows="false">
 			<v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src" reverse-transition="fade-transition" transition="fade-transition">
-				<v-container class="vs_margintopheader">
+				<v-container class="vs_margintopheader pr-3">
 					<v-row>
 						<v-col class="col-xs-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
 							<v-card
@@ -147,7 +147,7 @@ export default class Home extends Vue {}
 		font-size: 1.2rem;
 	}
 	.vs_margintopheader {
-		margin-top: 100px;
+		margin-top: 170px;
 	}
 }
 </style>
