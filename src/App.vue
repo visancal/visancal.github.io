@@ -52,16 +52,24 @@ ul li::before {
 	background-color: hsla(336, 74%, 40%, 0.3) !important;
 }
 .v-list-item__title {
-	color: #1b237b !important;
+	color: white !important;
 	font-size: 1.5rem;
+}
+.v-navigation-drawer__content {
+	background-color: #1b237b !important;
 }
 
 .v-list-item--active {
-	background-color: white !important;
-	border: 1px solid rgb(185, 54, 107) !important;
+	background-color: #1b237b !important;
+	border: 1px solid white !important;
+}
+
+.v-list-item--active .v-list-item__title {
+	color: #1b237b !important;
+	font-weight: 500 !important;
 }
 
 .v-list-item--link:before {
-	background-color: white !important;
+	background-color: #1b237b !important;
 }
 </style>

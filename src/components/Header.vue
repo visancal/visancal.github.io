@@ -7,24 +7,24 @@
 			<Menu />
 		</v-app-bar>
 		<!-- Secondary bar -->
-		<v-app-bar dense flat color="rgba(255,255,255,0.2)" v-show="isHome">
+		<v-app-bar dense flat color="rgba(255,255,255,0)" v-show="isHome">
 			<v-spacer></v-spacer>
-			<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goTwitter" aria-label="Twitter" v-show="!isDrawer">
+			<v-btn icon x-small color="pink darken-3" class="mr-4 elevation-0 " @click="goTwitter" aria-label="Twitter" v-show="!isDrawer">
 				<v-icon>
 					mdi-twitter
 				</v-icon>
 			</v-btn>
-			<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goInstagram" aria-label="Instagram" v-show="!isDrawer">
+			<v-btn icon x-small color="pink darken-3" class="mr-4 elevation-0 " @click="goInstagram" aria-label="Instagram" v-show="!isDrawer">
 				<v-icon>
 					mdi-instagram
 				</v-icon>
 			</v-btn>
-			<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goLinkedin" aria-label="Linkedin" v-show="!isDrawer">
+			<v-btn icon x-small color="pink darken-3" class="mr-4 elevation-0 " @click="goLinkedin" aria-label="Linkedin" v-show="!isDrawer">
 				<v-icon>
 					mdi-linkedin
 				</v-icon>
 			</v-btn>
-			<v-btn icon x-small color="pink darken-3" class="mr-5 elevation-0" @click="goGithub" aria-label="Github" v-show="!isDrawer">
+			<v-btn icon x-small color="pink darken-3" class="mr-2 elevation-0 " @click="goGithub" aria-label="Github" v-show="!isDrawer">
 				<v-icon>
 					mdi-github
 				</v-icon>
@@ -88,6 +88,9 @@ export default class Header extends Vue {}
 	font-size: 2.1rem;
 	cursor: pointer;
 	animation: color-change 15s infinite;
+}
+.vs_social_btn {
+	margin-left: 15px !important;
 }
 @keyframes color-change {
 	0% {

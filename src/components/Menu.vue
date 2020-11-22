@@ -1,7 +1,7 @@
 <template>
 	<v-row justify="end">
 		<!-- DESKTOP version -->
-		<div v-if="!isMobile">
+		<div v-if="!isMobile" class="pr-8">
 			<v-btn
 				aria-label="Home"
 				color="light-blue darken-4"
@@ -37,11 +37,9 @@
 		<div v-else>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" color="#1b237b"></v-app-bar-nav-icon>
 			<v-navigation-drawer v-model="drawer" absolute class="vs_drawer">
-				<v-list nav dense>
+				<v-list nav dense ripple>
+					<v-subheader class="vs_header_drawer">Vicent Sanjaime</v-subheader>
 					<v-list-item-group v-model="group" active-class="vs_active_drawer">
-						<v-list-item>
-							<v-list-item-title class="vs_header_drawer">Vicent Sanjaime</v-list-item-title>
-						</v-list-item>
 						<v-list-item>
 							<v-list-item-title class="vs_item_drawer" @click="goHome">Home</v-list-item-title>
 						</v-list-item>
@@ -72,7 +70,7 @@ import mobileUtils from '@/mixins/mobileUtils';
 	data: function() {
 		return {
 			drawer: false,
-			group: null
+			group: 1
 		};
 	},
 	mixins: [mobileUtils],
@@ -111,6 +109,15 @@ import mobileUtils from '@/mixins/mobileUtils';
 			return this.$store.getters.currentTab === 'home';
 		}
 	},
+	created() {
+		if (this.$router.currentRoute.name === 'background') {
+			(this as any).group = 1;
+		} else if (this.$router.currentRoute.name === 'projects') {
+			(this as any).group = 2;
+		} else {
+			(this as any).group = 0;
+		}
+	},
 	watch: {
 		group() {
 			(this as any).drawer = false;
@@ -135,7 +142,7 @@ export default class Menu extends Vue {}
 	font-family: 'Special Elite', sans-serif;
 	font-weight: 500;
 	font-size: 2.1rem;
-	color: #1b237b !important;
+	color: white !important;
 	font-size: 1.5rem !important;
 	margin-top: 30px;
 	padding-top: 10px;
