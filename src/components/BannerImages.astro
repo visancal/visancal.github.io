@@ -57,6 +57,8 @@ const { images, interval = 10000, bannerId } = Astro.props;
     background-position: center;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    /* Warm the images to match the earthy cream palette */
+    filter: saturate(0.45) sepia(0.45) brightness(0.92);
   }
 
   .vs-banner-slide--active {

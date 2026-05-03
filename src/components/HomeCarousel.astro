@@ -79,17 +79,21 @@ const { slides, interval = 15000 } = Astro.props;
     transition: opacity 1.2s ease-in-out;
   }
 
-  /* Gradient overlay for readability */
+  /* Warm earthy overlay — tints the image without affecting text (text sits above via z-index) */
   .vs-slide::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(26, 16, 8, 0.35) 0%,
-      rgba(26, 16, 8, 0.15) 50%,
-      rgba(26, 16, 8, 0.5) 100%
-    );
+    background:
+      /* Warm amber colour wash */
+      linear-gradient(rgba(180, 100, 40, 0.22), rgba(160, 85, 30, 0.22)),
+      /* Dark gradient for text readability */
+      linear-gradient(
+        to bottom,
+        rgba(70, 38, 12, 0.52) 0%,
+        rgba(50, 25, 8, 0.18) 48%,
+        rgba(70, 38, 12, 0.65) 100%
+      );
   }
 
   .vs-slide--active {
