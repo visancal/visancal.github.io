@@ -1,0 +1,166 @@
+---
+interface Slide {
+  src: string;
+  credits: string;
+  link: string;
+  place: string;
+}
+
+interface Props {
+  slides: Slide[];
+  interval?: number;
+}
+
+const { slides, interval = 15000 } = Astro.props;
+---
+
+<div class="vs-carousel" data-carousel data-interval={interval}>
+  {slides.map((slide, i) => (
+    <div
+      class:list={['vs-slide', { 'vs-slide--active': i === 0 }]}
+      style={`background-image: url('${slide.src}')`}
+    >
+      {i === 0 && (
+        <div class="vs-slide-content">
+          <h1 class="vs-hello">Hey, I'm Vicent</h1>
+          <p class="vs-description">GIS developer &amp; travel lover based in Valencia, Spain</p>
+          <div class="vs-actions">
+            <a href="/background" class="vs-btn-more">Learn more</a>
+          </div>
+        </div>
+      )}
+      {i !== 0 && (
+        <div class="vs-slide-content vs-slide-content--hidden">
+          <h1 class="vs-hello">Hey, I'm Vicent</h1>
+          <p class="vs-description">GIS developer &amp; travel lover based in Valencia, Spain</p>
+          <div class="vs-actions">
+            <a href="/background" class="vs-btn-more">Learn more</a>
+          </div>
+        </div>
+      )}
+      <div class="vs-credits">
+        <div>{slide.place}</div>
+        <div>
+          <i class="mdi mdi-camera vs-credits-cam"></i>
+          <a href={slide.link} target="_blank" rel="noopener noreferrer">{slide.credits}</a>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((el) => {
+    const slides = el.querySelectorAll<HTMLElement>('.vs-slide');
+    const ms = parseInt(el.dataset.interval ?? '15000', 10);
+    let cur = 0;
+
+    setInterval(() => {
+      slides[cur].classList.remove('vs-slide--active');
+      cur = (cur + 1) % slides.length;
+      slides[cur].classList.add('vs-slide--active');
+    }, ms);
+  });
+</script>
+
+<style>
+  .vs-carousel {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .vs-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .vs-slide--active {
+    opacity: 1;
+  }
+
+  .vs-slide-content {
+    margin-top: 180px;
+    margin-left: 40px;
+    max-width: 580px;
+  }
+
+  .vs-hello {
+    font-family: var(--font-display);
+    font-size: 3.3rem;
+    color: var(--color-primary);
+    line-height: 3.5rem;
+    margin-bottom: 16px;
+  }
+
+  .vs-description {
+    font-size: 1.8rem;
+    color: var(--color-link);
+    font-weight: 300;
+    line-height: 2.3rem;
+    margin: 0 20px 24px;
+  }
+
+  .vs-actions {
+    margin-left: 20px;
+  }
+
+  .vs-btn-more {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: capitalize;
+    animation: btn-change 5s infinite;
+  }
+
+  .vs-credits {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: var(--color-primary);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
+    font-weight: 300;
+    padding: 2px 8px;
+  }
+
+  .vs-credits-cam {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+
+  .vs-credits a {
+    color: var(--color-primary);
+    margin-left: 4px;
+  }
+
+  @keyframes btn-change {
+    0%   { color: var(--color-primary); }
+    50%  { color: var(--color-accent); }
+    100% { color: var(--color-primary); }
+  }
+
+  @media (max-width: 600px) {
+    .vs-slide-content {
+      margin-top: 170px;
+      margin-left: 8px;
+    }
+    .vs-hello {
+      font-size: 1.6rem;
+      line-height: 2rem;
+    }
+    .vs-description {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+  }
+</style>

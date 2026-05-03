@@ -1,0 +1,112 @@
+---
+import type { Employment } from '../data/content';
+
+interface Props {
+  info: Employment;
+}
+
+const { info } = Astro.props;
+---
+
+<div class="vs-card-wrap">
+  <article class="vs-card">
+    <img class="vs-card-img" src={info.img} alt={info.center} loading="lazy" />
+    <div class="vs-card-body">
+      <h3 class="vs-card-title">{info.title}</h3>
+      <div class="vs-card-subtitle">
+        <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-center-link">
+          {info.center}
+        </a>
+      </div>
+      <div class="vs-date-chip">
+        <i class="mdi mdi-calendar-month"></i>
+        {info.date}
+      </div>
+      <ul class="vs-task-list">
+        {info.tasks.map((task) => <li>{task}</li>)}
+      </ul>
+    </div>
+  </article>
+</div>
+
+<style>
+  .vs-card-wrap {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .vs-card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .vs-card-img {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+    display: block;
+    padding: 12px 16px 0;
+  }
+
+  .vs-card-body {
+    padding: 16px;
+  }
+
+  .vs-card-title {
+    color: var(--color-accent);
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .vs-card-subtitle {
+    margin-bottom: 8px;
+  }
+
+  .vs-center-link {
+    color: var(--color-primary);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+  }
+
+  .vs-center-link:hover {
+    color: var(--color-accent);
+  }
+
+  .vs-date-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+  .vs-task-list {
+    padding-left: 1.3em;
+  }
+
+  .vs-task-list li {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: #333;
+  }
+
+  @media (min-width: 768px) {
+    .vs-card-wrap {
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .vs-card-wrap {
+      width: 33.333%;
+    }
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+import type { Project } from '../data/content';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-accent)';
+---
+
+<div class="vs-card">
+  <p class="vs-project-title">{project.title}</p>
+  {project.description && <p class="vs-project-desc">{project.description}</p>}
+  {project.url && (
+    <a href={project.url} target="_blank" rel="noopener noreferrer" class="vs-project-url">
+      {project.url}
+    </a>
+  )}
+
+  <!-- Mobile-only chips (date + company shown inside card on small screens) -->
+  <div class="vs-mobile-chips">
+    <span class="vs-chip vs-chip--date">
+      <i class="mdi mdi-calendar-month"></i>{project.date}
+    </span>
+    <span class="vs-chip" style={`background-color: ${companyColor}`}>
+      {project.company}
+    </span>
+    {project.rd && <span class="vs-chip vs-chip--rd">R&amp;D</span>}
+  </div>
+
+  <div class="vs-tech-chips">
+    {project.technologies.map((tech) => (
+      <span class="vs-chip vs-chip--tech">{tech}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .vs-card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.14);
+    padding: 16px 12px;
+  }
+
+  .vs-project-title {
+    font-weight: 300;
+    font-size: 1.7rem;
+    color: var(--color-primary);
+    line-height: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .vs-project-desc {
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .vs-project-url {
+    display: block;
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+    max-width: 100%;
+  }
+
+  .vs-project-url:hover {
+    color: var(--color-accent);
+  }
+
+  .vs-mobile-chips {
+    display: none;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .vs-tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .vs-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.72rem;
+    color: white;
+    font-weight: 300;
+  }
+
+  .vs-chip--date {
+    background: var(--color-primary);
+  }
+
+  .vs-chip--rd {
+    background: #ef6c00;
+  }
+
+  .vs-chip--tech {
+    background: transparent;
+    color: #7b1fa2;
+    border: 1px solid #7b1fa2;
+  }
+
+  @media (max-width: 600px) {
+    .vs-mobile-chips {
+      display: flex;
+    }
+  }
+</style>

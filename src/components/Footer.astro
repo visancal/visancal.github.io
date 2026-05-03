@@ -1,0 +1,80 @@
+---
+---
+
+<footer class="vs-footer">
+  <div class="vs-footer-inner">
+    <span class="vs-footer-start"></span>
+    <div class="vs-footer-center">
+      <a href="https://twitter.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="vs-social-btn">
+        <i class="mdi mdi-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/visancal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="vs-social-btn">
+        <i class="mdi mdi-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/vsanjaime/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="vs-social-btn">
+        <i class="mdi mdi-linkedin"></i>
+      </a>
+      <a href="https://github.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="vs-social-btn">
+        <i class="mdi mdi-github"></i>
+      </a>
+    </div>
+    <div class="vs-footer-end">
+      Developed with <span class="vs-love">&hearts;</span> by Vicent
+    </div>
+  </div>
+</footer>
+
+<style>
+  .vs-footer {
+    background-color: #efefef;
+    height: 30px;
+    flex-shrink: 0;
+  }
+
+  .vs-footer-inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+  }
+
+  .vs-footer-start {
+    flex: 1;
+  }
+
+  .vs-footer-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .vs-footer-end {
+    flex: 1;
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--color-primary);
+  }
+
+  .vs-social-btn {
+    color: #c62828;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    transition: color 0.2s;
+  }
+
+  .vs-social-btn:hover {
+    color: var(--color-accent);
+  }
+
+  .vs-love {
+    color: var(--color-accent);
+    padding: 0 4px;
+  }
+
+  @media (max-width: 600px) {
+    .vs-footer {
+      display: none;
+    }
+  }
+</style>

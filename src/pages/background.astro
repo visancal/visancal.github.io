@@ -1,0 +1,241 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import BannerImages from '../components/BannerImages.astro';
+import SectionBackground from '../components/SectionBackground.astro';
+import EducationCard from '../components/EducationCard.astro';
+import EmploymentCard from '../components/EmploymentCard.astro';
+import { employment, education, skills } from '../data/content';
+
+const images = [
+  { src: '/img/back/back5.webp' },
+  { src: '/img/back/back1.webp' },
+  { src: '/img/back/back2.webp' },
+];
+
+const languages = [
+  { name: 'Spanish',  value: 100, label: 'Native' },
+  { name: 'English',  value: 70,  label: 'Upper-Intermediate' },
+  { name: 'Catalan',  value: 100, label: 'Native' },
+];
+---
+
+<Layout title="Vicent Sanjaime – Background">
+  <div class="vs-page">
+    <Header currentPage="background" />
+    <BannerImages images={images} interval={10000} bannerId="background-banner" />
+
+    <main class="vs-content" id="vs-bio-info">
+      <div class="vs-container">
+
+        <!-- Bio -->
+        <SectionBackground title="Bio">
+          <div class="vs-bio">
+            Developer of geospatial applications,{' '}
+            <a href="https://en.wikipedia.org/wiki/Geographic_information_system">GIS</a> consultant
+            and technical product manager of{' '}
+            <a href="https://www.prodevelop.es/puertos/posidonia/posidonia-space">Posidonia SPACE</a> and{' '}
+            <a href="https://www.prodevelop.es/global/geo/local-space">Local SPACE</a> at{' '}
+            <a href="https://www.prodevelop.es/en/">Prodevelop</a>. I love the front-end development,
+            I usually work with <a href="https://vuejs.org/">Vue</a> and web mapping libraries such as{' '}
+            <a href="https://openlayers.org/">OpenLayers</a>,{' '}
+            <a href="https://leafletjs.com/">Leaflet</a>,{' '}
+            <a href="https://developers.google.com/maps/documentation/javascript/overview">Google Maps API</a>,{' '}
+            <a href="https://deck.gl">Deck.gl</a>, <a href="https://carto.com/">CARTO</a>...
+            I also have a extensive experience with the installation and management of server components
+            as spatial databases and map servers. I have worked in a big amount of GIS projects, always
+            integrating different technologies and components, the majority of them have been{' '}
+            <a href="https://en.wikipedia.org/wiki/Open-source_model">Open-source</a>.
+          </div>
+          <div class="vs-bio vs-bio--gap">
+            I enjoy working on projects with a high spatial component because I can use my background
+            related with cartography, geography and geodesy, applied to development of spatial solutions.
+            I consider myself an adaptable, helpful and approachable team player. I also have a keen
+            interest in new technologies.
+          </div>
+          <div class="vs-bio vs-bio--gap">
+            <p class="vs-skills-intro">Among my technical skill set I would highlight:</p>
+            <ul class="vs-skills-list">
+              {skills.map((group) => (
+                <li class="vs-skills-row">
+                  {group.techs.map((tech) => (
+                    <span class="vs-skill-chip" style={`background-color: ${group.color}`}>
+                      <i class="mdi mdi-label"></i>
+                      {tech}
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </SectionBackground>
+
+        <!-- Education -->
+        <SectionBackground title="Education">
+          <div class="vs-cards-row">
+            {education.map((info) => <EducationCard info={info} />)}
+          </div>
+        </SectionBackground>
+
+        <!-- Employment -->
+        <SectionBackground title="Employment history">
+          <div class="vs-cards-row">
+            {employment.map((info) => <EmploymentCard info={info} />)}
+          </div>
+        </SectionBackground>
+
+        <!-- Languages -->
+        <SectionBackground title="Languages">
+          <div class="vs-languages">
+            {languages.map((lang) => (
+              <div class="vs-lang-block">
+                <p class="vs-lang-name">{lang.name}</p>
+                <div class="vs-progress-bar">
+                  <div class="vs-progress-fill" style={`width: ${lang.value}%`}>
+                    {lang.label}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SectionBackground>
+
+        <div style="height: 100px"></div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<!-- Shadow on banner when content is scrolled -->
+<script>
+  const banner = document.getElementById('background-banner');
+  const content = document.getElementById('vs-bio-info');
+
+  content?.addEventListener('scroll', () => {
+    banner?.classList.toggle('vs-banner--scrolled', (content.scrollTop ?? 0) > 5);
+  });
+</script>
+
+<style>
+  .vs-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .vs-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .vs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* Bio text */
+  .vs-bio {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #111;
+    margin: 0 20px;
+    line-height: 1.7;
+  }
+
+  .vs-bio a {
+    color: var(--color-primary);
+  }
+
+  .vs-bio a:hover {
+    color: var(--color-accent);
+  }
+
+  .vs-bio--gap {
+    margin-top: 12px;
+  }
+
+  .vs-skills-intro {
+    margin-bottom: 8px;
+  }
+
+  /* Skills list: override global ul li::before */
+  .vs-skills-list {
+    padding-left: 0;
+  }
+
+  .vs-skills-list li::before {
+    content: '' !important;
+    display: none;
+  }
+
+  .vs-skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .vs-skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 2px;
+  }
+
+  /* Cards grid */
+  .vs-cards-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 8px;
+  }
+
+  /* Languages */
+  .vs-languages {
+    margin: 8px 20px 0;
+  }
+
+  .vs-lang-block {
+    margin-bottom: 12px;
+  }
+
+  .vs-lang-name {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 6px;
+  }
+
+  .vs-progress-bar {
+    width: 30%;
+    background: #e0e0e0;
+    border-radius: 12px;
+    height: 20px;
+    overflow: hidden;
+  }
+
+  .vs-progress-fill {
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 8px;
+  }
+
+  @media (min-width: 700px) and (max-width: 1000px) {
+    .vs-progress-bar { width: 50%; }
+  }
+
+  @media (max-width: 700px) {
+    .vs-progress-bar { width: 80%; }
+  }
+</style>

@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import BannerImages from '../components/BannerImages.astro';
+import TimelineCard from '../components/TimelineCard.astro';
+import Footer from '../components/Footer.astro';
+import { projects } from '../data/content';
+
+const images = [
+  { src: '/img/back/back5.webp' },
+  { src: '/img/back/back6.webp' },
+];
+---
+
+<Layout title="Vicent Sanjaime – Projects">
+  <div class="vs-page">
+    <Header currentPage="projects" />
+    <BannerImages images={images} interval={10000} bannerId="projects-banner" />
+
+    <main class="vs-content" id="vs-timeline-info">
+      <div class="vs-container">
+        <div class="vs-intro">
+          <span class="vs-page-title">Projects</span>
+          <p class="vs-intro-text">
+            Since I started my professional career I have had the opportunity to work in a bunch of
+            different GIS projects with differents technologies. On the timeline below shows the main
+            projects in which I have participated and the technologies used. This list also includes
+            some personal and R&amp;D projects.
+          </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="vs-timeline">
+          {projects.map((project, index) => {
+            const isEven = index % 2 === 0;
+            const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-accent)';
+            return (
+              <div class:list={['vs-timeline-item', isEven ? 'vs-item--right' : 'vs-item--left']}>
+                <!-- Opposite chips (desktop only) -->
+                <div class:list={['vs-opp', isEven ? 'vs-opp--end' : 'vs-opp--start']}>
+                  <span class="vs-chip vs-chip--date">
+                    <i class="mdi mdi-calendar-month"></i>{project.date}
+                  </span>
+                  <span class="vs-chip" style={`background-color: ${companyColor}`}>
+                    {project.company}
+                  </span>
+                  {project.rd && <span class="vs-chip vs-chip--rd">R&amp;D</span>}
+                </div>
+
+                <!-- Center dot -->
+                <div class="vs-dot-wrap">
+                  <div class="vs-dot"></div>
+                </div>
+
+                <!-- Card -->
+                <div class="vs-card-wrap">
+                  <TimelineCard project={project} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div style="height: 20px"></div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<script>
+  const banner = document.getElementById('projects-banner');
+  const content = document.getElementById('vs-timeline-info');
+
+  content?.addEventListener('scroll', () => {
+    banner?.classList.toggle('vs-banner--scrolled', (content.scrollTop ?? 0) > 5);
+  });
+</script>
+
+<style>
+  .vs-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .vs-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .vs-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 8px;
+  }
+
+  .vs-intro {
+    margin: 8px 8px 0;
+  }
+
+  .vs-page-title {
+    display: block;
+    color: var(--color-primary);
+    font-size: 1.9rem;
+    font-weight: 300;
+    font-family: var(--font-display);
+    margin-bottom: 6px;
+  }
+
+  .vs-intro-text {
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  /* Timeline */
+  .vs-timeline {
+    position: relative;
+    padding: 16px 0;
+  }
+
+  .vs-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: hsla(336, 74%, 40%, 0.3);
+    transform: translateX(-50%);
+  }
+
+  .vs-timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin: 8px 0;
+  }
+
+  /* Even: card on right, chips on left */
+  .vs-item--right {
+    flex-direction: row;
+  }
+
+  /* Odd: card on left, chips on right */
+  .vs-item--left {
+    flex-direction: row-reverse;
+  }
+
+  .vs-opp {
+    width: calc(50% - 20px);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Even item: chips align to right (toward center dot) */
+  .vs-opp--end {
+    align-items: flex-end;
+  }
+
+  /* Odd item: chips align to left (toward center dot) */
+  .vs-opp--start {
+    align-items: flex-start;
+  }
+
+  .vs-dot-wrap {
+    width: 40px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
+
+  .vs-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .vs-card-wrap {
+    width: calc(50% - 20px);
+    padding: 8px;
+  }
+
+  /* Chips */
+  .vs-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.72rem;
+    color: white;
+    font-weight: 300;
+  }
+
+  .vs-chip--date {
+    background: var(--color-primary);
+  }
+
+  .vs-chip--rd {
+    background: #ef6c00;
+  }
+
+  /* Mobile: single column */
+  @media (max-width: 600px) {
+    .vs-timeline::before {
+      left: 20px;
+    }
+
+    .vs-item--right,
+    .vs-item--left {
+      flex-direction: row;
+    }
+
+    .vs-opp {
+      display: none;
+    }
+
+    .vs-dot-wrap {
+      width: 40px;
+    }
+
+    .vs-card-wrap {
+      width: calc(100% - 40px);
+    }
+  }
+</style>
