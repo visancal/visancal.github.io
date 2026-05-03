@@ -27,6 +27,13 @@ const { slides, interval = 15000 } = Astro.props;
           <div class="vs-actions">
             <a href="/background" class="vs-btn-more">Learn more</a>
           </div>
+          <div class="vs-social-mobile">
+            <a href="https://twitter.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="vs-social-icon"><i class="mdi mdi-twitter"></i></a>
+            <a href="https://www.instagram.com/visancal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="vs-social-icon"><i class="mdi mdi-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/vsanjaime/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="vs-social-icon"><i class="mdi mdi-linkedin"></i></a>
+            <a href="https://github.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="vs-social-icon"><i class="mdi mdi-github"></i></a>
+            <a href="https://www.strava.com/athletes/visancal" target="_blank" rel="noopener noreferrer" aria-label="Strava" class="vs-social-icon"><i class="mdi mdi-strava"></i></a>
+          </div>
         </div>
       )}
       {i !== 0 && (
@@ -35,6 +42,13 @@ const { slides, interval = 15000 } = Astro.props;
           <p class="vs-description">GIS developer, AI enthusiast, travel &amp; cycling lover based in Valencia, Spain</p>
           <div class="vs-actions">
             <a href="/background" class="vs-btn-more">Learn more</a>
+          </div>
+          <div class="vs-social-mobile">
+            <a href="https://twitter.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="vs-social-icon"><i class="mdi mdi-twitter"></i></a>
+            <a href="https://www.instagram.com/visancal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="vs-social-icon"><i class="mdi mdi-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/vsanjaime/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="vs-social-icon"><i class="mdi mdi-linkedin"></i></a>
+            <a href="https://github.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="vs-social-icon"><i class="mdi mdi-github"></i></a>
+            <a href="https://www.strava.com/athletes/visancal" target="_blank" rel="noopener noreferrer" aria-label="Strava" class="vs-social-icon"><i class="mdi mdi-strava"></i></a>
           </div>
         </div>
       )}
@@ -182,6 +196,11 @@ const { slides, interval = 15000 } = Astro.props;
     color: #ffffff;
   }
 
+  /* Social icons — hidden on desktop (shown in header), visible on mobile */
+  .vs-social-mobile {
+    display: none;
+  }
+
   @media (max-width: 600px) {
     .vs-slide-content {
       margin-top: 160px;
@@ -193,6 +212,24 @@ const { slides, interval = 15000 } = Astro.props;
     }
     .vs-description {
       font-size: 1rem;
+    }
+    .vs-social-mobile {
+      display: flex;
+      gap: 4px;
+      margin-top: 24px;
+    }
+    .vs-social-icon {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 8px;
+      border-radius: var(--radius-pill);
+      transition: color 0.15s, background 0.15s;
+    }
+    .vs-social-icon:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
     }
   }
 </style>
