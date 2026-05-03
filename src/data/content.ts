@@ -109,12 +109,12 @@ export const education: Education[] = [
 
 // Muted earthy tones to harmonise with the warm cream palette
 export const skills: SkillGroup[] = [
-  { color: '#B85C42', techs: ['Front-end development', 'Javascript', 'HTML5', 'CSS', 'Vue', 'Typescript'] },
+  { color: '#B85C42', techs: ['Front-end development', 'Javascript', 'HTML5', 'CSS', 'Vue', 'React', 'Typescript'] },
   { color: '#A04E68', techs: ['GIS Analysis', 'Cartography', 'Geodesy', 'Geomatics', 'QGIS', 'gvSIG', 'ArcGis Desktop', 'CARTO'] },
   { color: '#7A5090', techs: ['Geoserver', 'MapServer', 'MapProxy', 'Tilecache', 'Geonetwork'] },
   { color: '#5C5490', techs: ['CAD', 'AutoCAD', 'Microstation'] },
   { color: '#4A6090', techs: ['Oracle Spatial', 'PostgreSQL / PostGIS', 'SQL Server', 'SQL'] },
-  { color: '#3D7A9A', techs: ['DevOps', 'Jenkins', 'Docker', 'AWS', 'Linux', 'Bash'] },
+  { color: '#3D7A9A', techs: ['DevOps', 'Jenkins', 'Docker', 'AWS', 'Google Cloud Platform', 'Linux', 'Bash'] },
   { color: '#2E8C8C', techs: ['Java', 'GeoTools', 'Spring'] },
   { color: '#2E8A78', techs: ['Kafka'] },
   { color: '#4A7A68', techs: ['Scrum', 'Jira', 'Confluence'] },
