@@ -38,13 +38,20 @@ const { slides, interval = 15000 } = Astro.props;
           </div>
         </div>
       )}
-      <div class="vs-credits">
-        <div>{slide.place}</div>
-        <div>
-          <i class="mdi mdi-camera vs-credits-cam"></i>
-          <a href={slide.link} target="_blank" rel="noopener noreferrer">{slide.credits}</a>
+      {(slide.place || slide.credits) && (
+        <div class="vs-credits">
+          {slide.place && <div>{slide.place}</div>}
+          {slide.credits && (
+            <div>
+              <i class="mdi mdi-camera vs-credits-cam"></i>
+              {slide.link
+                ? <a href={slide.link} target="_blank" rel="noopener noreferrer">{slide.credits}</a>
+                : <span>{slide.credits}</span>
+              }
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   ))}
 </div>
