@@ -76,7 +76,20 @@ const { slides, interval = 15000 } = Astro.props;
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1.2s ease-in-out;
+  }
+
+  /* Gradient overlay for readability */
+  .vs-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(26, 16, 8, 0.35) 0%,
+      rgba(26, 16, 8, 0.15) 50%,
+      rgba(26, 16, 8, 0.5) 100%
+    );
   }
 
   .vs-slide--active {
@@ -84,83 +97,89 @@ const { slides, interval = 15000 } = Astro.props;
   }
 
   .vs-slide-content {
+    position: relative;
+    z-index: 1;
     margin-top: 180px;
-    margin-left: 40px;
-    max-width: 580px;
+    margin-left: 64px;
+    max-width: 620px;
   }
 
   .vs-hello {
     font-family: var(--font-display);
-    font-size: 3.3rem;
-    color: var(--color-primary);
-    line-height: 3.5rem;
-    margin-bottom: 16px;
+    font-size: 3.8rem;
+    color: #ffffff;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
   }
 
   .vs-description {
-    font-size: 1.8rem;
-    color: var(--color-link);
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.88);
     font-weight: 300;
-    line-height: 2.3rem;
-    margin: 0 20px 24px;
-  }
-
-  .vs-actions {
-    margin-left: 20px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 440px;
   }
 
   .vs-btn-more {
     display: inline-block;
-    padding: 10px 24px;
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--color-accent);
-    font-size: 1rem;
-    font-weight: 300;
-    text-transform: capitalize;
-    animation: btn-change 5s infinite;
+    padding: 12px 28px;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.01em;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .vs-btn-more:hover {
+    background: var(--color-accent-dk);
+    transform: translateY(-1px);
   }
 
   .vs-credits {
     position: absolute;
-    bottom: 15px;
-    left: 15px;
-    color: var(--color-primary);
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.4);
-    font-size: 0.7rem;
-    font-weight: 300;
-    padding: 2px 8px;
+    bottom: 16px;
+    left: 16px;
+    z-index: 1;
+    color: rgba(255,255,255,0.75);
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: var(--radius-pill);
+    font-size: 0.68rem;
+    font-weight: 400;
+    padding: 3px 10px;
+    backdrop-filter: blur(4px);
   }
 
   .vs-credits-cam {
     color: var(--color-accent);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     vertical-align: middle;
   }
 
   .vs-credits a {
-    color: var(--color-primary);
+    color: rgba(255,255,255,0.9);
     margin-left: 4px;
   }
 
-  @keyframes btn-change {
-    0%   { color: var(--color-primary); }
-    50%  { color: var(--color-accent); }
-    100% { color: var(--color-primary); }
+  .vs-credits a:hover {
+    color: #ffffff;
   }
 
   @media (max-width: 600px) {
     .vs-slide-content {
-      margin-top: 170px;
-      margin-left: 8px;
+      margin-top: 160px;
+      margin-left: 20px;
     }
     .vs-hello {
-      font-size: 1.6rem;
-      line-height: 2rem;
+      font-size: 2.2rem;
     }
     .vs-description {
-      font-size: 1.2rem;
-      line-height: 1.6rem;
+      font-size: 1rem;
     }
   }
 </style>

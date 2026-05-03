@@ -38,80 +38,93 @@ const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-a
 
 <style>
   .vs-card {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.14);
-    padding: 16px 12px;
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    padding: 20px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .vs-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
   }
 
   .vs-project-title {
-    font-weight: 300;
-    font-size: 1.7rem;
-    color: var(--color-primary);
-    line-height: 2rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
     margin-bottom: 10px;
   }
 
   .vs-project-desc {
-    font-weight: 300;
-    font-size: 0.9rem;
-    color: #333;
-    margin-bottom: 8px;
-    line-height: 1.4;
+    font-size: 0.875rem;
+    color: var(--color-text-sec);
+    margin-bottom: 10px;
+    line-height: 1.6;
   }
 
   .vs-project-url {
     display: block;
-    color: var(--color-primary);
-    font-size: 0.8rem;
+    color: var(--color-accent);
+    font-size: 0.78rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     max-width: 100%;
+    transition: color 0.15s;
   }
 
   .vs-project-url:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-dk);
   }
 
   .vs-mobile-chips {
     display: none;
     flex-wrap: wrap;
-    gap: 4px;
-    margin-bottom: 8px;
+    gap: 6px;
+    margin-bottom: 10px;
   }
 
   .vs-tech-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 8px;
+    gap: 5px;
+    margin-top: 12px;
   }
 
   .vs-chip {
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    padding: 2px 8px;
-    border-radius: 2px;
-    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 0.7rem;
+    font-weight: 500;
     color: white;
-    font-weight: 300;
   }
 
   .vs-chip--date {
-    background: var(--color-primary);
+    background: rgba(217, 119, 87, 0.15);
+    color: var(--color-accent);
+    border: 1px solid rgba(217, 119, 87, 0.3);
   }
 
   .vs-chip--rd {
-    background: #ef6c00;
+    background: rgba(239, 108, 0, 0.12);
+    color: #C85C00;
+    border: 1px solid rgba(239, 108, 0, 0.25);
   }
 
   .vs-chip--tech {
-    background: transparent;
-    color: #7b1fa2;
-    border: 1px solid #7b1fa2;
+    background: rgba(26, 16, 8, 0.06);
+    color: var(--color-text-sec);
+    border: 1px solid var(--color-border);
   }
 
   @media (max-width: 600px) {

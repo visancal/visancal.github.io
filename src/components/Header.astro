@@ -90,20 +90,21 @@ const isHome = currentPage === 'home';
   .vs-appbar {
     display: flex;
     align-items: center;
-    height: 80px;
-    padding: 0 8px 0 16px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(2px);
+    height: 72px;
+    padding: 0 24px;
+    background: rgba(245, 239, 227, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .vs-title {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 2.1rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    color: var(--color-primary);
-    margin-left: 20px;
-    animation: color-change 15s infinite;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
   }
 
   .vs-spacer {
@@ -112,46 +113,49 @@ const isHome = currentPage === 'home';
 
   .vs-nav-desktop {
     display: flex;
-    gap: 4px;
-    padding-right: 32px;
+    align-items: center;
+    gap: 2px;
+    padding-right: 8px;
   }
 
   .vs-nav-btn {
-    color: #0d47a1;
-    font-weight: 500;
-    font-size: 0.875rem;
-    letter-spacing: 0.05em;
-    text-transform: capitalize;
-    padding: 6px 12px;
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    color: var(--color-text-sec);
+    font-family: var(--font-main);
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    transition: color 0.15s, background 0.15s;
   }
 
   .vs-nav-btn--active {
-    border-bottom-color: var(--color-accent);
-    color: var(--color-primary);
-    font-weight: 900;
+    color: var(--color-text);
+    background: rgba(217, 119, 87, 0.12);
+    font-weight: 500;
   }
 
   .vs-nav-btn:hover:not(.vs-nav-btn--active) {
-    color: var(--color-accent);
+    color: var(--color-text);
+    background: rgba(26, 16, 8, 0.06);
   }
 
   /* Social bar */
   .vs-social-bar {
     display: flex;
     align-items: center;
-    height: 36px;
-    padding: 0 8px;
+    height: 32px;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(245, 239, 227, 0.6);
   }
 
   .vs-social-btn {
-    color: #c62828;
-    font-size: 18px;
-    margin-right: 16px;
+    color: var(--color-text-sec);
+    font-size: 17px;
+    margin-right: 12px;
     display: inline-flex;
     align-items: center;
-    transition: color 0.2s;
+    transition: color 0.15s;
   }
 
   .vs-social-btn:hover {
@@ -164,10 +168,9 @@ const isHome = currentPage === 'home';
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.5rem;
-    color: var(--color-primary);
+    font-size: 1.4rem;
+    color: var(--color-text);
     padding: 8px;
-    margin-right: 8px;
   }
 
   /* Mobile drawer */
@@ -177,9 +180,10 @@ const isHome = currentPage === 'home';
     left: -300px;
     width: 280px;
     height: 100vh;
-    background-color: var(--color-primary);
+    background: var(--color-bg);
+    border-right: 1px solid var(--color-border);
     z-index: 20000;
-    transition: left 0.3s ease;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .vs-drawer.open {
@@ -190,8 +194,9 @@ const isHome = currentPage === 'home';
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(26, 16, 8, 0.35);
     z-index: 19999;
+    backdrop-filter: blur(2px);
   }
 
   .vs-overlay.open {
@@ -199,38 +204,36 @@ const isHome = currentPage === 'home';
   }
 
   .vs-drawer-title {
-    color: white;
+    color: var(--color-text);
     font-family: var(--font-display);
-    font-size: 1.5rem;
-    padding: 40px 10px 40px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 36px 20px 32px;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .vs-drawer-item {
     display: block;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 300;
-    padding: 15px 20px;
-    margin-top: 5px;
-    transition: background 0.2s;
+    color: var(--color-text-sec);
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--color-border);
+    transition: color 0.15s, background 0.15s;
   }
 
   .vs-drawer-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  @keyframes color-change {
-    0%   { color: var(--color-primary); }
-    50%  { color: var(--color-accent); }
-    100% { color: var(--color-primary); }
+    color: var(--color-text);
+    background: rgba(217, 119, 87, 0.08);
   }
 
   @media (max-width: 600px) {
     .vs-appbar {
       height: 60px;
+      padding: 0 16px;
     }
     .vs-title {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
     .vs-nav-desktop {
       display: none;

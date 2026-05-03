@@ -36,56 +36,71 @@ const { info } = Astro.props;
   }
 
   .vs-card {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
     overflow: hidden;
     height: 100%;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .vs-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
   }
 
   .vs-card-img {
     width: 100%;
-    height: 100px;
+    height: 90px;
     object-fit: contain;
     display: block;
-    padding: 12px 16px 0;
+    padding: 16px 24px 0;
   }
 
   .vs-card-body {
-    padding: 16px;
+    padding: 20px;
   }
 
   .vs-card-title {
-    color: var(--color-accent);
+    color: var(--color-text);
+    font-family: var(--font-display);
     font-weight: 500;
-    font-size: 1.3rem;
-    margin-bottom: 8px;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    line-height: 1.4;
   }
 
   .vs-card-subtitle {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .vs-center-link {
-    color: var(--color-primary);
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 500;
     text-transform: uppercase;
-    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    transition: color 0.15s;
   }
 
   .vs-center-link:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-dk);
   }
 
   .vs-date-chip {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: var(--color-primary);
-    color: white;
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    border-radius: 2px;
-    margin-bottom: 12px;
+    background: rgba(217, 119, 87, 0.12);
+    color: var(--color-accent);
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(217, 119, 87, 0.25);
+    margin-bottom: 14px;
   }
 
   .vs-task-list {
@@ -93,9 +108,10 @@ const { info } = Astro.props;
   }
 
   .vs-task-list li {
-    font-size: 1rem;
-    margin-bottom: 4px;
-    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    color: var(--color-text-sec);
   }
 
   @media (min-width: 768px) {
