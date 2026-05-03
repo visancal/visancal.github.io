@@ -59,7 +59,7 @@ export const employment: Employment[] = [
     url: 'https://www.prodevelop.es',
     img: '/img/employment/prodevelop.webp',
     title: 'GIS analyst, developer and product manager',
-    date: 'Nov 2006 - Present',
+    date: 'Nov 2006 - Jan 2022',
     location: 'Valencia',
     tasks: [
       'Product manager of SPACE (Posidonia Suite)',
