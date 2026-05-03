@@ -53,6 +53,7 @@ const { info } = Astro.props;
     height: 120px;
     object-fit: cover;
     display: block;
+    filter: saturate(0.45) sepia(0.45) brightness(0.92);
   }
 
   .vs-card-body {
@@ -118,6 +119,7 @@ const { info } = Astro.props;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--color-border);
+    filter: saturate(0.45) sepia(0.45) brightness(0.92);
   }
 
   @media (min-width: 768px) {
