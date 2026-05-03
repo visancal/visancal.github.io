@@ -38,6 +38,22 @@ export interface Project {
 
 export const employment: Employment[] = [
   {
+    id: 0,
+    center: 'CARTO',
+    url: 'https://carto.com',
+    img: '/img/employment/carto.webp',
+    title: 'Professional Services',
+    date: '2024 - Present',
+    location: 'Valencia',
+    tasks: [
+      'Customer onboarding and technical guidance on the CARTO platform',
+      'Design and development of geospatial solutions and dashboards',
+      'Spatial data analysis using cloud data warehouses (BigQuery, Snowflake)',
+      'Integration of CARTO with web mapping libraries (Deck.gl, Google Maps, MapLibre)',
+      'GIS consulting and best-practice recommendations for enterprise clients',
+    ],
+  },
+  {
     id: 1,
     center: 'Prodevelop',
     url: 'https://www.prodevelop.es',
