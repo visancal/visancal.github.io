@@ -107,17 +107,17 @@ export const education: Education[] = [
   },
 ];
 
-// Vuetify color names converted to hex
+// Muted earthy tones to harmonise with the warm cream palette
 export const skills: SkillGroup[] = [
-  { color: '#E53935', techs: ['Front-end development', 'Javascript', 'HTML5', 'CSS', 'Vue', 'Typescript'] },
-  { color: '#D81B60', techs: ['GIS Analysis', 'Cartography', 'Geodesy', 'Geomatics', 'QGIS', 'gvSIG', 'ArcGis Desktop', 'CARTO'] },
-  { color: '#8E24AA', techs: ['Geoserver', 'MapServer', 'MapProxy', 'Tilecache', 'Geonetwork'] },
-  { color: '#5E35B1', techs: ['CAD', 'AutoCAD', 'Microstation'] },
-  { color: '#3949AB', techs: ['Oracle Spatial', 'PostgreSQL / PostGIS', 'SQL Server', 'SQL'] },
-  { color: '#1E88E5', techs: ['DevOps', 'Jenkins', 'Docker', 'AWS', 'Linux', 'Bash'] },
-  { color: '#039BE5', techs: ['Java', 'GeoTools', 'Spring'] },
-  { color: '#00ACC1', techs: ['Kafka'] },
-  { color: '#00897B', techs: ['Scrum', 'Jira', 'Confluence'] },
+  { color: '#B85C42', techs: ['Front-end development', 'Javascript', 'HTML5', 'CSS', 'Vue', 'Typescript'] },
+  { color: '#A04E68', techs: ['GIS Analysis', 'Cartography', 'Geodesy', 'Geomatics', 'QGIS', 'gvSIG', 'ArcGis Desktop', 'CARTO'] },
+  { color: '#7A5090', techs: ['Geoserver', 'MapServer', 'MapProxy', 'Tilecache', 'Geonetwork'] },
+  { color: '#5C5490', techs: ['CAD', 'AutoCAD', 'Microstation'] },
+  { color: '#4A6090', techs: ['Oracle Spatial', 'PostgreSQL / PostGIS', 'SQL Server', 'SQL'] },
+  { color: '#3D7A9A', techs: ['DevOps', 'Jenkins', 'Docker', 'AWS', 'Linux', 'Bash'] },
+  { color: '#2E8C8C', techs: ['Java', 'GeoTools', 'Spring'] },
+  { color: '#2E8A78', techs: ['Kafka'] },
+  { color: '#4A7A68', techs: ['Scrum', 'Jira', 'Confluence'] },
 ];
 
 export const projects: Project[] = [
