@@ -1,0 +1,1 @@
+document.querySelectorAll("[data-banner]").forEach(t=>{const s=t.querySelectorAll(".vs-banner-slide"),a=parseInt(t.dataset.interval??"10000",10);let e=0;setInterval(()=>{s[e].classList.remove("vs-banner-slide--active"),e=(e+1)%s.length,s[e].classList.add("vs-banner-slide--active")},a)});

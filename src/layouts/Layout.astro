@@ -1,0 +1,168 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonicalPath?: string;
+}
+
+const SITE_URL  = 'https://vicentsanjaime.net';
+const SITE_NAME = 'Vicent Sanjaime';
+
+const {
+  title       = 'Vicent Sanjaime | GIS Developer & Consultant',
+  description = 'GIS developer and consultant at CARTO Professional Services based in Valencia, Spain. Specialised in geospatial web applications, mapping libraries and spatial databases.',
+  ogImage     = `${SITE_URL}/img/home/intro.webp`,
+  canonicalPath = '',
+} = Astro.props;
+
+const canonical = `${SITE_URL}${canonicalPath}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Vicent Sanjaime" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph (LinkedIn, Facebook, WhatsApp…) -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content={SITE_NAME} />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:image"       content={ogImage} />
+    <meta property="og:image:alt"   content="Vicent Sanjaime — GIS Developer" />
+    <meta property="og:locale"      content="en_GB" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@visancal" />
+    <meta name="twitter:creator"     content="@visancal" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImage} />
+
+    <!-- Structured data — Person schema -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Vicent Sanjaime",
+        "url": "https://vicentsanjaime.net",
+        "jobTitle": "GIS Developer & Consultant",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "CARTO",
+          "url": "https://carto.com"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Valencia",
+          "addressCountry": "ES"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/vsanjaime/",
+          "https://github.com/visancal",
+          "https://twitter.com/visancal",
+          "https://www.instagram.com/visancal/"
+        ],
+        "knowsAbout": [
+          "GIS", "Geospatial development", "Web mapping",
+          "Vue.js", "React", "TypeScript", "OpenLayers",
+          "PostGIS", "GeoServer", "CARTO", "Deck.gl"
+        ]
+      }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    /* Anthropic-inspired palette */
+    --color-bg:        #F5EFE3;   /* warm cream */
+    --color-surface:   #FDFAF4;   /* lighter cream for cards */
+    --color-text:      #1A1008;   /* warm near-black */
+    --color-text-sec:  #6E6760;   /* warm gray */
+    --color-accent:    #D97757;   /* coral / terracotta */
+    --color-accent-dk: #B85E3A;   /* darker coral for hover */
+    --color-border:    #E8E2D6;   /* warm light border */
+
+    /* Legacy aliases used in components */
+    --color-primary:   #1A1008;
+    --color-secondary: #D97757;
+    --color-link:      #D97757;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-main:    'Inter', system-ui, sans-serif;
+
+    --radius-card: 16px;
+    --radius-pill: 9999px;
+    --radius-sm:   8px;
+
+    --shadow-card: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    overflow-y: hidden;
+    font-weight: 400;
+  }
+
+  body {
+    font-family: var(--font-main);
+    font-weight: 400;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul li::before {
+    content: '\2022';
+    color: var(--color-accent);
+    font-weight: bold;
+    display: inline-block;
+    width: 1.4em;
+    margin-left: -1.3em;
+  }
+</style>

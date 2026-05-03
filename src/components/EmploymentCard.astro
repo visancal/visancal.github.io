@@ -1,0 +1,129 @@
+---
+import type { Employment } from '../data/content';
+
+interface Props {
+  info: Employment;
+}
+
+const { info } = Astro.props;
+---
+
+<div class="vs-card-wrap">
+  <article class="vs-card">
+    <img class="vs-card-img" src={info.img} alt={info.center} loading="lazy" />
+    <div class="vs-card-body">
+      <h3 class="vs-card-title">{info.title}</h3>
+      <div class="vs-card-subtitle">
+        <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-center-link">
+          {info.center}
+        </a>
+      </div>
+      <div class="vs-date-chip">
+        <i class="mdi mdi-calendar-month"></i>
+        {info.date}
+      </div>
+      <ul class="vs-task-list">
+        {info.tasks.map((task) => <li>{task}</li>)}
+      </ul>
+    </div>
+  </article>
+</div>
+
+<style>
+  .vs-card-wrap {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .vs-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    height: 100%;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .vs-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .vs-card-img {
+    width: 100%;
+    height: 90px;
+    object-fit: contain;
+    display: block;
+    padding: 16px 24px 0;
+    filter: saturate(0.65) sepia(0.2) brightness(0.95);
+  }
+
+  .vs-card-body {
+    padding: 20px;
+  }
+
+  .vs-card-title {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .vs-card-subtitle {
+    margin-bottom: 10px;
+  }
+
+  .vs-center-link {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: color 0.15s;
+  }
+
+  .vs-center-link:hover {
+    color: var(--color-accent-dk);
+  }
+
+  .vs-date-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(217, 119, 87, 0.12);
+    color: var(--color-accent);
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(217, 119, 87, 0.25);
+    margin-bottom: 14px;
+  }
+
+  .vs-task-list {
+    padding-left: 1.3em;
+  }
+
+  .vs-task-list li {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    color: var(--color-text-sec);
+  }
+
+  @media (min-width: 768px) {
+    .vs-card-wrap {
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .vs-card-wrap {
+      width: 33.333%;
+    }
+  }
+</style>

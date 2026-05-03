@@ -1,0 +1,135 @@
+---
+import type { Project } from '../data/content';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-accent)';
+---
+
+<div class="vs-card">
+  <p class="vs-project-title">{project.title}</p>
+  {project.description && <p class="vs-project-desc">{project.description}</p>}
+  {project.url && (
+    <a href={project.url} target="_blank" rel="noopener noreferrer" class="vs-project-url">
+      {project.url}
+    </a>
+  )}
+
+  <!-- Mobile-only chips (date + company shown inside card on small screens) -->
+  <div class="vs-mobile-chips">
+    <span class="vs-chip vs-chip--date">
+      <i class="mdi mdi-calendar-month"></i>{project.date}
+    </span>
+    <span class="vs-chip" style={`background-color: ${companyColor}`}>
+      {project.company}
+    </span>
+    {project.rd && <span class="vs-chip vs-chip--rd">R&amp;D</span>}
+  </div>
+
+  <div class="vs-tech-chips">
+    {project.technologies.map((tech) => (
+      <span class="vs-chip vs-chip--tech">{tech}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .vs-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    padding: 20px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .vs-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+
+  .vs-project-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+
+  .vs-project-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-sec);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .vs-project-url {
+    display: block;
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+    max-width: 100%;
+    transition: color 0.15s;
+  }
+
+  .vs-project-url:hover {
+    color: var(--color-accent-dk);
+  }
+
+  .vs-mobile-chips {
+    display: none;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .vs-tech-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 12px;
+  }
+
+  .vs-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: white;
+  }
+
+  .vs-chip--date {
+    background: rgba(217, 119, 87, 0.15);
+    color: var(--color-accent);
+    border: 1px solid rgba(217, 119, 87, 0.3);
+  }
+
+  .vs-chip--rd {
+    background: rgba(239, 108, 0, 0.12);
+    color: #C85C00;
+    border: 1px solid rgba(239, 108, 0, 0.25);
+  }
+
+  .vs-chip--tech {
+    background: rgba(74, 96, 144, 0.08);
+    color: #4A6090;
+    border: 1px solid rgba(74, 96, 144, 0.25);
+  }
+
+  @media (max-width: 600px) {
+    .vs-mobile-chips {
+      display: flex;
+    }
+  }
+</style>

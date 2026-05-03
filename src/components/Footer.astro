@@ -1,0 +1,89 @@
+---
+---
+
+<footer class="vs-footer">
+  <div class="vs-footer-inner">
+    <span class="vs-footer-start"></span>
+    <div class="vs-footer-center">
+      <a href="https://twitter.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="vs-social-btn">
+        <i class="mdi mdi-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/visancal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="vs-social-btn">
+        <i class="mdi mdi-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/vsanjaime/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="vs-social-btn">
+        <i class="mdi mdi-linkedin"></i>
+      </a>
+      <a href="https://github.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="vs-social-btn">
+        <i class="mdi mdi-github"></i>
+      </a>
+      <a href="https://www.strava.com/athletes/visancal" target="_blank" rel="noopener noreferrer" aria-label="Strava" class="vs-social-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
+      </a>
+    </div>
+    <div class="vs-footer-end">
+      Developed with <span class="vs-love">&hearts;</span> by Vicent
+    </div>
+  </div>
+</footer>
+
+<style>
+  .vs-footer {
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .vs-footer-inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .vs-footer-start {
+    flex: 1;
+  }
+
+  .vs-footer-center {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .vs-footer-end {
+    flex: 1;
+    text-align: right;
+    font-size: 0.78rem;
+    color: var(--color-text-sec);
+  }
+
+  .vs-social-btn {
+    color: var(--color-text-sec);
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 8px;
+    border-radius: var(--radius-pill);
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .vs-social-btn:hover {
+    color: var(--color-accent);
+    background: rgba(217, 119, 87, 0.1);
+  }
+
+  .vs-love {
+    color: var(--color-accent);
+    padding: 0 3px;
+  }
+
+  @media (max-width: 600px) {
+    .vs-footer {
+      display: none;
+    }
+  }
+</style>
