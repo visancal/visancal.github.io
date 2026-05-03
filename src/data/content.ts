@@ -48,11 +48,11 @@ export const employment: Employment[] = [
     tasks: [
       'Product manager of SPACE (Posidonia Suite)',
       'GIS consultant',
-      'Frontend  and backend developer (VueJs)(Java)',
-      'Managing spatial database (PostgreSQL / PostGIS, Oracle Spatial, SQL Server)',
-      'Map servers (MapServer, Geoserver)',
+      'Front-end and back-end developer (Vue.js / Java)',
+      'Spatial database management (PostgreSQL / PostGIS, Oracle Spatial, SQL Server)',
+      'Map server administration (MapServer, GeoServer)',
       'DevOps tasks (Jenkins, Docker, Bash)',
-      'Cartographic editor (QGis, gvSIG, ArcMap, AutoCAD)',
+      'Cartographic editing (QGIS, gvSIG, ArcMap, AutoCAD)',
       'User training',
     ],
   },
@@ -65,7 +65,7 @@ export const employment: Employment[] = [
     title: 'GIS technician',
     location: 'Valencia',
     tasks: [
-      'Cartographic editor  (ArcMap-ESRI)',
+      'Cartographic editing (ArcMap / ESRI)',
       'Photogrammetric studies',
       'Hydraulic studies (HEC-GeoRAS)',
     ],
@@ -79,7 +79,7 @@ export const employment: Employment[] = [
     title: 'GIS technician',
     location: 'Albal',
     tasks: [
-      'Cartographic revision of land uses of LICS (Natural parks) in the Valencian region',
+      'Cartographic review of land uses in protected natural areas (LICs) across the Valencian region',
     ],
   },
 ];
@@ -139,7 +139,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: '',
     description:
-      'Web tool for tracking incidents and suppliers globally. It has been developed with CARTO technology and it is hosted in AWS',
+      'Web tool for tracking incidents and suppliers globally, developed with CARTO technology and hosted on AWS.',
     rd: false,
   },
   {
@@ -150,7 +150,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: 'https://www.prodevelop.es/puertos/posidonia/posidonia-space',
     description:
-      "Port cartography web viewer. It's included in the Posidonia component suite that Prodevelop commercialises for ports management. This solution includes a spatial database (PostGIS, Oracle Spatial or SQL Server), a Geoserver map server and a client made with OpenLayers.",
+      'Port cartography web viewer included in the Posidonia suite that Prodevelop offers for port management. The solution comprises a spatial database (PostGIS, Oracle Spatial or SQL Server), a GeoServer map server and an OpenLayers client.',
     rd: false,
   },
   {
@@ -160,7 +160,7 @@ export const projects: Project[] = [
     img: '',
     company: 'Prodevelop',
     url: '',
-    description: 'Municipal cartography web viewer based on Posidonia SPACE and offered for municipal management of spatial data',
+    description: 'Municipal cartography web viewer based on Posidonia SPACE, designed for local governments to manage spatial data.',
     rd: false,
   },
   {
@@ -170,7 +170,7 @@ export const projects: Project[] = [
     img: '',
     company: 'Prodevelop',
     url: 'https://www.agroasesor.es',
-    description: 'Development of an automatic agricultural parcel classification tool based on Sentinel Hub images',
+    description: 'Development of an automated agricultural parcel classification tool based on Sentinel Hub imagery.',
     rd: false,
   },
   {
@@ -192,7 +192,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: 'https://itea3.org/project/apps.html',
     description:
-      'European research project ITEA3 to develop a surveillance systems (IOT) in the maritime domain consist of radar and visual sensors. The demo was held in the port of Rotterdam.',
+      'European research project (ITEA3) to develop surveillance systems (IoT) in the maritime domain, consisting of radar and visual sensors. The final demo was held at the Port of Rotterdam.',
     rd: true,
   },
   {
@@ -203,7 +203,7 @@ export const projects: Project[] = [
     company: 'Personal',
     url: 'http://decasaalcole.com',
     description:
-      'Project carried out with a group of friends with GEO knowledge to obtain the list of schools, ordered by travel time and filtering by type of training (primary, special, secondary...). This website is based on Bootstrap and Leaflet, and CARTO in the server side',
+      'A collaborative project to help families find schools ranked by travel time, with filters by school type (primary, special needs, secondary…). Built with Bootstrap, Leaflet and CARTO on the back end.',
     rd: false,
   },
   {
@@ -214,7 +214,7 @@ export const projects: Project[] = [
     company: 'Personal',
     url: 'https://youtu.be/vZ7eQl_TOJU',
     description:
-      'Android APP developed in ESA Space APP Camp (Noordwijk), which is intended to aid in the reporting of illegal fishing. Based on AIS data and Sentinel images.',
+      'Android app developed at the ESA Space App Camp (Noordwijk), designed to help report illegal fishing activities. Based on AIS data and Sentinel satellite imagery.',
     rd: false,
   },
   {
@@ -224,7 +224,7 @@ export const projects: Project[] = [
     img: '',
     company: 'Prodevelop',
     url: '',
-    description: 'Map web viewer to show delivery areas (Geomarketing)',
+    description: 'Web map viewer displaying delivery areas for geomarketing analysis.',
     rd: false,
   },
   {
@@ -235,7 +235,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: 'https://www.irena.org',
     description:
-      'Android, IOS, Windows Phone and Blackberry APP to show environment cartography (OGC). This APP was developed with Apache Cordova, CesiumJS and OpenLayers.',
+      'Android, iOS, Windows Phone and BlackBerry app for viewing environmental cartography via OGC standards. Developed with Apache Cordova, CesiumJS and OpenLayers.',
     rd: false,
   },
   {
@@ -246,7 +246,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: 'http://maps.service-public.ma/mfpma/geo/front/',
     description:
-      'Web geoportal of POIs of the whole territory of Morocco, created with OpenLayers, our own vector tile technology and a search engine based on Lucene.',
+      'Web geoportal of points of interest (POIs) across the entire territory of Morocco, built with OpenLayers, a custom vector tile engine and a Lucene-based search engine.',
     rd: false,
   },
   {
@@ -256,7 +256,7 @@ export const projects: Project[] = [
     img: '',
     company: 'Prodevelop',
     url: '',
-    description: 'Web map viewer to the SOSTRAT application',
+    description: 'Web map viewer for the SOSTRAT port infrastructure management application.',
     rd: false,
   },
   {
@@ -266,7 +266,7 @@ export const projects: Project[] = [
     img: '',
     company: 'Prodevelop',
     url: '',
-    description: 'Project to create a web site to share and buy geospatial information',
+    description: 'Platform for sharing and purchasing geospatial data online.',
     rd: true,
   },
   {
@@ -277,7 +277,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: '',
     description:
-      'Development and installation of a GIS tool to local administrations. It was installed in 80 municipalities of the region of Valencia. In this project, we created a new web geoportal based on GeoExt framework, a unique repository of cartography (PostGIS) and new web map services to publish the local maps (MapServer)',
+      'Development and deployment of a GIS platform for local governments, installed in 80 municipalities across the Valencia region. The project included a new web geoportal built on GeoExt, a centralised cartographic repository (PostGIS) and WMS services to publish local maps (MapServer).',
     rd: false,
   },
   {
@@ -288,7 +288,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: '',
     description:
-      'Geoportal of tourist points of interest in the Valencian Community. This Web application was developed with the Google Maps Javascript API, our own vector tile technology and a search engine based on Lucene (Java).',
+      'Geoportal of tourist points of interest in the Valencian Community, built with the Google Maps JavaScript API, a custom vector tile engine and a Lucene-based search engine (Java).',
     rd: false,
   },
   {
@@ -299,7 +299,7 @@ export const projects: Project[] = [
     company: 'Prodevelop',
     url: 'https://itea3.org/project/osami-commons.html',
     description:
-      'OSAMI-Commons targets open-source common foundations for a dynamic service-oriented platform which is able to personalise itself in large diversity of co-operating software-intensive systems (SISs).',
+      'OSAMI-Commons aimed to establish open-source foundations for a dynamic, service-oriented platform capable of adapting across a wide range of co-operating software-intensive systems (SIS).',
     rd: true,
   },
   {
@@ -319,7 +319,7 @@ export const projects: Project[] = [
     img: '',
     company: 'Prodevelop',
     url: 'http://www.gvsig.com/es',
-    description: 'Development of extensions for gvSIG 1.x y gvSIG 2.x: Geocoding, Connector Oracle (2.x), Phone Cache and GeoResources',
+    description: 'Development of extensions for gvSIG 1.x and gvSIG 2.x: Geocoding, Oracle Connector (2.x), Phone Cache and GeoResources.',
     rd: false,
   },
 ];
