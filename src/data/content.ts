@@ -43,7 +43,7 @@ export const employment: Employment[] = [
     url: 'https://carto.com',
     img: '/img/employment/carto.webp',
     title: 'Professional Services',
-    date: '2024 - Present',
+    date: 'Jan 2022 - Present',
     location: 'Valencia',
     tasks: [
       'Customer onboarding and technical guidance on the CARTO platform',
