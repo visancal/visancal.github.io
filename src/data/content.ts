@@ -125,12 +125,12 @@ export const education: Education[] = [
 
 // Muted earthy tones to harmonise with the warm cream palette
 export const skills: SkillGroup[] = [
-  { color: '#B85C42', techs: ['Front-end development', 'JavaScript', 'HTML5', 'CSS', 'Vue', 'React', 'TypeScript'] },
+  { color: '#B85C42', techs: ['Front-end development', 'JavaScript', 'HTML5', 'CSS', 'Vue', 'React', 'TypeScript', 'Astro'] },
   { color: '#A04E68', techs: ['GIS Analysis', 'Cartography', 'Geodesy', 'Geomatics', 'QGIS', 'gvSIG', 'ArcGIS Desktop', 'CARTO'] },
   { color: '#7A5090', techs: ['GeoServer', 'MapServer', 'MapProxy', 'Tilecache', 'GeoNetwork'] },
   { color: '#5C5490', techs: ['CAD', 'AutoCAD', 'Microstation'] },
-  { color: '#4A6090', techs: ['Oracle Spatial', 'PostgreSQL / PostGIS', 'SQL Server', 'SQL'] },
-  { color: '#3D7A9A', techs: ['DevOps', 'Jenkins', 'Docker', 'AWS', 'Google Cloud Platform', 'Linux', 'Bash'] },
+  { color: '#4A6090', techs: ['Oracle Spatial', 'PostgreSQL / PostGIS', 'SQL Server', 'SQL', 'Big Query'] },
+  { color: '#3D7A9A', techs: ['DevOps', 'Jenkins', 'Docker', 'AWS', 'Google Cloud Platform', 'Linux', 'Bash', 'Kubernetes', 'Terraform'] },
   { color: '#2E8C8C', techs: ['Java', 'GeoTools', 'Spring'] },
   { color: '#2E8A78', techs: ['Kafka'] },
   { color: '#4A7A68', techs: ['Scrum', 'Jira', 'Confluence'] },
@@ -140,7 +140,7 @@ export const projects: Project[] = [
   {
     title: 'Personal website (version 2026)',
     date: '2026',
-    technologies: ['GitHub Pages', 'Astro', 'TypeScript'],
+    technologies: ['GitHub Pages', 'Astro', 'TypeScript', 'Claude'],
     img: '',
     company: 'Personal',
     url: 'https://vicentsanjaime.net',
@@ -160,7 +160,7 @@ export const projects: Project[] = [
   {
     title: 'De casa al cole (version 2026)',
     date: '2025',
-    technologies: ['React', 'TypeScript', 'GitHub Pages','Claude'],
+    technologies: ['React', 'TypeScript', 'GitHub Pages', 'Claude'],
     img: '',
     company: 'Personal',
     url: 'https://decasaalcole.com',
@@ -171,7 +171,7 @@ export const projects: Project[] = [
   {
     title: 'RadarView',
     date: '2022-2026',
-    technologies: ['CARTO', 'Vue', 'Google Cloud Platform', 'Node', 'Terraform'],
+    technologies: ['CARTO', 'Vue', 'Google Cloud Platform', 'Node', 'Terraform', 'Claude'],
     img: '',
     company: 'Carto',
     url: '',
