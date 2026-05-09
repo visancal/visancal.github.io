@@ -1,0 +1,242 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import BannerImages from '../components/BannerImages.astro';
+import TimelineCard from '../components/TimelineCard.astro';
+import Footer from '../components/Footer.astro';
+import { projects } from '../data/content';
+
+const images = [
+  { src: '/img/back/back5.webp' },
+  { src: '/img/back/back6.webp' },
+];
+---
+
+<Layout
+  title="Projects | Vicent Sanjaime — GIS Developer & Consultant"
+  description="Portfolio of GIS and geospatial web projects by Vicent Sanjaime: port cartography, spatial data catalogues, map viewers, IoT maritime surveillance and more — built with OpenLayers, Vue.js, React, GeoServer and PostGIS."
+  canonicalPath="/projects"
+>
+  <div class="vs-page">
+    <Header currentPage="projects" />
+    <BannerImages images={images} interval={10000} bannerId="projects-banner" />
+
+    <main class="vs-content" id="vs-timeline-info">
+      <div class="vs-container">
+        <div class="vs-intro">
+          <span class="vs-page-title">Projects</span>
+          <p class="vs-intro-text">
+            Throughout my professional career I have had the opportunity to work on a wide range of
+            GIS projects using diverse technologies. The timeline below highlights the main projects
+            I have been involved in and the technologies used, including personal and R&amp;D work.
+          </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="vs-timeline">
+          {projects.map((project, index) => {
+            const isEven = index % 2 === 0;
+            const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-accent)';
+            return (
+              <div class:list={['vs-timeline-item', isEven ? 'vs-item--right' : 'vs-item--left']}>
+                <!-- Opposite chips (desktop only) -->
+                <div class:list={['vs-opp', isEven ? 'vs-opp--end' : 'vs-opp--start']}>
+                  <span class="vs-chip vs-chip--date">
+                    <i class="mdi mdi-calendar-month"></i>{project.date}
+                  </span>
+                  <span class="vs-chip" style={`background-color: ${companyColor}`}>
+                    {project.company}
+                  </span>
+                  {project.rd && <span class="vs-chip vs-chip--rd">R&amp;D</span>}
+                </div>
+
+                <!-- Center dot -->
+                <div class="vs-dot-wrap">
+                  <div class="vs-dot"></div>
+                </div>
+
+                <!-- Card -->
+                <div class="vs-card-wrap">
+                  <TimelineCard project={project} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div style="height: 20px"></div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<script>
+  const banner = document.getElementById('projects-banner');
+  const content = document.getElementById('vs-timeline-info');
+
+  content?.addEventListener('scroll', () => {
+    banner?.classList.toggle('vs-banner--scrolled', (content.scrollTop ?? 0) > 5);
+  });
+</script>
+
+<style>
+  .vs-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .vs-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .vs-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 8px;
+  }
+
+  .vs-intro {
+    margin: 8px 8px 0;
+  }
+
+  .vs-page-title {
+    display: block;
+    color: var(--color-text);
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .vs-intro-text {
+    font-size: 0.9rem;
+    color: var(--color-text-sec);
+    line-height: 1.6;
+    margin-bottom: 8px;
+    max-width: 600px;
+  }
+
+  /* Timeline */
+  .vs-timeline {
+    position: relative;
+    padding: 16px 0;
+  }
+
+  .vs-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border);
+    transform: translateX(-50%);
+  }
+
+  .vs-timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin: 10px 0;
+  }
+
+  .vs-item--right {
+    flex-direction: row;
+  }
+
+  .vs-item--left {
+    flex-direction: row-reverse;
+  }
+
+  .vs-opp {
+    width: calc(50% - 20px);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .vs-opp--end {
+    align-items: flex-end;
+  }
+
+  .vs-opp--start {
+    align-items: flex-start;
+  }
+
+  .vs-dot-wrap {
+    width: 40px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 22px;
+  }
+
+  .vs-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+    border: 2px solid var(--color-bg);
+    box-shadow: 0 0 0 1px var(--color-accent);
+  }
+
+  .vs-card-wrap {
+    width: calc(50% - 20px);
+    padding: 8px;
+  }
+
+  /* Chips */
+  .vs-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .vs-chip--date {
+    background: rgba(217, 119, 87, 0.12);
+    color: var(--color-accent);
+    border: 1px solid rgba(217, 119, 87, 0.25);
+  }
+
+  .vs-chip--rd {
+    background: rgba(239, 108, 0, 0.1);
+    color: #C85C00;
+    border: 1px solid rgba(239, 108, 0, 0.25);
+  }
+
+  /* Mobile: single column */
+  @media (max-width: 600px) {
+    .vs-timeline::before {
+      left: 20px;
+    }
+
+    .vs-item--right,
+    .vs-item--left {
+      flex-direction: row;
+    }
+
+    .vs-opp {
+      display: none;
+    }
+
+    .vs-dot-wrap {
+      width: 40px;
+    }
+
+    .vs-card-wrap {
+      width: calc(100% - 40px);
+    }
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="vs-section">
+  <p class="vs-section-title">{title}</p>
+  <slot />
+</section>
+
+<style>
+  .vs-section {
+    margin-top: 28px;
+    padding: 0 8px;
+  }
+
+  .vs-section-title {
+    color: var(--color-text);
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    margin: 0 8px 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 600px) {
+    .vs-section {
+      padding: 0 2px;
+      margin-top: 20px;
+    }
+    .vs-section-title {
+      font-size: 1.4rem;
+    }
+  }
+</style>

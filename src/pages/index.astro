@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HomeCarousel from '../components/HomeCarousel.astro';
+
+const slides = [
+  {
+    src: '/img/home/intro.webp',
+    credits: '@xurxosanz',
+    link: 'https://twitter.com/xurxosanz',
+    place: 'Griffith Observatory, LA',
+  },
+  {
+    src: '/img/home/intro2.webp',
+    credits: '@xurxosanz',
+    link: 'https://twitter.com/xurxosanz',
+    place: 'Badwater Basin, Death Valley, NE',
+  },
+  {
+    src: '/img/home/intro3.webp',
+    credits: 'Nerea',
+    link: '',
+    place: 'Angkor Wat, Cambodia',
+  },
+  {
+    src: '/img/home/intro4.webp',
+    credits: 'Nerea',
+    link: '',
+    place: 'Caldera de Taburiente, La Palma',
+  },
+  {
+    src: '/img/home/intro5.webp',
+    credits: 'Nerea',
+    link: '',
+    place: 'Segla, Senja Island, Norway',
+  },
+];
+---
+
+<Layout
+  title="Vicent Sanjaime | GIS Developer, AI Enthusiast & Travel Lover"
+  description="Personal website of Vicent Sanjaime — GIS developer and consultant at CARTO Professional Services, based in Valencia, Spain. Passionate about geospatial technology, AI, cycling and travel."
+  canonicalPath="/"
+>
+  <!--
+    The carousel sits behind the header (position: absolute, z-index: 0).
+    The header overlays it with semi-transparent background (z-index: 100).
+  -->
+  <div class="vs-home">
+    <HomeCarousel slides={slides} interval={15000} />
+    <Header currentPage="home" />
+  </div>
+</Layout>
+
+<style>
+  .vs-home {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+</style>
