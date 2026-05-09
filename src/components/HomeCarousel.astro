@@ -4,6 +4,8 @@ interface Slide {
   credits: string;
   link: string;
   place: string;
+  bgPosition?: string;
+  bgPositionMobile?: string;
 }
 
 interface Props {
@@ -18,7 +20,7 @@ const { slides, interval = 7000 } = Astro.props;
   {slides.map((slide, i) => (
     <div
       class:list={['vs-slide', { 'vs-slide--active': i === 0 }]}
-      style={`background-image: url('${slide.src}')`}
+      style={`background-image: url('${slide.src}'); --bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`}
     >
       {i === 0 && (
         <div class="vs-slide-content">
@@ -95,7 +97,7 @@ const { slides, interval = 7000 } = Astro.props;
     position: absolute;
     inset: 0;
     background-size: cover;
-    background-position: center;
+    background-position: var(--bg-pos, center);
     opacity: 0;
     transition: opacity 1.2s ease-in-out;
   }
@@ -202,6 +204,9 @@ const { slides, interval = 7000 } = Astro.props;
   }
 
   @media (max-width: 600px) {
+    .vs-slide {
+      background-position: var(--bg-pos-mobile, var(--bg-pos, center));
+    }
     .vs-slide-content {
       margin-top: 160px;
       margin-left: 28px;
