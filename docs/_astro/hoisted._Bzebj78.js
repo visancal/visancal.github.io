@@ -1,1 +1,0 @@
-import"./Header.astro_astro_type_script_index_0_lang.Dd7Fzw05.js";import"./BannerImages.astro_astro_type_script_index_0_lang.Cs4W0mQ0.js";const e=document.getElementById("background-banner"),n=document.getElementById("vs-bio-info");n?.addEventListener("scroll",()=>{e?.classList.toggle("vs-banner--scrolled",(n.scrollTop??0)>5)});

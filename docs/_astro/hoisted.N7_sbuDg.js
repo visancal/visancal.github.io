@@ -1,1 +1,0 @@
-import"./Header.astro_astro_type_script_index_0_lang.Dd7Fzw05.js";import"./BannerImages.astro_astro_type_script_index_0_lang.Cs4W0mQ0.js";const n=document.getElementById("projects-banner"),e=document.getElementById("vs-timeline-info");e?.addEventListener("scroll",()=>{n?.classList.toggle("vs-banner--scrolled",(e.scrollTop??0)>5)});
