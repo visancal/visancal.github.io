@@ -125,9 +125,9 @@ export const education: Education[] = [
 
 // Muted earthy tones to harmonise with the warm cream palette
 export const skills: SkillGroup[] = [
-  { color: '#B85C42', techs: ['Front-end development', 'Javascript', 'HTML5', 'CSS', 'Vue', 'React', 'Typescript'] },
-  { color: '#A04E68', techs: ['GIS Analysis', 'Cartography', 'Geodesy', 'Geomatics', 'QGIS', 'gvSIG', 'ArcGis Desktop', 'CARTO'] },
-  { color: '#7A5090', techs: ['Geoserver', 'MapServer', 'MapProxy', 'Tilecache', 'Geonetwork'] },
+  { color: '#B85C42', techs: ['Front-end development', 'JavaScript', 'HTML5', 'CSS', 'Vue', 'React', 'TypeScript'] },
+  { color: '#A04E68', techs: ['GIS Analysis', 'Cartography', 'Geodesy', 'Geomatics', 'QGIS', 'gvSIG', 'ArcGIS Desktop', 'CARTO'] },
+  { color: '#7A5090', techs: ['GeoServer', 'MapServer', 'MapProxy', 'Tilecache', 'GeoNetwork'] },
   { color: '#5C5490', techs: ['CAD', 'AutoCAD', 'Microstation'] },
   { color: '#4A6090', techs: ['Oracle Spatial', 'PostgreSQL / PostGIS', 'SQL Server', 'SQL'] },
   { color: '#3D7A9A', techs: ['DevOps', 'Jenkins', 'Docker', 'AWS', 'Google Cloud Platform', 'Linux', 'Bash'] },
@@ -140,7 +140,7 @@ export const projects: Project[] = [
   {
     title: 'Personal website (version 2026)',
     date: '2026',
-    technologies: ['Github Pages', 'Astro', 'Typescript'],
+    technologies: ['GitHub Pages', 'Astro', 'TypeScript'],
     img: '',
     company: 'Personal',
     url: 'https://vicentsanjaime.net',
@@ -150,7 +150,7 @@ export const projects: Project[] = [
   {
     title: 'Club running Tos Pelat',
     date: '2026',
-    technologies: ['Github Pages', 'Astro', 'Typescript', 'Claude'],
+    technologies: ['GitHub Pages', 'Astro', 'TypeScript', 'Claude'],
     img: '',
     company: 'Personal',
     url: 'https://cctospelat.com',
@@ -160,7 +160,7 @@ export const projects: Project[] = [
   {
     title: 'De casa al cole (version 2026)',
     date: '2025',
-    technologies: ['React', 'Typescript', 'Github Pages','Claude'],
+    technologies: ['React', 'TypeScript', 'GitHub Pages','Claude'],
     img: '',
     company: 'Personal',
     url: 'https://decasaalcole.com',
@@ -193,7 +193,7 @@ export const projects: Project[] = [
     {
     title: 'Personal website',
     date: '2020',
-    technologies: ['Github Pages', 'Vue', 'Typescript'],
+    technologies: ['GitHub Pages', 'Vue', 'TypeScript'],
     img: '',
     company: 'Personal',
     url: 'https://vicentsanjaime.net',
@@ -214,7 +214,7 @@ export const projects: Project[] = [
   {
     title: 'Posidonia SPACE (Suite Posidonia)',
     date: '2015-2022',
-    technologies: ['Java', 'Geoserver', 'JQuery', 'OpenLayers', 'Oracle', 'Bootstrap', 'Spring'],
+    technologies: ['Java', 'GeoServer', 'jQuery', 'OpenLayers', 'Oracle', 'Bootstrap', 'Spring'],
     img: '',
     company: 'Prodevelop',
     url: 'https://www.prodevelop.es/puertos/posidonia/posidonia-space',
@@ -225,7 +225,7 @@ export const projects: Project[] = [
   {
     title: 'Local SPACE (Local & Provincial governments)',
     date: '2018 - 2022',
-    technologies: ['Java', 'Geoserver', 'JQuery', 'OpenLayers', 'PostgreSQL/PostGIS', 'Bootstrap', 'Spring'],
+    technologies: ['Java', 'GeoServer', 'jQuery', 'OpenLayers', 'PostgreSQL/PostGIS', 'Bootstrap', 'Spring'],
     img: '',
     company: 'Prodevelop',
     url: '',
@@ -235,7 +235,7 @@ export const projects: Project[] = [
   {
     title: 'sigAGROasesor',
     date: '2018',
-    technologies: ['JQuery', 'Knockout', 'Java', 'Spring', 'OpenLayers'],
+    technologies: ['jQuery', 'Knockout', 'Java', 'Spring', 'OpenLayers'],
     img: '',
     company: 'Prodevelop',
     url: 'https://www.agroasesor.es',
@@ -245,7 +245,7 @@ export const projects: Project[] = [
   {
     title: 'Spatial data catalogue (ICV)',
     date: '2017',
-    technologies: ['Vue', 'Webpack', 'Geonetwork', 'Vuetify'],
+    technologies: ['Vue', 'Webpack', 'GeoNetwork', 'Vuetify'],
     img: '',
     company: 'Prodevelop',
     url: 'http://www.icv.gva.es/auto/aplicaciones/icv_geocat',
@@ -256,7 +256,7 @@ export const projects: Project[] = [
   {
     title: 'APPS project (ITEA3) (Port of Rotterdam)',
     date: '2017-2018',
-    technologies: ['CesiumJs', 'JQuery', 'CEP Drools', 'Kafka', 'Java', 'Machine Learning'],
+    technologies: ['CesiumJS', 'jQuery', 'CEP Drools', 'Kafka', 'Java', 'Machine Learning'],
     img: '',
     company: 'Prodevelop',
     url: 'https://itea3.org/project/apps.html',
@@ -267,7 +267,7 @@ export const projects: Project[] = [
   {
     title: 'De casa al cole',
     date: '2015',
-    technologies: ['CARTO', 'JQuery', 'Bootstrap'],
+    technologies: ['CARTO', 'jQuery', 'Bootstrap'],
     img: '',
     company: 'Personal',
     url: 'http://decasaalcole.com',
@@ -278,7 +278,7 @@ export const projects: Project[] = [
   {
     title: 'Sea Care APP (European Space Agency APP Camp)',
     date: '2014',
-    technologies: ['Android', 'OpenLayers', 'Javascript'],
+    technologies: ['Android', 'OpenLayers', 'JavaScript'],
     img: '',
     company: 'Personal',
     url: 'https://youtu.be/vZ7eQl_TOJU',
@@ -289,7 +289,7 @@ export const projects: Project[] = [
   {
     title: 'Traycco',
     date: '2014',
-    technologies: ['Javascript', 'OpenLayers'],
+    technologies: ['JavaScript', 'OpenLayers'],
     img: '',
     company: 'Prodevelop',
     url: '',
@@ -299,7 +299,7 @@ export const projects: Project[] = [
   {
     title: 'APP IRENA (International Renewable Energy Agency)',
     date: '2014',
-    technologies: ['Android', 'iOS', 'Windows Phone', 'Blackberry', 'OpenLayers', 'CesiumJs', 'Apache Cordova'],
+    technologies: ['Android', 'iOS', 'Windows Phone', 'BlackBerry', 'OpenLayers', 'CesiumJS', 'Apache Cordova'],
     img: '',
     company: 'Prodevelop',
     url: 'https://www.irena.org',
@@ -310,7 +310,7 @@ export const projects: Project[] = [
   {
     title: 'Geoportal of Morocco (MFPMA)',
     date: '2014',
-    technologies: ['JQuery', 'OpenLayers', 'Java', 'Spring', 'Lucene', 'Knockout'],
+    technologies: ['jQuery', 'OpenLayers', 'Java', 'Spring', 'Lucene', 'Knockout'],
     img: '',
     company: 'Prodevelop',
     url: 'http://maps.service-public.ma/mfpma/geo/front/',
@@ -321,7 +321,7 @@ export const projects: Project[] = [
   {
     title: 'SOSTRAT GIS (Port of Barcelona)',
     date: '2013',
-    technologies: ['Geoserver', 'OpenLayers', 'Bootstrap'],
+    technologies: ['GeoServer', 'OpenLayers', 'Bootstrap'],
     img: '',
     company: 'Prodevelop',
     url: '',
@@ -341,7 +341,7 @@ export const projects: Project[] = [
   {
     title: 'LocalGIS (Provincial Deputation of Valencia)',
     date: '2011-2012',
-    technologies: ['LocalGIS', 'Java', 'ExtJs', 'GeoExt', 'MapServer', 'PostGIS', 'ETL Pentaho', 'Geonetwork'],
+    technologies: ['LocalGIS', 'Java', 'Ext JS', 'GeoExt', 'MapServer', 'PostGIS', 'ETL Pentaho', 'GeoNetwork'],
     img: '',
     company: 'Prodevelop',
     url: '',
@@ -352,7 +352,7 @@ export const projects: Project[] = [
   {
     title: 'Tourist Geoportal of the Valencian Community (AVT)',
     date: '2010',
-    technologies: ['Google Maps API', 'JQuery', 'Java', 'Lucene', 'ETL Pentaho', 'Drupal'],
+    technologies: ['Google Maps API', 'jQuery', 'Java', 'Lucene', 'ETL Pentaho', 'Drupal'],
     img: '',
     company: 'Prodevelop',
     url: '',
@@ -363,7 +363,7 @@ export const projects: Project[] = [
   {
     title: 'OSAMI (ITEA3)',
     date: '2010',
-    technologies: ['Javascript', 'OpenLayers', 'JQuery'],
+    technologies: ['JavaScript', 'OpenLayers', 'jQuery'],
     img: '',
     company: 'Prodevelop',
     url: 'https://itea3.org/project/osami-commons.html',
@@ -374,7 +374,7 @@ export const projects: Project[] = [
   {
     title: 'Aventura Oceanica',
     date: '2009',
-    technologies: ['OpenLayers', 'PostGIS', 'Javascript'],
+    technologies: ['OpenLayers', 'PostGIS', 'JavaScript'],
     img: '',
     company: 'Prodevelop',
     url: 'http://aventuraoceanica.es/',
