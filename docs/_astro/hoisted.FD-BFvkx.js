@@ -1,1 +1,0 @@
-import"./Header.astro_astro_type_script_index_0_lang.Dd7Fzw05.js";document.querySelectorAll("[data-carousel]").forEach(t=>{const s=t.querySelectorAll(".vs-slide"),l=parseInt(t.dataset.interval??"15000",10);let e=0;setInterval(()=>{s[e].classList.remove("vs-slide--active"),e=(e+1)%s.length,s[e].classList.add("vs-slide--active")},l)});
