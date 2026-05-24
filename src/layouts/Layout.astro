@@ -1,6 +1,12 @@
 ---
 import ClientRouter from 'astro/components/ClientRouter.astro';
 
+interface PreloadImage {
+  href: string;
+  /** CSS media query, e.g. "(max-width: 600px)" */
+  media?: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
@@ -8,6 +14,8 @@ interface Props {
   canonicalPath?: string;
   /** Optional JSON-LD schema objects to inject alongside the default Person schema */
   schemas?: object[];
+  /** Critical images to preload — add the LCP image from each page */
+  preloadImages?: PreloadImage[];
 }
 
 const SITE_URL  = 'https://vicentsanjaime.net';
@@ -19,6 +27,7 @@ const {
   ogImage     = `${SITE_URL}/img/home/intro.webp`,
   canonicalPath = '',
   schemas = [],
+  preloadImages = [],
 } = Astro.props;
 
 const canonical = `${SITE_URL}${canonicalPath}`;
@@ -116,17 +125,56 @@ const allSchemas = [personSchema, ...schemas];
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.ico" />
 
-    <!-- Fonts -->
+    <!-- Preconnect to external origins (warms TCP+TLS before requests land) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload critical above-the-fold images (LCP candidates) -->
+    {preloadImages.map((img) => (
+      <link
+        rel="preload"
+        as="image"
+        href={img.href}
+        {...(img.media ? { media: img.media } : {})}
+        fetchpriority="high"
+      />
+    ))}
+
+    <!--
+      Fonts — loaded asynchronously to avoid render-blocking.
+      The onload trick: preload fires, then the callback swaps rel to stylesheet.
+      <noscript> covers the rare no-JS case.
+    -->
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+      />
+    </noscript>
+
+    <!--
+      Material Design Icons — also async.
+      The hamburger button uses an inline SVG so this is no longer render-critical.
+    -->
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css"
+      />
+    </noscript>
   </head>
   <body>
     <slot />

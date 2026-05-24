@@ -21,8 +21,29 @@ const { slides, interval = 7000 } = Astro.props;
   {slides.map((slide, i) => (
     <div
       class:list={['vs-slide', { 'vs-slide--active': i === 0 }]}
-      style={`--bg-src: url('${slide.src}'); ${slide.srcMobile ? `--bg-src-mobile: url('${slide.srcMobile}');` : ''} --bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`}
+      style={i === 0
+        /* First slide: no CSS bg-image — a real <picture> handles it (LCP-friendly) */
+        ? `--bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`
+        : `--bg-src: url('${slide.src}'); ${slide.srcMobile ? `--bg-src-mobile: url('${slide.srcMobile}');` : ''} --bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`
+      }
     >
+      {i === 0 && (
+        /* Real <picture> element: discoverable by the preload scanner, eligible as LCP */
+        <picture class="vs-slide-picture">
+          {slide.srcMobile && <source srcset={slide.srcMobile} media="(max-width: 600px)" />}
+          <img
+            src={slide.src}
+            alt=""
+            class="vs-slide-img"
+            style={`--img-pos: ${slide.bgPosition ?? 'center'}; --img-pos-m: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'}`}
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+            width="1920"
+            height="1080"
+          />
+        </picture>
+      )}
       {i === 0 && (
         <div class="vs-slide-content">
           <h1 class="vs-hello">Hey, I'm Vicent</h1>
@@ -102,6 +123,29 @@ const { slides, interval = 7000 } = Astro.props;
     background-position: var(--bg-pos, center);
     opacity: 0;
     transition: opacity 1.2s ease-in-out;
+  }
+
+  /* First-slide real image element (LCP candidate) */
+  .vs-slide-picture {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .vs-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--img-pos, center);
+  }
+
+  @media (max-width: 600px) {
+    .vs-slide-img {
+      object-position: var(--img-pos-m, center);
+    }
   }
 
   /* Warm earthy overlay — tints the image without affecting text (text sits above via z-index) */
