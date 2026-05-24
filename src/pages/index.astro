@@ -54,15 +54,19 @@ const slides = [
 
 <Layout
   title="Vicent Sanjaime | GIS Developer, AI Enthusiast & Travel Lover"
-  description="Personal website of Vicent Sanjaime — GIS developer and consultant at CARTO Professional Services, based in Valencia, Spain. Passionate about geospatial technology, AI, cycling and travel."
+  description="Personal website of Vicent Sanjaime Calvet — GIS developer and consultant at CARTO Professional Services, based in Valencia, Spain. Passionate about geospatial technology, AI, cycling and travel."
   canonicalPath="/"
+  preloadImages={[
+    { href: '/img/home/intro-m.webp', media: '(max-width: 600px)' },
+    { href: '/img/home/intro.webp',   media: '(min-width: 601px)' },
+  ]}
   schemas={[{
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Vicent Sanjaime',
     url: 'https://vicentsanjaime.net',
-    description: 'Personal website of Vicent Sanjaime — GIS developer and consultant at CARTO Professional Services, based in Valencia, Spain.',
-    author: { '@type': 'Person', name: 'Vicent Sanjaime' },
+    description: 'Personal website of Vicent Sanjaime Calvet — GIS developer and consultant at CARTO Professional Services, based in Valencia, Spain.',
+    author: { '@type': 'Person', name: 'Vicent Sanjaime', alternateName: ['Vicente Sanjaime', 'Vicente Sanjaime Calvet', 'Vicent Sanjaime Calvet'] },
   }]}
 >
   <!--
