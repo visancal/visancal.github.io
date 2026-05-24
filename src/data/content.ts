@@ -118,7 +118,7 @@ export const education: Education[] = [
     date: '1998 - 2002',
     title: 'Graduate in Geography',
     location: 'Valencia',
-    icon: '/img/education/uv.webp',
+    icon: '/img/education/uv.svg',
     subtitle: 'Proficient in physical geography',
   },
 ];
