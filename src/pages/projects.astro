@@ -15,7 +15,16 @@ const images = [
 <Layout
   title="Projects | Vicent Sanjaime — GIS Developer & Consultant"
   description="Portfolio of GIS and geospatial web projects by Vicent Sanjaime: port cartography, spatial data catalogues, map viewers, IoT maritime surveillance and more — built with OpenLayers, Vue.js, React, GeoServer and PostGIS."
+  ogImage="https://vicentsanjaime.net/img/back/back5.webp"
   canonicalPath="/projects"
+  schemas={[{
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vicentsanjaime.net' },
+      { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://vicentsanjaime.net/projects' },
+    ],
+  }]}
 >
   <div class="vs-page">
     <Header currentPage="projects" />

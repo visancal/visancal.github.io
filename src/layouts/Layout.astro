@@ -6,6 +6,8 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonicalPath?: string;
+  /** Optional JSON-LD schema objects to inject alongside the default Person schema */
+  schemas?: object[];
 }
 
 const SITE_URL  = 'https://vicentsanjaime.net';
@@ -16,9 +18,57 @@ const {
   description = 'GIS developer and consultant at CARTO Professional Services based in Valencia, Spain. Specialised in geospatial web applications, mapping libraries and spatial databases.',
   ogImage     = `${SITE_URL}/img/home/intro.webp`,
   canonicalPath = '',
+  schemas = [],
 } = Astro.props;
 
 const canonical = `${SITE_URL}${canonicalPath}`;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Vicent Sanjaime',
+  url: SITE_URL,
+  image: `${SITE_URL}/img/home/intro.webp`,
+  jobTitle: 'GIS Developer & Consultant',
+  description: 'GIS developer and consultant with 20+ years of experience in geospatial web applications, mapping libraries and spatial databases.',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'CARTO',
+    url: 'https://carto.com',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Valencia',
+    addressCountry: 'ES',
+  },
+  alumniOf: [
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Polytechnic University of Valencia',
+      url: 'http://www.upv.es/',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'University of Valencia',
+      url: 'http://www.uv.es/',
+    },
+  ],
+  knowsLanguage: ['Spanish', 'Catalan', 'English'],
+  sameAs: [
+    'https://www.linkedin.com/in/vsanjaime/',
+    'https://github.com/visancal',
+    'https://twitter.com/visancal',
+    'https://x.com/visancal',
+    'https://www.instagram.com/visancal/',
+  ],
+  knowsAbout: [
+    'GIS', 'Geospatial development', 'Web mapping', 'Cartography', 'Geodesy',
+    'Vue.js', 'React', 'TypeScript', 'Astro', 'OpenLayers', 'Leaflet', 'Deck.gl',
+    'PostGIS', 'GeoServer', 'CARTO', 'BigQuery', 'Docker', 'Kubernetes',
+  ],
+};
+
+const allSchemas = [personSchema, ...schemas];
 ---
 
 <!doctype html>
@@ -27,6 +77,7 @@ const canonical = `${SITE_URL}${canonicalPath}`;
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#D97757" />
 
     <!-- Primary SEO -->
     <title>{title}</title>
@@ -42,7 +93,7 @@ const canonical = `${SITE_URL}${canonicalPath}`;
     <meta property="og:description" content={description} />
     <meta property="og:url"         content={canonical} />
     <meta property="og:image"       content={ogImage} />
-    <meta property="og:image:alt"   content="Vicent Sanjaime — GIS Developer" />
+    <meta property="og:image:alt"   content={title} />
     <meta property="og:locale"      content="en_GB" />
 
     <!-- Twitter / X Card -->
@@ -52,43 +103,18 @@ const canonical = `${SITE_URL}${canonicalPath}`;
     <meta name="twitter:title"       content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image"       content={ogImage} />
+    <meta name="twitter:image:alt"   content={title} />
 
-    <!-- Structured data — Person schema -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Vicent Sanjaime",
-        "url": "https://vicentsanjaime.net",
-        "jobTitle": "GIS Developer & Consultant",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "CARTO",
-          "url": "https://carto.com"
-        },
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Valencia",
-          "addressCountry": "ES"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/in/vsanjaime/",
-          "https://github.com/visancal",
-          "https://twitter.com/visancal",
-          "https://www.instagram.com/visancal/"
-        ],
-        "knowsAbout": [
-          "GIS", "Geospatial development", "Web mapping",
-          "Vue.js", "React", "TypeScript", "OpenLayers",
-          "PostGIS", "GeoServer", "CARTO", "Deck.gl"
-        ]
-      }
-    </script>
+    <!-- Structured data (Person + any page-specific schemas) -->
+    {allSchemas.map((schema) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
 
     <ClientRouter />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -132,9 +158,10 @@ const canonical = `${SITE_URL}${canonicalPath}`;
     --color-surface:   #FDFAF4;   /* lighter cream for cards */
     --color-text:      #1A1008;   /* warm near-black */
     --color-text-sec:  #6E6760;   /* warm gray */
-    --color-accent:    #D97757;   /* coral / terracotta */
+    --color-accent:    #D97757;   /* coral / terracotta (UI elements, buttons, icons) */
     --color-accent-dk: #B85E3A;   /* darker coral for hover */
     --color-border:    #E8E2D6;   /* warm light border */
+    --color-link-text: #923D1E;   /* accessible coral for inline text links — 6.3:1 on cream */
 
     /* Legacy aliases used in components */
     --color-primary:   #1A1008;

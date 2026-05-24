@@ -48,10 +48,10 @@ const isHome = currentPage === 'home';
     </div>
   )}
 
-  <!-- Mobile drawer -->
-  <div class="vs-drawer" id="mobile-drawer" aria-hidden="true">
+  <!-- Mobile drawer — inert keeps descendants non-focusable while closed -->
+  <div class="vs-drawer" id="mobile-drawer" aria-hidden="true" inert>
     <div class="vs-drawer-title">Vicent Sanjaime</div>
-    <nav>
+    <nav aria-label="Mobile navigation">
       <a href="/" class="vs-drawer-item">Home</a>
       <a href="/background" class="vs-drawer-item">Background</a>
       <a href="/projects" class="vs-drawer-item">Projects</a>
@@ -62,20 +62,24 @@ const isHome = currentPage === 'home';
 
 <script>
   function initDrawer() {
-    const toggle = document.getElementById('menu-toggle');
+    const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
     const drawer = document.getElementById('mobile-drawer');
     const overlay = document.getElementById('drawer-overlay');
 
     function openDrawer() {
       drawer?.classList.add('open');
       overlay?.classList.add('open');
+      drawer?.removeAttribute('inert');
       drawer?.setAttribute('aria-hidden', 'false');
+      toggle?.setAttribute('aria-label', 'Close menu');
     }
 
     function closeDrawer() {
       drawer?.classList.remove('open');
       overlay?.classList.remove('open');
+      drawer?.setAttribute('inert', '');
       drawer?.setAttribute('aria-hidden', 'true');
+      toggle?.setAttribute('aria-label', 'Open menu');
     }
 
     toggle?.addEventListener('click', () => {

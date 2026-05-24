@@ -23,7 +23,16 @@ const languages = [
 <Layout
   title="Background | Vicent Sanjaime — GIS Developer & Consultant"
   description="Professional background of Vicent Sanjaime: GIS consultant at CARTO, front-end developer with Vue.js and React, geospatial specialist with 20+ years of experience in Valencia, Spain."
+  ogImage="https://vicentsanjaime.net/img/back/back5.webp"
   canonicalPath="/background"
+  schemas={[{
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vicentsanjaime.net' },
+      { '@type': 'ListItem', position: 2, name: 'Background', item: 'https://vicentsanjaime.net/background' },
+    ],
+  }]}
 >
   <div class="vs-page">
     <Header currentPage="background" />
@@ -148,7 +157,7 @@ const languages = [
   }
 
   .vs-bio a {
-    color: var(--color-accent);
+    color: var(--color-link-text);
     font-weight: 500;
     transition: color 0.15s;
   }
