@@ -35,7 +35,20 @@ const canonical = `${SITE_URL}${canonicalPath}`;
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
+  /*
+   * Primary name: Valencian form (official).
+   * alternateName covers the Castilian variant "Vicente" and the full
+   * two-surname form "Sanjaime Calvet" so Google's Knowledge Graph can
+   * unify all three query intents to the same entity.
+   */
   name: 'Vicent Sanjaime',
+  givenName: 'Vicent',
+  familyName: 'Sanjaime Calvet',
+  alternateName: [
+    'Vicente Sanjaime',
+    'Vicente Sanjaime Calvet',
+    'Vicent Sanjaime Calvet',
+  ],
   url: SITE_URL,
   image: `${SITE_URL}/img/home/intro.webp`,
   jobTitle: 'GIS Developer & Consultant',
@@ -91,7 +104,7 @@ const allSchemas = [personSchema, ...schemas];
     <!-- Primary SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Vicent Sanjaime" />
+    <meta name="author" content="Vicent Sanjaime Calvet" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
 
