@@ -1,6 +1,7 @@
 ---
 interface Slide {
   src: string;
+  srcMobile?: string;
   credits: string;
   link: string;
   place: string;
@@ -20,7 +21,7 @@ const { slides, interval = 7000 } = Astro.props;
   {slides.map((slide, i) => (
     <div
       class:list={['vs-slide', { 'vs-slide--active': i === 0 }]}
-      style={`background-image: url('${slide.src}'); --bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`}
+      style={`--bg-src: url('${slide.src}'); ${slide.srcMobile ? `--bg-src-mobile: url('${slide.srcMobile}');` : ''} --bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`}
     >
       {i === 0 && (
         <div class="vs-slide-content">
@@ -96,6 +97,7 @@ const { slides, interval = 7000 } = Astro.props;
   .vs-slide {
     position: absolute;
     inset: 0;
+    background-image: var(--bg-src);
     background-size: cover;
     background-position: var(--bg-pos, center);
     opacity: 0;
@@ -205,6 +207,7 @@ const { slides, interval = 7000 } = Astro.props;
 
   @media (max-width: 600px) {
     .vs-slide {
+      background-image: var(--bg-src-mobile, var(--bg-src));
       background-position: var(--bg-pos-mobile, var(--bg-pos, center));
     }
     .vs-slide-content {
