@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Allow: /background
-Allow: /projects
 
-Sitemap: http://visancal.io 
+Sitemap: https://vicentsanjaime.net/sitemap-index.xml

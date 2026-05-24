@@ -1,11 +1,9 @@
 export interface Employment {
-  id: number;
   center: string;
   url: string;
   img: string;
   title: string;
   date: string;
-  location: string;
   tasks: string[];
 }
 
@@ -15,7 +13,6 @@ export interface Education {
   img: string;
   date: string;
   title: string;
-  location: string;
   icon: string;
   subtitle: string;
 }
@@ -29,7 +26,6 @@ export interface Project {
   title: string;
   date: string;
   technologies: string[];
-  img: string;
   company: string;
   url: string;
   description: string;
@@ -38,13 +34,11 @@ export interface Project {
 
 export const employment: Employment[] = [
   {
-    id: 0,
     center: 'CARTO',
     url: 'https://carto.com',
     img: '/img/employment/carto.svg',
     title: 'Professional Services',
     date: 'Jan 2022 - Present',
-    location: 'Valencia',
     tasks: [
       'Customer onboarding and technical guidance on the CARTO platform',
       'Design and development of geospatial solutions and dashboards',
@@ -54,13 +48,11 @@ export const employment: Employment[] = [
     ],
   },
   {
-    id: 1,
     center: 'Prodevelop',
     url: 'https://www.prodevelop.es',
     img: '/img/employment/prodevelop_new.webp',
     title: 'GIS analyst, developer and product manager',
     date: 'Nov 2006 - Jan 2022',
-    location: 'Valencia',
     tasks: [
       'Product manager of SPACE (Posidonia Suite)',
       'GIS consultant',
@@ -73,13 +65,11 @@ export const employment: Employment[] = [
     ],
   },
   {
-    id: 2,
     center: 'SENER',
     url: 'https://www.group.sener/es',
     img: '/img/employment/sener_new.webp',
     date: 'Jun 2005 - May 2006',
     title: 'GIS technician',
-    location: 'Valencia',
     tasks: [
       'Cartographic editing (ArcMap / ESRI)',
       'Photogrammetric studies',
@@ -87,13 +77,11 @@ export const employment: Employment[] = [
     ],
   },
   {
-    id: 3,
     center: 'CIDE (CSIG, UV, GV)',
     url: 'https://www.group.sener/es',
     img: '/img/employment/cide.webp',
     date: '2002 - 2004',
     title: 'GIS technician',
-    location: 'Albal',
     tasks: [
       'Cartographic review of land uses in protected natural areas (LICs) across the Valencian region',
     ],
@@ -107,7 +95,6 @@ export const education: Education[] = [
     img: 'https://raphacasgi.files.wordpress.com/2013/09/a010.jpg',
     date: '2002 - 2007',
     title: 'Geodesy and Cartography Engineer',
-    location: 'Valencia',
     icon: '/img/education/upv.svg',
     subtitle: 'Proficient in Remote Sensing and GIS',
   },
@@ -117,7 +104,6 @@ export const education: Education[] = [
     img: 'https://www.uv.es/recursos/fatwirepub/ccurl/929/546/SPOT_PRIN_01.jpg',
     date: '1998 - 2002',
     title: 'Graduate in Geography',
-    location: 'Valencia',
     icon: '/img/education/uv.svg',
     subtitle: 'Proficient in physical geography',
   },
@@ -141,7 +127,6 @@ export const projects: Project[] = [
     title: 'Personal website (version 2026)',
     date: '2026',
     technologies: ['GitHub Pages', 'Astro', 'TypeScript', 'Claude'],
-    img: '',
     company: 'Personal',
     url: 'https://vicentsanjaime.net',
     description: 'My personal website',
@@ -151,7 +136,6 @@ export const projects: Project[] = [
     title: 'Club running Tos Pelat',
     date: '2026',
     technologies: ['GitHub Pages', 'Astro', 'TypeScript', 'Claude'],
-    img: '',
     company: 'Personal',
     url: 'https://cctospelat.com',
     description: 'Website for the running club',
@@ -161,7 +145,6 @@ export const projects: Project[] = [
     title: 'De casa al cole (version 2026)',
     date: '2025',
     technologies: ['React', 'TypeScript', 'GitHub Pages', 'Claude'],
-    img: '',
     company: 'Personal',
     url: 'https://decasaalcole.com',
     description:
@@ -172,7 +155,6 @@ export const projects: Project[] = [
     title: 'RadarView',
     date: '2022-2026',
     technologies: ['CARTO', 'Vue', 'Google Cloud Platform', 'Node', 'Terraform', 'Claude'],
-    img: '',
     company: 'Carto',
     url: '',
     description:
@@ -183,7 +165,6 @@ export const projects: Project[] = [
     title: 'Axa framework',
     date: '2022-2026',
     technologies: ['CARTO 2', 'Vue', 'Google Cloud Platform', 'Python', 'Node', 'Kubernetes'],
-    img: '',
     company: 'Carto',
     url: '',
     description:
@@ -194,7 +175,6 @@ export const projects: Project[] = [
     title: 'Personal website',
     date: '2020',
     technologies: ['GitHub Pages', 'Vue', 'TypeScript'],
-    img: '',
     company: 'Personal',
     url: 'https://vicentsanjaime.net',
     description: 'My personal website',
@@ -204,7 +184,6 @@ export const projects: Project[] = [
     title: 'Mia tracking',
     date: '2019-2022',
     technologies: ['CARTO', 'Vue', 'AWS', 'Kafka', 'Java', 'PostGIS', 'Spring'],
-    img: '',
     company: 'Prodevelop',
     url: '',
     description:
@@ -215,7 +194,6 @@ export const projects: Project[] = [
     title: 'Posidonia SPACE (Suite Posidonia)',
     date: '2015-2022',
     technologies: ['Java', 'GeoServer', 'jQuery', 'OpenLayers', 'Oracle', 'Bootstrap', 'Spring'],
-    img: '',
     company: 'Prodevelop',
     url: 'https://www.prodevelop.es/puertos/posidonia/posidonia-space',
     description:
@@ -226,7 +204,6 @@ export const projects: Project[] = [
     title: 'Local SPACE (Local & Provincial governments)',
     date: '2018 - 2022',
     technologies: ['Java', 'GeoServer', 'jQuery', 'OpenLayers', 'PostgreSQL/PostGIS', 'Bootstrap', 'Spring'],
-    img: '',
     company: 'Prodevelop',
     url: '',
     description: 'Municipal cartography web viewer based on Posidonia SPACE, designed for local governments to manage spatial data.',
@@ -236,7 +213,6 @@ export const projects: Project[] = [
     title: 'sigAGROasesor',
     date: '2018',
     technologies: ['jQuery', 'Knockout', 'Java', 'Spring', 'OpenLayers'],
-    img: '',
     company: 'Prodevelop',
     url: 'https://www.agroasesor.es',
     description: 'Development of an automated agricultural parcel classification tool based on Sentinel Hub imagery.',
@@ -246,7 +222,6 @@ export const projects: Project[] = [
     title: 'Spatial data catalogue (ICV)',
     date: '2017',
     technologies: ['Vue', 'Webpack', 'GeoNetwork', 'Vuetify'],
-    img: '',
     company: 'Prodevelop',
     url: 'http://www.icv.gva.es/auto/aplicaciones/icv_geocat',
     description:
@@ -257,7 +232,6 @@ export const projects: Project[] = [
     title: 'APPS project (ITEA3) (Port of Rotterdam)',
     date: '2017-2018',
     technologies: ['CesiumJS', 'jQuery', 'CEP Drools', 'Kafka', 'Java', 'Machine Learning'],
-    img: '',
     company: 'Prodevelop',
     url: 'https://itea3.org/project/apps.html',
     description:
@@ -268,7 +242,6 @@ export const projects: Project[] = [
     title: 'De casa al cole',
     date: '2015',
     technologies: ['CARTO', 'jQuery', 'Bootstrap'],
-    img: '',
     company: 'Personal',
     url: 'http://decasaalcole.com',
     description:
@@ -279,7 +252,6 @@ export const projects: Project[] = [
     title: 'Sea Care APP (European Space Agency APP Camp)',
     date: '2014',
     technologies: ['Android', 'OpenLayers', 'JavaScript'],
-    img: '',
     company: 'Personal',
     url: 'https://youtu.be/vZ7eQl_TOJU',
     description:
@@ -290,7 +262,6 @@ export const projects: Project[] = [
     title: 'Traycco',
     date: '2014',
     technologies: ['JavaScript', 'OpenLayers'],
-    img: '',
     company: 'Prodevelop',
     url: '',
     description: 'Web map viewer displaying delivery areas for geomarketing analysis.',
@@ -300,7 +271,6 @@ export const projects: Project[] = [
     title: 'APP IRENA (International Renewable Energy Agency)',
     date: '2014',
     technologies: ['Android', 'iOS', 'Windows Phone', 'BlackBerry', 'OpenLayers', 'CesiumJS', 'Apache Cordova'],
-    img: '',
     company: 'Prodevelop',
     url: 'https://www.irena.org',
     description:
@@ -311,7 +281,6 @@ export const projects: Project[] = [
     title: 'Geoportal of Morocco (MFPMA)',
     date: '2014',
     technologies: ['jQuery', 'OpenLayers', 'Java', 'Spring', 'Lucene', 'Knockout'],
-    img: '',
     company: 'Prodevelop',
     url: 'http://maps.service-public.ma/mfpma/geo/front/',
     description:
@@ -322,7 +291,6 @@ export const projects: Project[] = [
     title: 'SOSTRAT GIS (Port of Barcelona)',
     date: '2013',
     technologies: ['GeoServer', 'OpenLayers', 'Bootstrap'],
-    img: '',
     company: 'Prodevelop',
     url: '',
     description: 'Web map viewer for the SOSTRAT port infrastructure management application.',
@@ -332,7 +300,6 @@ export const projects: Project[] = [
     title: 'GeoStore',
     date: '2012',
     technologies: ['Drupal', 'OpenLayers'],
-    img: '',
     company: 'Prodevelop',
     url: '',
     description: 'Platform for sharing and purchasing geospatial data online.',
@@ -342,7 +309,6 @@ export const projects: Project[] = [
     title: 'LocalGIS (Provincial Deputation of Valencia)',
     date: '2011-2012',
     technologies: ['LocalGIS', 'Java', 'Ext JS', 'GeoExt', 'MapServer', 'PostGIS', 'ETL Pentaho', 'GeoNetwork'],
-    img: '',
     company: 'Prodevelop',
     url: '',
     description:
@@ -353,7 +319,6 @@ export const projects: Project[] = [
     title: 'Tourist Geoportal of the Valencian Community (AVT)',
     date: '2010',
     technologies: ['Google Maps API', 'jQuery', 'Java', 'Lucene', 'ETL Pentaho', 'Drupal'],
-    img: '',
     company: 'Prodevelop',
     url: '',
     description:
@@ -364,7 +329,6 @@ export const projects: Project[] = [
     title: 'OSAMI (ITEA3)',
     date: '2010',
     technologies: ['JavaScript', 'OpenLayers', 'jQuery'],
-    img: '',
     company: 'Prodevelop',
     url: 'https://itea3.org/project/osami-commons.html',
     description:
@@ -375,7 +339,6 @@ export const projects: Project[] = [
     title: 'Aventura Oceanica',
     date: '2009',
     technologies: ['OpenLayers', 'PostGIS', 'JavaScript'],
-    img: '',
     company: 'Prodevelop',
     url: 'http://aventuraoceanica.es/',
     description: '',
@@ -385,7 +348,6 @@ export const projects: Project[] = [
     title: 'gvSIG',
     date: '2008-2010',
     technologies: ['Java'],
-    img: '',
     company: 'Prodevelop',
     url: 'http://www.gvsig.com/es',
     description: 'Development of extensions for gvSIG 1.x and gvSIG 2.x: Geocoding, Oracle Connector (2.x), Phone Cache and GeoResources.',
