@@ -1,0 +1,18 @@
+# Vicent Sanjaime
+
+> GIS developer and consultant at CARTO Professional Services, based in Valencia, Spain. 20+ years of experience in geospatial web applications, mapping libraries and spatial databases.
+
+Personal portfolio site of Vicent Sanjaime Calvet. This file follows the llms.txt convention
+(https://llmstxt.org/) to help AI agents and LLMs navigate the site. See `/llms-full.txt`
+for the complete bio, employment history, education, skills and project list inlined as a
+single plain-text document.
+
+## Pages
+
+- [Home](https://vicentsanjaime.net/): Landing page with intro photos.
+- [Background](https://vicentsanjaime.net/background): Bio, technical skills, employment history and education.
+- [Projects](https://vicentsanjaime.net/projects): Timeline of professional and personal projects.
+
+## Full content
+
+- [llms-full.txt](https://vicentsanjaime.net/llms-full.txt): All site content (bio, employment, education, skills, projects) inlined for LLM consumption.
