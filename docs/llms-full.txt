@@ -1,0 +1,242 @@
+# Vicent Sanjaime — Full site content
+
+> This document inlines all content from https://vicentsanjaime.net as plain text for AI agents and LLMs.
+> See /llms.txt for a short index of the site's pages.
+
+## Bio
+
+I'm Vicent Sanjaime Calvet — developer of geospatial applications and GIS (Geographic
+Information System) consultant, currently working at CARTO (https://carto.com/) as part
+of the Professional Services team. I love front-end development and usually work with
+Vue and web mapping libraries such as OpenLayers, Leaflet, the Google Maps API, Deck.gl
+and CARTO. I also have extensive experience in the installation and management of server
+components such as spatial databases and map servers. I have worked on a large number of
+GIS projects, always integrating different technologies and components, most of them
+open-source.
+
+I enjoy working on projects with a strong spatial component, as they allow me to apply my
+background in cartography, geography and geodesy to the development of spatial solutions.
+I consider myself an adaptable, collaborative and approachable team player with a keen
+interest in new technologies.
+
+Based in Valencia, Spain. Languages: Spanish (native), Catalan (native), English
+(upper-intermediate).
+
+## Technical skills
+
+- Front-end development, JavaScript, HTML5, CSS, Vue, React, TypeScript, Astro
+- GIS Analysis, Cartography, Geodesy, Geomatics, QGIS, gvSIG, ArcGIS Desktop, CARTO
+- GeoServer, MapServer, MapProxy, Tilecache, GeoNetwork
+- CAD, AutoCAD, Microstation
+- Oracle Spatial, PostgreSQL / PostGIS, SQL Server, SQL, Big Query
+- DevOps, Jenkins, Docker, AWS, Google Cloud Platform, Linux, Bash, Kubernetes, Terraform
+- Java, GeoTools, Spring
+- Kafka
+- Scrum, Jira, Confluence
+
+## Employment history
+
+### Professional Services — CARTO (Jan 2022 - Present)
+https://carto.com
+
+  - Customer onboarding and technical guidance on the CARTO platform
+  - Design and development of geospatial solutions and dashboards
+  - Spatial data analysis using cloud data warehouses (BigQuery, Snowflake)
+  - Integration of CARTO with web mapping libraries (Deck.gl, Google Maps, MapLibre)
+  - GIS consulting and best-practice recommendations for enterprise clients
+
+### GIS analyst, developer and product manager — Prodevelop (Nov 2006 - Jan 2022)
+https://www.prodevelop.es
+
+  - Product manager of SPACE (Posidonia Suite)
+  - GIS consultant
+  - Front-end and back-end developer (Vue.js / Java)
+  - Spatial database management (PostgreSQL / PostGIS, Oracle Spatial, SQL Server)
+  - Map server administration (MapServer, GeoServer)
+  - DevOps tasks (Jenkins, Docker, Bash)
+  - Cartographic editing (QGIS, gvSIG, ArcMap, AutoCAD)
+  - User training
+
+### GIS technician — SENER (Jun 2005 - May 2006)
+https://www.group.sener/es
+
+  - Cartographic editing (ArcMap / ESRI)
+  - Photogrammetric studies
+  - Hydraulic studies (HEC-GeoRAS)
+
+### GIS technician — CIDE (CSIG, UV, GV) (2002 - 2004)
+https://www.group.sener/es
+
+  - Cartographic review of land uses in protected natural areas (LICs) across the Valencian region
+
+## Education
+
+### Geodesy and Cartography Engineer — Polytechnic University of Valencia (2002 - 2007)
+http://www.upv.es/
+Proficient in Remote Sensing and GIS
+
+### Graduate in Geography — University of Valencia (1998 - 2002)
+http://www.uv.es/
+Proficient in physical geography
+
+## Projects
+
+### Personal website (version 2026) (2026)
+Company: Personal
+Technologies: GitHub Pages, Astro, TypeScript, Claude
+URL: https://vicentsanjaime.net
+
+My personal website
+
+### Club running Tos Pelat (2026)
+Company: Personal
+Technologies: GitHub Pages, Astro, TypeScript, Claude
+URL: https://cctospelat.com
+
+Website for the running club
+
+### De casa al cole (version 2026) (2025)
+Company: Personal
+Technologies: React, TypeScript, GitHub Pages, Claude
+URL: https://decasaalcole.com
+
+A collaborative project to help families find schools ranked by travel time, with filters by school type (primary, special needs, secondary…).
+
+### RadarView (2022-2026)
+Company: Carto
+Technologies: CARTO, Vue, Google Cloud Platform, Node, Terraform, Claude
+
+Web tool for OOH analysis
+
+### Axa framework (2022-2026)
+Company: Carto
+Technologies: CARTO 2, Vue, Google Cloud Platform, Python, Node, Kubernetes
+
+Framework for building geospatial applications on top of the CARTO platform
+
+### Personal website (2020)
+Company: Personal
+Technologies: GitHub Pages, Vue, TypeScript
+URL: https://vicentsanjaime.net
+
+My personal website
+
+### Mia tracking (2019-2022)
+Company: Prodevelop
+Technologies: CARTO, Vue, AWS, Kafka, Java, PostGIS, Spring
+
+Web tool for tracking incidents and suppliers globally, developed with CARTO technology and hosted on AWS.
+
+### Posidonia SPACE (Suite Posidonia) (2015-2022)
+Company: Prodevelop
+Technologies: Java, GeoServer, jQuery, OpenLayers, Oracle, Bootstrap, Spring
+URL: https://www.prodevelop.es/puertos/posidonia/posidonia-space
+
+Port cartography web viewer included in the Posidonia suite that Prodevelop offers for port management. The solution comprises a spatial database (PostGIS, Oracle Spatial or SQL Server), a GeoServer map server and an OpenLayers client.
+
+### Local SPACE (Local & Provincial governments) (2018 - 2022)
+Company: Prodevelop
+Technologies: Java, GeoServer, jQuery, OpenLayers, PostgreSQL/PostGIS, Bootstrap, Spring
+
+Municipal cartography web viewer based on Posidonia SPACE, designed for local governments to manage spatial data.
+
+### sigAGROasesor (2018)
+Company: Prodevelop
+Technologies: jQuery, Knockout, Java, Spring, OpenLayers
+URL: https://www.agroasesor.es
+
+Development of an automated agricultural parcel classification tool based on Sentinel Hub imagery.
+
+### Spatial data catalogue (ICV) (2017)
+Company: Prodevelop
+Technologies: Vue, Webpack, GeoNetwork, Vuetify
+URL: http://www.icv.gva.es/auto/aplicaciones/icv_geocat
+
+Spatial data catalogue website of the Valencian SDI implemented for the Valencian Cartographic Institute (ICV). This web client was made with VueJs on the ICV's Geonetwork metadata server.
+
+### APPS project (ITEA3) (Port of Rotterdam) (2017-2018)
+Company: Prodevelop
+Technologies: CesiumJS, jQuery, CEP Drools, Kafka, Java, Machine Learning
+URL: https://itea3.org/project/apps.html
+Type: R&D project
+
+European research project (ITEA3) to develop surveillance systems (IoT) in the maritime domain, consisting of radar and visual sensors. The final demo was held at the Port of Rotterdam.
+
+### De casa al cole (2015)
+Company: Personal
+Technologies: CARTO, jQuery, Bootstrap
+URL: http://decasaalcole.com
+
+A collaborative project to help families find schools ranked by travel time, with filters by school type (primary, special needs, secondary…). Built with Bootstrap, Leaflet and CARTO on the back end.
+
+### Sea Care APP (European Space Agency APP Camp) (2014)
+Company: Personal
+Technologies: Android, OpenLayers, JavaScript
+URL: https://youtu.be/vZ7eQl_TOJU
+
+Android app developed at the ESA Space App Camp (Noordwijk), designed to help report illegal fishing activities. Based on AIS data and Sentinel satellite imagery.
+
+### Traycco (2014)
+Company: Prodevelop
+Technologies: JavaScript, OpenLayers
+
+Web map viewer displaying delivery areas for geomarketing analysis.
+
+### APP IRENA (International Renewable Energy Agency) (2014)
+Company: Prodevelop
+Technologies: Android, iOS, Windows Phone, BlackBerry, OpenLayers, CesiumJS, Apache Cordova
+URL: https://www.irena.org
+
+Android, iOS, Windows Phone and BlackBerry app for viewing environmental cartography via OGC standards. Developed with Apache Cordova, CesiumJS and OpenLayers.
+
+### Geoportal of Morocco (MFPMA) (2014)
+Company: Prodevelop
+Technologies: jQuery, OpenLayers, Java, Spring, Lucene, Knockout
+URL: http://maps.service-public.ma/mfpma/geo/front/
+
+Web geoportal of points of interest (POIs) across the entire territory of Morocco, built with OpenLayers, a custom vector tile engine and a Lucene-based search engine.
+
+### SOSTRAT GIS (Port of Barcelona) (2013)
+Company: Prodevelop
+Technologies: GeoServer, OpenLayers, Bootstrap
+
+Web map viewer for the SOSTRAT port infrastructure management application.
+
+### GeoStore (2012)
+Company: Prodevelop
+Technologies: Drupal, OpenLayers
+Type: R&D project
+
+Platform for sharing and purchasing geospatial data online.
+
+### LocalGIS (Provincial Deputation of Valencia) (2011-2012)
+Company: Prodevelop
+Technologies: LocalGIS, Java, Ext JS, GeoExt, MapServer, PostGIS, ETL Pentaho, GeoNetwork
+
+Development and deployment of a GIS platform for local governments, installed in 80 municipalities across the Valencia region. The project included a new web geoportal built on GeoExt, a centralised cartographic repository (PostGIS) and WMS services to publish local maps (MapServer).
+
+### Tourist Geoportal of the Valencian Community (AVT) (2010)
+Company: Prodevelop
+Technologies: Google Maps API, jQuery, Java, Lucene, ETL Pentaho, Drupal
+
+Geoportal of tourist points of interest in the Valencian Community, built with the Google Maps JavaScript API, a custom vector tile engine and a Lucene-based search engine (Java).
+
+### OSAMI (ITEA3) (2010)
+Company: Prodevelop
+Technologies: JavaScript, OpenLayers, jQuery
+URL: https://itea3.org/project/osami-commons.html
+Type: R&D project
+
+OSAMI-Commons aimed to establish open-source foundations for a dynamic, service-oriented platform capable of adapting across a wide range of co-operating software-intensive systems (SIS).
+
+### Aventura Oceanica (2009)
+Company: Prodevelop
+Technologies: OpenLayers, PostGIS, JavaScript
+URL: http://aventuraoceanica.es/
+
+### gvSIG (2008-2010)
+Company: Prodevelop
+Technologies: Java
+URL: http://www.gvsig.com/es
+
+Development of extensions for gvSIG 1.x and gvSIG 2.x: Geocoding, Oracle Connector (2.x), Phone Cache and GeoResources.

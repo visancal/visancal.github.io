@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://vicentsanjaime.net/sitemap-index.xml
+# AI/LLM-friendly content index: https://llmstxt.org/
+# https://vicentsanjaime.net/llms.txt
