@@ -5,10 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm install          # install dependencies (requires Node ≥ 24)
-npm run dev          # dev server (alias: npm run serve)
-npm run build        # production build → outputs to docs/
-npm run preview      # preview the production build locally
+pnpm install          # install dependencies (requires Node ≥ 24)
+pnpm run dev          # dev server (alias: pnpm run serve)
+pnpm run build        # production build → outputs to docs/
+pnpm run preview      # preview the production build locally
 ```
 
 There are no tests in this project.
@@ -83,7 +83,7 @@ Mobile is `max-width: 600px` — hamburger menu replaces desktop nav, banner hei
 
 ### Deployment
 ```bash
-npm run build   # outputs to docs/
+pnpm run build   # outputs to docs/
 git add docs/
 git commit -m "chore: build [skip ci]"
 git push        # GitHub Pages serves docs/ on master branch
