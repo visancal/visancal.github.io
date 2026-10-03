@@ -15,10 +15,10 @@ There are no tests in this project.
 
 ## Architecture
 
-This is an **Astro 6 + TypeScript personal portfolio site** (vicentsanjaime.net) deployed as a GitHub Pages static site. The production build outputs to `docs/` (not `dist/`), which is what GitHub Pages serves from the `master` branch.
+This is an **Astro 7 + TypeScript personal portfolio site** (vicentsanjaime.net) deployed as a GitHub Pages static site. The production build outputs to `docs/` (not `dist/`), which is what GitHub Pages serves from the `master` branch.
 
 ### Stack
-- **Astro 6** — static site generator with `ClientRouter` (View Transitions) enabled; zero JS by default, vanilla `<script>` tags for interactivity
+- **Astro 7** — static site generator with `ClientRouter` (View Transitions) enabled; zero JS by default, vanilla `<script>` tags for interactivity
 - **TypeScript** — strict mode via `astro/tsconfigs/strict`
 - **Material Design Icons** (CDN `@mdi/font`) — icon font, `mdi-*` class names
 - **Google Fonts** — Inter (body) + Playfair Display (headings)
