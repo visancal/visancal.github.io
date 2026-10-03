@@ -168,6 +168,22 @@ const navItems = [
 
   .vs-nav-icon {
     flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .vs-nav-btn:hover .vs-nav-icon,
+  .vs-drawer-item:hover .vs-nav-icon {
+    transform: scale(1.15) rotate(-6deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vs-nav-icon {
+      transition: none;
+    }
+    .vs-nav-btn:hover .vs-nav-icon,
+    .vs-drawer-item:hover .vs-nav-icon {
+      transform: none;
+    }
   }
 
   .vs-nav-btn--active {

@@ -118,11 +118,38 @@ const { slides, interval = 7000 } = Astro.props;
   .vs-slide {
     position: absolute;
     inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+  }
+
+  /* Background image lives on its own layer so the Ken Burns zoom scales
+     only the photo, never the text above it */
+  .vs-slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     background-image: var(--bg-src);
     background-size: cover;
     background-position: var(--bg-pos, center);
-    opacity: 0;
-    transition: opacity 1.2s ease-in-out;
+  }
+
+  .vs-slide::before,
+  .vs-slide-picture {
+    transform-origin: center;
+    will-change: transform;
+    animation: vs-kenburns 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes vs-kenburns {
+    from { transform: scale(1); }
+    to   { transform: scale(1.08); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vs-slide::before,
+    .vs-slide-picture {
+      animation: none;
+    }
   }
 
   /* First-slide real image element (LCP candidate) */
@@ -250,7 +277,7 @@ const { slides, interval = 7000 } = Astro.props;
   }
 
   @media (max-width: 600px) {
-    .vs-slide {
+    .vs-slide::before {
       background-image: var(--bg-src-mobile, var(--bg-src));
       background-position: var(--bg-pos-mobile, var(--bg-pos, center));
     }
