@@ -43,7 +43,7 @@ const images = [
         <div class="vs-timeline">
           {projects.map((project, index) => {
             const isEven = index % 2 === 0;
-            const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-accent)';
+            const companyColor = project.company === 'Personal' ? 'var(--color-badge-personal)' : 'var(--color-accent)';
             return (
               <div class:list={['vs-timeline-item', isEven ? 'vs-item--right' : 'vs-item--left']}>
                 <!-- Opposite chips (desktop only) -->
@@ -212,15 +212,15 @@ const images = [
   }
 
   .vs-chip--date {
-    background: rgba(217, 119, 87, 0.12);
+    background: rgba(var(--color-accent-rgb), 0.12);
     color: var(--color-accent);
-    border: 1px solid rgba(217, 119, 87, 0.25);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.25);
   }
 
   .vs-chip--rd {
-    background: rgba(239, 108, 0, 0.1);
-    color: #C85C00;
-    border: 1px solid rgba(239, 108, 0, 0.25);
+    background: var(--color-badge-rd-bg);
+    color: var(--color-badge-rd-text);
+    border: 1px solid var(--color-badge-rd-border);
   }
 
   /* Mobile: single column */

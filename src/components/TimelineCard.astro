@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-accent)';
+const companyColor = project.company === 'Personal' ? 'var(--color-badge-personal)' : 'var(--color-accent)';
 ---
 
 <div class="vs-card">
@@ -47,7 +47,7 @@ const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-a
   }
 
   .vs-card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+    box-shadow: var(--shadow-card-hover);
     transform: translateY(-1px);
   }
 
@@ -110,21 +110,21 @@ const companyColor = project.company === 'Personal' ? '#0277BD' : 'var(--color-a
   }
 
   .vs-chip--date {
-    background: rgba(217, 119, 87, 0.15);
+    background: rgba(var(--color-accent-rgb), 0.15);
     color: var(--color-accent);
-    border: 1px solid rgba(217, 119, 87, 0.3);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.3);
   }
 
   .vs-chip--rd {
-    background: rgba(239, 108, 0, 0.12);
-    color: #C85C00;
-    border: 1px solid rgba(239, 108, 0, 0.25);
+    background: var(--color-badge-rd-bg);
+    color: var(--color-badge-rd-text);
+    border: 1px solid var(--color-badge-rd-border);
   }
 
   .vs-chip--tech {
-    background: rgba(74, 96, 144, 0.08);
-    color: #4A6090;
-    border: 1px solid rgba(74, 96, 144, 0.25);
+    background: var(--color-badge-type-bg);
+    color: var(--color-badge-type-text);
+    border: 1px solid var(--color-badge-type-border);
   }
 
   @media (max-width: 600px) {
