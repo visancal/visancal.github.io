@@ -81,6 +81,12 @@ Proficient in physical geography
 
 ## Projects
 
+### Sekisui US Submarkets (2026)
+Company: Carto
+Technologies: CARTO 3, TypeScript, Deck.gl, Big Query
+
+Web viewer for querying and visualising KPIs across US submarkets, built with CARTO 3, deck.gl and BigQuery.
+
 ### Personal website (version 2026) (2026)
 Company: Personal
 Technologies: GitHub Pages, Astro, TypeScript, Claude
