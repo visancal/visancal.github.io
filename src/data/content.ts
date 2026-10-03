@@ -126,7 +126,7 @@ export const projects: Project[] = [
   {
     title: 'Sekisui US Submarkets',
     date: '2026',
-    technologies: ['CARTO 3', 'TypeScript', 'Deck.gl', 'Big Query'],
+    technologies: ['CARTO 3', 'TypeScript', 'React', 'Deck.gl', 'Big Query'],
     company: 'Carto',
     url: '',
     description:
