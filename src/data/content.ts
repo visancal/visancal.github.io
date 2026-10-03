@@ -124,6 +124,16 @@ export const skills: SkillGroup[] = [
 
 export const projects: Project[] = [
   {
+    title: 'Sekisui US Submarkets',
+    date: '2026',
+    technologies: ['CARTO 3', 'TypeScript', 'Deck.gl', 'Big Query'],
+    company: 'Carto',
+    url: '',
+    description:
+      'Web viewer for querying and visualising KPIs across US submarkets, built with CARTO 3, deck.gl and BigQuery.',
+    rd: false,
+  },
+  {
     title: 'Personal website (version 2026)',
     date: '2026',
     technologies: ['GitHub Pages', 'Astro', 'TypeScript', 'Claude'],
