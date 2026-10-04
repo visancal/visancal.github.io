@@ -1,5 +1,6 @@
 ---
 import SocialLinks from './SocialLinks.astro';
+import { LANGS, LANG_META, getLang, localizePath, routePath, ui } from '../data/i18n';
 
 interface Props {
   currentPage?: 'home' | 'background' | 'projects' | 'trips';
@@ -7,23 +8,26 @@ interface Props {
 
 const { currentPage = 'home' } = Astro.props;
 const isHome = currentPage === 'home';
+const lang = getLang(Astro.url);
+const text = ui[lang];
+const route = routePath(Astro.url);
 
 // Feather-style stroke icons, one path list per section
 const navItems = [
-  { key: 'home', href: '/', label: 'Home', paths: ['M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M9 22V12h6v10'] },
-  { key: 'background', href: '/background', label: 'Background', paths: ['M4 7h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z', 'M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'] },
-  { key: 'projects', href: '/projects', label: 'Projects', paths: ['M12 2L2 7l10 5 10-5-10-5z', 'M2 17l10 5 10-5', 'M2 12l10 5 10-5'] },
-  { key: 'trips', href: '/trips', label: 'Trips', paths: ['M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z', 'M12 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'] },
+  { key: 'home', href: localizePath('/', lang), label: text.nav.home, paths: ['M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M9 22V12h6v10'] },
+  { key: 'background', href: localizePath('/background', lang), label: text.nav.background, paths: ['M4 7h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z', 'M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'] },
+  { key: 'projects', href: localizePath('/projects', lang), label: text.nav.projects, paths: ['M12 2L2 7l10 5 10-5-10-5z', 'M2 17l10 5 10-5', 'M2 12l10 5 10-5'] },
+  { key: 'trips', href: localizePath('/trips', lang), label: text.nav.trips, paths: ['M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z', 'M12 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'] },
 ] as const;
 ---
 
 <header class="vs-header">
   <!-- Main bar -->
   <div class="vs-appbar">
-    <a href="/" class="vs-title">Vicent Sanjaime</a>
+    <a href={localizePath('/', lang)} class="vs-title">Vicent Sanjaime</a>
 
     <!-- Desktop nav -->
-    <nav class="vs-nav-desktop" aria-label="Main navigation">
+    <nav class="vs-nav-desktop" aria-label={text.mainNav}>
       {navItems.map((item) => (
         <a href={item.href} class:list={['vs-nav-btn', { 'vs-nav-btn--active': currentPage === item.key }]}>
           <svg class="vs-nav-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -34,8 +38,23 @@ const navItems = [
       ))}
     </nav>
 
+    <!-- Language switcher: same page in another language -->
+    <nav class="vs-lang" aria-label={text.language}>
+      {LANGS.map((l) => (
+        <a
+          href={localizePath(route, l)}
+          class:list={['vs-lang-btn', { 'vs-lang-btn--active': l === lang }]}
+          hreflang={LANG_META[l].hreflang}
+          lang={LANG_META[l].htmlLang}
+          title={LANG_META[l].name}
+          aria-current={l === lang ? 'true' : undefined}
+          data-lang={l}
+        >{l.toUpperCase()}</a>
+      ))}
+    </nav>
+
     <!-- Mobile hamburger -->
-    <button class="vs-hamburger" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+    <button class="vs-hamburger" id="menu-toggle" aria-label={text.openMenu} data-label-open={text.openMenu} data-label-close={text.closeMenu} aria-expanded="false" aria-controls="mobile-drawer">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
            fill="none" stroke="currentColor" stroke-width="2"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -56,7 +75,7 @@ const navItems = [
   <!-- Mobile drawer — inert keeps descendants non-focusable while closed -->
   <div class="vs-drawer" id="mobile-drawer" aria-hidden="true" inert>
     <div class="vs-drawer-title">Vicent Sanjaime</div>
-    <nav aria-label="Mobile navigation">
+    <nav aria-label={text.mobileNav}>
       {navItems.map((item) => (
         <a href={item.href} class="vs-drawer-item">
           <svg class="vs-nav-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -83,7 +102,7 @@ const navItems = [
       drawer.toggleAttribute('inert', !open);
       drawer.setAttribute('aria-hidden', String(!open));
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.setAttribute('aria-label', (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? '');
     };
 
     toggle.addEventListener('click', () => setOpen(!drawer.classList.contains('open')));
@@ -92,6 +111,15 @@ const navItems = [
 
   // Re-run after every ClientRouter navigation (the header is swapped)
   document.addEventListener('astro:page-load', initDrawer);
+
+  // Remember an explicit language choice so the English pages stop redirecting (see Layout)
+  document.addEventListener('click', (e) => {
+    const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-lang]');
+    if (!link) return;
+    try {
+      localStorage.setItem('vs-lang', link.dataset.lang!);
+    } catch {}
+  });
 </script>
 
 <style>
@@ -170,6 +198,33 @@ const navItems = [
   .vs-nav-btn:hover:not(.vs-nav-btn--active) {
     color: var(--color-text);
     background: var(--color-hover-tint);
+  }
+
+  /* Language switcher */
+  .vs-lang {
+    display: flex;
+    gap: 2px;
+    padding: 0 4px;
+  }
+
+  .vs-lang-btn {
+    color: var(--color-text-sec);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 8px;
+    border-radius: var(--radius-pill);
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .vs-lang-btn:hover:not(.vs-lang-btn--active) {
+    color: var(--color-text);
+    background: var(--color-hover-tint);
+  }
+
+  .vs-lang-btn--active {
+    color: var(--color-text);
+    background: rgba(var(--color-accent-rgb), 0.12);
   }
 
   /* Social bar */
@@ -275,6 +330,9 @@ const navItems = [
     }
     .vs-hamburger {
       display: block;
+    }
+    .vs-lang-btn {
+      padding: 4px 6px;
     }
     .vs-social-bar {
       display: none;

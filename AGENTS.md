@@ -26,6 +26,7 @@ Principles: keep it simple, fast and dependency-free.
 - Plain scoped CSS in `.astro` files; shared styles and design tokens in `src/styles/global.css`.
 - No third-party requests at runtime (fonts self-hosted, icons inline). The only exception is the basemap tiles on `/trips`.
 - The only heavy dependency is deck.gl, and it is bundled only into the Trips page.
+- Three languages: English at `/` (default, no prefix), Spanish at `/es/`, Valencian at `/va/`.
 
 ## Structure
 
@@ -33,6 +34,7 @@ Principles: keep it simple, fast and dependency-free.
 src/
   data/content.ts        All site content: SITE_URL, socials, employment, education, skills,
                          languages, projects, trips, highlights, wishlist
+  data/i18n.ts           Languages, URL helpers (getLang, localizePath, routePath), UI strings (ui)
   data/icons.ts          SVG path data for <Icon> (24×24 viewBox)
   layouts/Layout.astro   <head>: SEO/OG/JSON-LD, fonts, theme picker, ClientRouter
   styles/global.css      Design tokens, themes, reset and shared classes
@@ -47,7 +49,7 @@ src/
     Icon.astro           <Icon name="calendar" /> inline SVG
     SocialLinks.astro    Renders `socials` from content.ts
   pages/
-    index · background · projects · trips (.astro)
+    [...locale]/index · background · projects · trips (.astro)   one copy per language
     llms.txt.ts · llms-full.txt.ts   AI-readable site content (see below)
 public/
   img/                   Static images served as-is (pre-optimised WebP)
@@ -58,10 +60,30 @@ docs/                    Build output — generated, never edit by hand
 ## Editing content
 
 All content lives in `src/data/content.ts`; pages, JSON-LD and the `llms*.txt` files read
-from it. Bio prose is the exception: it is written in `src/pages/background.astro` **and**
-`src/pages/llms-full.txt.ts` — update both. The JSON-LD `Person` schema in `Layout.astro`
+from it. Bio prose is the exception: it is written in `src/pages/[...locale]/background.astro`
+(once per language) **and** `src/pages/llms-full.txt.ts` — update all of them.
+
+Every text must exist in English, Spanish and Valencian (see Languages below). The JSON-LD `Person` schema in `Layout.astro`
 (job title, employer, `sameAs`, `knowsAbout`) also needs a manual update when the role or
 profiles change.
+
+## Languages
+
+- `src/data/i18n.ts` defines `LANGS = ['en', 'es', 'va']`. English is unprefixed; the others live
+  under `/es/` and `/va/` (`<html lang="ca-ES-valencia">`, `hreflang="ca"`).
+- Pages live in `src/pages/[...locale]/` and export `getStaticPaths = localeStaticPaths`, which builds
+  each page once per language. Pages and components read the language with `getLang(Astro.url)`.
+- Translatable content fields are `Text`: a plain string when it is the same in every language, or
+  `{ en, es, va }`. Render with `t(text, lang)`. Interface strings (nav, titles, SEO descriptions…)
+  live in `ui` in `i18n.ts`. Build internal links with `localizePath('/page', lang)`.
+- Trip `country` fields are ISO 3166 codes; `countryName()` turns them into localised names.
+- Valencian follows AVL norms (e.g. *treballe*, *servicis*, *ferramenta*, *interés*).
+- Language choice: GitHub Pages cannot negotiate `Accept-Language`, so an inline script in
+  `Layout.astro` (English pages only) redirects to `/es/` or `/va/` before first paint, using the
+  language stored by the header switcher (`localStorage` key `vs-lang`) or else the first supported
+  language in `navigator.languages`. Otherwise English.
+- `Layout` emits the canonical URL, `hreflang` alternates (+ `x-default` → English) and `og:locale`.
+  The sitemap adds the same alternates. `llms*.txt` are English only.
 
 ## Images
 
@@ -100,18 +122,19 @@ document.addEventListener('astro:before-swap', cleanup);      // clear timers, o
 
 ## SEO and AI discoverability
 
-Every page passes SEO props to `Layout`:
+Every page passes SEO props to `Layout`, translated through `ui`:
 
 ```astro
-<Layout title="Page | Vicent Sanjaime" description="…" canonicalPath="/page" ogImage="…" schemas={[…]}>
+<Layout title={text.title} description={text.description} ogImage="…" schemas={[breadcrumbSchema(lang, 'page')]}>
 ```
 
-`Layout` renders the canonical URL, Open Graph and Twitter tags and the JSON-LD `Person` schema
-(plus any extra `schemas`). The sitemap comes from `@astrojs/sitemap`.
+`Layout` derives the canonical URL and `hreflang` alternates from the current URL, and renders
+Open Graph and Twitter tags and the JSON-LD `Person` schema (plus any extra `schemas`). The sitemap comes from `@astrojs/sitemap`.
 
 `/llms.txt` (index) and `/llms-full.txt` (all content as plain text) follow https://llmstxt.org/
 and are linked from `robots.txt`. They are generated from `content.ts`. **When you add a page,
-add it to the Pages list in `llms.txt.ts`**, and to the Header `navItems`.
+put it in `src/pages/[...locale]/`, add it to the Pages list in `llms.txt.ts`**, and to the Header
+`navItems` (with its label in `ui.*.nav`).
 
 ## Deployment
 

@@ -1,11 +1,12 @@
 ---
 import Icon from './Icon.astro';
 import SocialLinks from './SocialLinks.astro';
+import { getLang, localizePath, t, ui, type Text } from '../data/i18n';
 
 interface Slide {
   src: string;
   srcMobile: string;
-  place: string;
+  place: Text;
   credits: string;
   link?: string;
   /** Desktop object-position (mobile always uses 85% 50%) */
@@ -18,6 +19,8 @@ interface Props {
 }
 
 const { slides, interval = 7000 } = Astro.props;
+const lang = getLang(Astro.url);
+const text = ui[lang].home;
 ---
 
 <div class="vs-carousel" data-rotator data-interval={interval} style={`--kb-duration: ${interval}ms`}>
@@ -44,7 +47,7 @@ const { slides, interval = 7000 } = Astro.props;
           />
         </picture>
         <figcaption class="vs-credits">
-          <div>{slide.place}</div>
+          <div>{t(slide.place, lang)}</div>
           <div>
             <Icon name="camera" class="vs-credits-cam" />
             {slide.link
@@ -57,9 +60,9 @@ const { slides, interval = 7000 } = Astro.props;
   })}
 
   <div class="vs-hero">
-    <h1 class="vs-hello">Hey, I'm Vicent</h1>
-    <p class="vs-description">GIS developer, AI enthusiast, travel &amp; cycling lover based in Valencia, Spain</p>
-    <a href="/background" class="vs-btn-more">About Vicent</a>
+    <h1 class="vs-hello">{text.hello}</h1>
+    <p class="vs-description">{text.intro}</p>
+    <a href={localizePath('/background', lang)} class="vs-btn-more">{text.about}</a>
     <div class="vs-social-mobile">
       <SocialLinks linkClass="vs-social-icon" />
     </div>

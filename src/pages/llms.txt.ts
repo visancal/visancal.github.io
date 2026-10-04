@@ -19,6 +19,9 @@ languages, projects and trips inlined as a single plain-text document.
 - [Projects](${SITE_URL}/projects): Timeline of professional, personal and R&D projects with the technologies used.
 - [Trips](${SITE_URL}/trips): Interactive deck.gl globe/map of places visited, highlighted places and wishlist destinations.
 
+Every page is also available in Spanish under \`/es/\` (e.g. ${SITE_URL}/es/projects) and in
+Valencian (Catalan) under \`/va/\` (e.g. ${SITE_URL}/va/projects).
+
 ## Full content
 
 - [llms-full.txt](${SITE_URL}/llms-full.txt): All site content inlined as plain text for LLM consumption.

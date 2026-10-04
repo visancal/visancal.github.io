@@ -6,9 +6,11 @@
  */
 const timers: number[] = [];
 
-function loadSlide(slide: Element) {
-  slide.querySelectorAll<HTMLImageElement | HTMLSourceElement>('[data-src], [data-srcset]').forEach((el) => {
-    if (el.dataset.srcset) el.srcset = el.dataset.srcset;
+function loadSlide(slide: HTMLElement) {
+  // The slide can be the <img> itself (banner) or wrap a <picture> (home carousel)
+  const deferred = [slide, ...slide.querySelectorAll<HTMLElement>('[data-src], [data-srcset]')];
+  deferred.forEach((el) => {
+    if (el.dataset.srcset) (el as HTMLImageElement | HTMLSourceElement).srcset = el.dataset.srcset;
     if (el.dataset.src) (el as HTMLImageElement).src = el.dataset.src;
     delete el.dataset.src;
     delete el.dataset.srcset;

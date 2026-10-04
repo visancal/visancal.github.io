@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import HomeCarousel from '../../components/HomeCarousel.astro';
+import { SITE_URL } from '../../data/content';
+import { getLang, localizePath, localeStaticPaths, ui } from '../../data/i18n';
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = getLang(Astro.url);
+const text = ui[lang].home;
+
+const slides = [
+  { src: '/img/home/intro.webp',  srcMobile: '/img/home/intro-m.webp',  position: '28% 22%', place: { en: 'Griffith Observatory, LA', es: 'Observatorio Griffith, LA', va: 'Observatori Griffith, LA' }, credits: '@xurxosanz', link: 'https://twitter.com/xurxosanz' },
+  { src: '/img/home/intro2.webp', srcMobile: '/img/home/intro2-m.webp', position: '62% 30%', place: { en: 'Badwater Basin, Death Valley, CA', es: 'Badwater Basin, Valle de la Muerte, CA', va: 'Badwater Basin, Vall de la Mort, CA' }, credits: '@xurxosanz', link: 'https://twitter.com/xurxosanz' },
+  { src: '/img/home/intro3.webp', srcMobile: '/img/home/intro3-m.webp', position: '50% 65%', place: { en: 'Angkor Wat, Cambodia', es: 'Angkor Wat, Camboya', va: 'Angkor Wat, Cambodja' }, credits: 'Nerea' },
+  { src: '/img/home/intro4.webp', srcMobile: '/img/home/intro4-m.webp', position: '65% 38%', place: 'Caldera de Taburiente, La Palma', credits: 'Nerea' },
+  { src: '/img/home/intro5.webp', srcMobile: '/img/home/intro5-m.webp', position: '43% 28%', place: { en: 'Segla, Senja Island, Norway', es: 'Segla, isla de Senja, Noruega', va: 'Segla, illa de Senja, Noruega' }, credits: 'Nerea' },
+];
+---
+
+<Layout
+  title={text.title}
+  description={text.description}
+  schemas={[{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Vicent Sanjaime',
+    url: `${SITE_URL}${localizePath('/', lang)}`,
+    inLanguage: lang === 'va' ? 'ca' : lang,
+    description: text.description,
+    author: { '@type': 'Person', name: 'Vicent Sanjaime', alternateName: ['Vicente Sanjaime', 'Vicente Sanjaime Calvet', 'Vicent Sanjaime Calvet'] },
+  }]}
+>
+  <!-- The carousel sits behind the semi-transparent header -->
+  <div class="vs-home">
+    <HomeCarousel slides={slides} interval={5000} />
+    <Header currentPage="home" />
+  </div>
+</Layout>
+
+<style>
+  .vs-home {
+    position: relative;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+</style>

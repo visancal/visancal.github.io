@@ -1,0 +1,275 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import BannerImages from '../../components/BannerImages.astro';
+import SectionBackground from '../../components/SectionBackground.astro';
+import EducationCard from '../../components/EducationCard.astro';
+import EmploymentCard from '../../components/EmploymentCard.astro';
+import Icon from '../../components/Icon.astro';
+import { employment, education, skills, languages } from '../../data/content';
+import { breadcrumbSchema, getLang, localeStaticPaths, t, ui } from '../../data/i18n';
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = getLang(Astro.url);
+const text = ui[lang].background;
+
+const images = ['/img/back/back5.webp', '/img/back/back1.webp', '/img/back/back2.webp'];
+---
+
+<Layout
+  title={text.title}
+  description={text.description}
+  ogImage="https://vicentsanjaime.net/img/back/back5.webp"
+  schemas={[breadcrumbSchema(lang, 'background')]}
+>
+  <div class="vs-page">
+    <Header currentPage="background" />
+    <BannerImages images={images} />
+
+    <main class="vs-content">
+      <div class="vs-container">
+
+        <!-- Bio -->
+        <SectionBackground title={text.bio}>
+          <!-- Bio prose: keep in sync with src/pages/llms-full.txt.ts -->
+          {lang === 'en' && (
+            <Fragment>
+              <div class="vs-bio">
+                I'm <strong>Vicent Sanjaime Calvet</strong> — developer of geospatial applications and{' '}
+                <a href="https://en.wikipedia.org/wiki/Geographic_information_system">GIS</a> consultant,
+                currently working at <a href="https://carto.com/">CARTO</a> as part of the Professional Services team.
+                I love front-end development
+                and usually work with <a href="https://vuejs.org/">Vue</a> and web mapping libraries such as{' '}
+                <a href="https://openlayers.org/">OpenLayers</a>,{' '}
+                <a href="https://leafletjs.com/">Leaflet</a>,{' '}
+                <a href="https://developers.google.com/maps/documentation/javascript/overview">Google Maps API</a>,{' '}
+                <a href="https://deck.gl">Deck.gl</a> and <a href="https://carto.com/">CARTO</a>.
+                I also have extensive experience in the installation and management of server components
+                such as spatial databases and map servers. I have worked on a large number of GIS projects,
+                always integrating different technologies and components, most of them{' '}
+                <a href="https://en.wikipedia.org/wiki/Open-source_model">open-source</a>.
+              </div>
+              <div class="vs-bio vs-bio--gap">
+                I enjoy working on projects with a strong spatial component, as they allow me to apply my
+                background in cartography, geography and geodesy to the development of spatial solutions.
+                I consider myself an adaptable, collaborative and approachable team player with a keen
+                interest in new technologies.
+              </div>
+            </Fragment>
+          )}
+          {lang === 'es' && (
+            <Fragment>
+              <div class="vs-bio">
+                Soy <strong>Vicent Sanjaime Calvet</strong>, desarrollador de aplicaciones geoespaciales y consultor{' '}
+                <a href="https://es.wikipedia.org/wiki/Sistema_de_informaci%C3%B3n_geogr%C3%A1fica">SIG</a>.
+                Actualmente trabajo en <a href="https://carto.com/">CARTO</a>, dentro del equipo de Professional Services.
+                Me encanta el desarrollo front-end
+                y suelo trabajar con <a href="https://vuejs.org/">Vue</a> y librerías de mapas web como{' '}
+                <a href="https://openlayers.org/">OpenLayers</a>,{' '}
+                <a href="https://leafletjs.com/">Leaflet</a>,{' '}
+                <a href="https://developers.google.com/maps/documentation/javascript/overview">Google Maps API</a>,{' '}
+                <a href="https://deck.gl">Deck.gl</a> y <a href="https://carto.com/">CARTO</a>.
+                También tengo una amplia experiencia en la instalación y gestión de componentes de servidor,
+                como bases de datos espaciales y servidores de mapas. He trabajado en un gran número de proyectos SIG,
+                siempre integrando distintas tecnologías y componentes, la mayoría de ellos de{' '}
+                <a href="https://es.wikipedia.org/wiki/C%C3%B3digo_abierto">código abierto</a>.
+              </div>
+              <div class="vs-bio vs-bio--gap">
+                Disfruto trabajando en proyectos con un fuerte componente espacial, ya que me permiten aplicar mi
+                formación en cartografía, geografía y geodesia al desarrollo de soluciones espaciales.
+                Me considero una persona adaptable, colaborativa y cercana, que trabaja bien en equipo y
+                con un gran interés por las nuevas tecnologías.
+              </div>
+            </Fragment>
+          )}
+          {lang === 'va' && (
+            <Fragment>
+              <div class="vs-bio">
+                Sóc <strong>Vicent Sanjaime Calvet</strong>, desenvolupador d'aplicacions geoespacials i consultor{' '}
+                <a href="https://ca.wikipedia.org/wiki/Sistema_d%27informaci%C3%B3_geogr%C3%A0fica">SIG</a>.
+                Actualment treballe a <a href="https://carto.com/">CARTO</a>, dins de l'equip de Professional Services.
+                M'encanta el desenvolupament front-end
+                i solc treballar amb <a href="https://vuejs.org/">Vue</a> i llibreries de mapes web com{' '}
+                <a href="https://openlayers.org/">OpenLayers</a>,{' '}
+                <a href="https://leafletjs.com/">Leaflet</a>,{' '}
+                <a href="https://developers.google.com/maps/documentation/javascript/overview">Google Maps API</a>,{' '}
+                <a href="https://deck.gl">Deck.gl</a> i <a href="https://carto.com/">CARTO</a>.
+                També tinc una àmplia experiència en la instal·lació i gestió de components de servidor,
+                com ara bases de dades espacials i servidors de mapes. He treballat en un gran nombre de projectes SIG,
+                sempre integrant diferents tecnologies i components, la majoria de{' '}
+                <a href="https://ca.wikipedia.org/wiki/Codi_obert">codi obert</a>.
+              </div>
+              <div class="vs-bio vs-bio--gap">
+                Gaudisc treballant en projectes amb un fort component espacial, ja que em permeten aplicar la meua
+                formació en cartografia, geografia i geodèsia al desenvolupament de solucions espacials.
+                Em considere una persona adaptable, col·laborativa i propera, que treballa bé en equip i
+                amb un gran interés per les noves tecnologies.
+              </div>
+            </Fragment>
+          )}
+          <div class="vs-bio vs-bio--gap">
+            <p class="vs-skills-intro">{text.skillsIntro}</p>
+            <ul class="vs-skills-list">
+              {skills.map((group) => (
+                <li class="vs-skills-row">
+                  {group.techs.map((tech) => (
+                    <span class="vs-chip vs-skill-chip" style={`background-color: ${group.color}`}>
+                      <Icon name="label" />{t(tech, lang)}
+                    </span>
+                  ))}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </SectionBackground>
+
+        <!-- Education -->
+        <SectionBackground title={text.education}>
+          <div class="vs-cards-row">
+            {education.map((info) => <EducationCard info={info} />)}
+          </div>
+        </SectionBackground>
+
+        <!-- Employment -->
+        <SectionBackground title={text.employment}>
+          <div class="vs-cards-row">
+            {employment.map((info) => <EmploymentCard info={info} />)}
+          </div>
+        </SectionBackground>
+
+        <!-- Languages -->
+        <SectionBackground title={text.languages}>
+          <div class="vs-languages">
+            {languages.map((language) => (
+              <div class="vs-lang-block">
+                <p class="vs-lang-name">{t(language.name, lang)}</p>
+                <div class="vs-progress-bar">
+                  <div class="vs-progress-fill" style={`width: ${language.value}%`}>
+                    {t(language.label, lang)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SectionBackground>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .vs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px 100px;
+  }
+
+  /* Bio text */
+  .vs-bio {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-text-sec);
+    margin: 0 16px;
+    line-height: 1.8;
+  }
+
+  .vs-bio a {
+    color: var(--color-link-text);
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+
+  .vs-bio a:hover {
+    color: var(--color-accent-dk);
+  }
+
+  .vs-bio--gap {
+    margin-top: 14px;
+  }
+
+  .vs-skills-intro {
+    margin-bottom: 10px;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .vs-skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .vs-skill-chip {
+    padding: 4px 12px;
+    opacity: 0.92;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+
+  .vs-skill-chip:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  /* Cards grid: 1 → 2 → 3 columns */
+  .vs-cards-row {
+    display: grid;
+    gap: 16px;
+    margin: 0 12px;
+  }
+
+  @media (min-width: 768px) {
+    .vs-cards-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1280px) {
+    .vs-cards-row { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Languages */
+  .vs-languages {
+    margin: 8px 16px 0;
+  }
+
+  .vs-lang-block {
+    margin-bottom: 16px;
+  }
+
+  .vs-lang-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+
+  .vs-progress-bar {
+    width: 30%;
+    background: var(--color-border);
+    border-radius: var(--radius-pill);
+    height: 22px;
+    overflow: hidden;
+  }
+
+  .vs-progress-fill {
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: var(--radius-pill);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 0 12px;
+  }
+
+  @media (min-width: 700px) and (max-width: 1000px) {
+    .vs-progress-bar { width: 50%; }
+  }
+
+  @media (max-width: 700px) {
+    .vs-progress-bar { width: 80%; }
+  }
+</style>

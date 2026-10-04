@@ -1,28 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import BannerImages from '../components/BannerImages.astro';
-import TimelineCard from '../components/TimelineCard.astro';
-import ProjectMeta from '../components/ProjectMeta.astro';
-import Footer from '../components/Footer.astro';
-import { projects } from '../data/content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import BannerImages from '../../components/BannerImages.astro';
+import TimelineCard from '../../components/TimelineCard.astro';
+import ProjectMeta from '../../components/ProjectMeta.astro';
+import Footer from '../../components/Footer.astro';
+import { projects } from '../../data/content';
+import { breadcrumbSchema, getLang, localeStaticPaths, ui } from '../../data/i18n';
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = getLang(Astro.url);
+const text = ui[lang].projects;
 
 const images = ['/img/back/back5.webp', '/img/back/back6.webp'];
 ---
 
 <Layout
-  title="Projects | Vicent Sanjaime — GIS Developer & Consultant"
-  description="Portfolio of GIS and geospatial web projects by Vicent Sanjaime: port cartography, spatial data catalogues, map viewers, IoT maritime surveillance and more — built with OpenLayers, Vue.js, React, GeoServer and PostGIS."
+  title={text.title}
+  description={text.description}
   ogImage="https://vicentsanjaime.net/img/back/back5.webp"
-  canonicalPath="/projects"
-  schemas={[{
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vicentsanjaime.net' },
-      { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://vicentsanjaime.net/projects' },
-    ],
-  }]}
+  schemas={[breadcrumbSchema(lang, 'projects')]}
 >
   <div class="vs-page">
     <Header currentPage="projects" />
@@ -31,10 +29,8 @@ const images = ['/img/back/back5.webp', '/img/back/back6.webp'];
     <main class="vs-content">
       <div class="vs-container">
         <div class="vs-intro">
-          <h1 class="vs-page-title">Projects</h1>
-          <p class="vs-intro-text">
-            Throughout my professional career I have had the opportunity to work on a wide range of GIS projects using diverse technologies. The timeline below highlights the main projects I have been involved in and the technologies used, including personal and R&amp;D work.
-          </p>
+          <h1 class="vs-page-title">{text.heading}</h1>
+          <p class="vs-intro-text">{text.intro}</p>
         </div>
 
         <!-- Timeline: cards alternate right (even) / left (odd) of the centre line -->

@@ -12,11 +12,16 @@ import {
   wishlist,
   type Trip,
 } from '../data/content';
+import { countryName, t } from '../data/i18n';
+
+// English only; /es/ and /va/ hold the same content translated
+const en = (text: Parameters<typeof t>[0]) => t(text, 'en');
 
 /** "Country: place, place" lines, countries in first-seen order */
 function byCountry(places: Trip[]): string {
   const groups = new Map<string, string[]>();
-  for (const { name, country } of places) {
+  for (const { name, country: code } of places) {
+    const country = countryName(code, 'en');
     groups.set(country, [...(groups.get(country) ?? []), name]);
   }
   return [...groups].map(([country, names]) => `- ${country}: ${names.join(', ')}`).join('\n');
@@ -24,21 +29,21 @@ function byCountry(places: Trip[]): string {
 
 const employmentSection = employment
   .map((job) => {
-    const tasks = job.tasks.map((t) => `  - ${t}`).join('\n');
-    return `### ${job.title} — ${job.center} (${job.date})\n${job.url}\n\n${tasks}`;
+    const tasks = job.tasks.map((task) => `  - ${en(task)}`).join('\n');
+    return `### ${en(job.title)} — ${job.center} (${en(job.date)})\n${job.url}\n\n${tasks}`;
   })
   .join('\n\n');
 
 const educationSection = education
-  .map((e) => `### ${e.title} — ${e.center} (${e.date})\n${e.url}\n${e.subtitle}`)
+  .map((e) => `### ${en(e.title)} — ${en(e.center)} (${e.date})\n${e.url}\n${en(e.subtitle)}`)
   .join('\n\n');
 
 const projectsSection = projects
   .map((p) => {
-    const lines = [`### ${p.title} (${p.date})`, `Company: ${p.company}`, `Technologies: ${p.technologies.join(', ')}`];
+    const lines = [`### ${en(p.title)} (${p.date})`, `Company: ${p.company}`, `Technologies: ${p.technologies.join(', ')}`];
     if (p.url) lines.push(`URL: ${p.url}`);
     if (p.rd) lines.push('Type: R&D project');
-    if (p.description) lines.push('', p.description);
+    if (p.description) lines.push('', en(p.description));
     return lines.join('\n');
   })
   .join('\n\n');
@@ -46,7 +51,8 @@ const projectsSection = projects
 const body = `# Vicent Sanjaime — Full site content
 
 > This document inlines all content from ${SITE_URL} as plain text for AI agents and LLMs.
-> See /llms.txt for a short index of the site's pages.
+> See /llms.txt for a short index of the site's pages. Spanish and Valencian versions of the
+> pages are under ${SITE_URL}/es/ and ${SITE_URL}/va/.
 
 ## Bio
 
@@ -72,11 +78,11 @@ ${socials.map((s) => `- ${s.label}: ${s.url}`).join('\n')}
 
 ## Technical skills
 
-${skills.map((group) => `- ${group.techs.join(', ')}`).join('\n')}
+${skills.map((group) => `- ${group.techs.map(en).join(', ')}`).join('\n')}
 
 ## Languages
 
-${languages.map((l) => `- ${l.name}: ${l.label}`).join('\n')}
+${languages.map((l) => `- ${en(l.name)}: ${en(l.label)}`).join('\n')}
 
 ## Employment history
 

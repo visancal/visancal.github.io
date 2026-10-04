@@ -2,28 +2,32 @@
 import { ClientRouter } from 'astro:transitions';
 import { Font } from 'astro:assets';
 import { SITE_URL } from '../data/content';
+import { DEFAULT_LANG, LANGS, LANG_META, getLang, localizePath, routePath, ui } from '../data/i18n';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
-  canonicalPath?: string;
   /** Optional JSON-LD schema objects to inject alongside the default Person schema */
   schemas?: object[];
 }
 
 const SITE_NAME = 'Vicent Sanjaime';
 
+const lang = getLang(Astro.url);
+const text = ui[lang];
+const route = routePath(Astro.url);
+
 const {
-  title       = 'Vicent Sanjaime | GIS Developer & Consultant',
-  description = 'GIS developer and consultant at CARTO Professional Services based in Valencia, Spain. Specialised in geospatial web applications, mapping libraries and spatial databases.',
+  title       = `Vicent Sanjaime | ${text.jobTitle}`,
+  description = text.defaultDescription,
   ogImage     = `${SITE_URL}/img/home/intro.webp`,
-  canonicalPath = '',
   schemas = [],
 } = Astro.props;
 
-const canonical = `${SITE_URL}${canonicalPath}`;
+const canonical = `${SITE_URL}${localizePath(route, lang)}`;
+const alternates = LANGS.map((l) => ({ hreflang: LANG_META[l].hreflang, href: `${SITE_URL}${localizePath(route, l)}` }));
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -44,8 +48,8 @@ const personSchema = {
   ],
   url: SITE_URL,
   image: `${SITE_URL}/img/home/intro.webp`,
-  jobTitle: 'GIS Developer & Consultant',
-  description: 'GIS developer and consultant with 20+ years of experience in geospatial web applications, mapping libraries and spatial databases.',
+  jobTitle: text.jobTitle,
+  description: text.personDescription,
   worksFor: {
     '@type': 'Organization',
     name: 'CARTO',
@@ -85,11 +89,35 @@ const personSchema = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={LANG_META[lang].htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#D97757" />
+
+    <!--
+      Static hosting has no Accept-Language negotiation, so English pages (unprefixed) send the
+      visitor to /es/ or /va/ before first paint when that is their language: the one picked in
+      the header switcher (localStorage) or else the first supported one in navigator.languages.
+    -->
+    {lang === DEFAULT_LANG && (
+      <script is:inline>
+        (function () {
+          var lang;
+          try { lang = localStorage.getItem('vs-lang'); } catch (e) {}
+          if (lang !== 'en' && lang !== 'es' && lang !== 'va') {
+            lang = 'en';
+            var prefs = navigator.languages || [navigator.language];
+            for (var i = 0; i < prefs.length; i++) {
+              var code = String(prefs[i]).toLowerCase().split('-')[0];
+              if (code === 'en' || code === 'es') { lang = code; break; }
+              if (code === 'ca') { lang = 'va'; break; }
+            }
+          }
+          if (lang !== 'en') location.replace('/' + lang + location.pathname + location.search + location.hash);
+        })();
+      </script>
+    )}
 
     <!--
       Random theme pick — once per browser session, applied before first paint
@@ -124,6 +152,8 @@ const personSchema = {
     <meta name="author" content="Vicent Sanjaime Calvet" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates[0].href} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/favicon.ico" />
 
@@ -135,7 +165,8 @@ const personSchema = {
     <meta property="og:url"         content={canonical} />
     <meta property="og:image"       content={ogImage} />
     <meta property="og:image:alt"   content={title} />
-    <meta property="og:locale"      content="en_GB" />
+    <meta property="og:locale"      content={LANG_META[lang].ogLocale} />
+    {LANGS.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={LANG_META[l].ogLocale} />)}
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card"        content="summary_large_image" />
