@@ -23,7 +23,7 @@ import { trips, highlights, wishlist } from '../data/content';
 
     <main class="vs-content">
       <div class="vs-intro">
-        <span class="vs-page-title">Trips</span>
+        <h1 class="vs-page-title">Trips</h1>
         <p class="vs-intro-text">A few of the places I have been lucky enough to visit, and some still on my list. Click a marker to zoom in.</p>
       </div>
 
@@ -261,16 +261,8 @@ import { trips, highlights, wishlist } from '../data/content';
 </script>
 
 <style>
-  .vs-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-  }
-
   .vs-content {
-    flex: 1;
-    min-height: 0;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     max-width: 1100px;
@@ -281,23 +273,6 @@ import { trips, highlights, wishlist } from '../data/content';
 
   .vs-intro {
     margin: 8px 0 12px;
-  }
-
-  .vs-page-title {
-    display: block;
-    color: var(--color-text);
-    font-size: 1.75rem;
-    font-weight: 500;
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-
-  .vs-intro-text {
-    font-size: 0.9rem;
-    color: var(--color-text-sec);
-    line-height: 1.6;
-    max-width: 600px;
   }
 
   .vs-trips {
@@ -328,9 +303,7 @@ import { trips, highlights, wishlist } from '../data/content';
     top: 12px;
     display: flex;
     gap: 12px;
-    margin: 0;
     padding: 6px 10px;
-    list-style: none;
     font-size: 0.75rem;
     color: var(--color-text);
     background: var(--color-surface-translucent);
@@ -343,10 +316,6 @@ import { trips, highlights, wishlist } from '../data/content';
     display: flex;
     align-items: center;
     gap: 6px;
-  }
-
-  .vs-legend li::before {
-    content: none;
   }
 
   .vs-legend-dot {
@@ -408,7 +377,6 @@ import { trips, highlights, wishlist } from '../data/content';
     position: absolute;
     right: 0;
     bottom: 0;
-    margin: 0;
     padding: 2px 8px;
     font-size: 0.65rem;
     color: var(--color-text-sec);

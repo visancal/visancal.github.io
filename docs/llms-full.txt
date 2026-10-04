@@ -5,22 +5,29 @@
 
 ## Bio
 
-I'm Vicent Sanjaime Calvet — developer of geospatial applications and GIS (Geographic
-Information System) consultant, currently working at CARTO (https://carto.com/) as part
-of the Professional Services team. I love front-end development and usually work with
-Vue and web mapping libraries such as OpenLayers, Leaflet, the Google Maps API, Deck.gl
-and CARTO. I also have extensive experience in the installation and management of server
-components such as spatial databases and map servers. I have worked on a large number of
-GIS projects, always integrating different technologies and components, most of them
-open-source.
+I'm Vicent Sanjaime Calvet (also known as Vicente Sanjaime) — developer of geospatial
+applications and GIS (Geographic Information System) consultant, currently working at CARTO
+(https://carto.com/) as part of the Professional Services team. I love front-end development
+and usually work with Vue and web mapping libraries such as OpenLayers, Leaflet, the Google
+Maps API, Deck.gl and CARTO. I also have extensive experience in the installation and
+management of server components such as spatial databases and map servers. I have worked on
+a large number of GIS projects, always integrating different technologies and components,
+most of them open-source.
 
 I enjoy working on projects with a strong spatial component, as they allow me to apply my
 background in cartography, geography and geodesy to the development of spatial solutions.
 I consider myself an adaptable, collaborative and approachable team player with a keen
 interest in new technologies.
 
-Based in Valencia, Spain. Languages: Spanish (native), Catalan (native), English
-(upper-intermediate).
+Based in Valencia, Spain. Interests: GIS, AI, travel and cycling.
+
+## Profiles
+
+- Twitter: https://twitter.com/visancal
+- Instagram: https://www.instagram.com/visancal/
+- LinkedIn: https://www.linkedin.com/in/vsanjaime/
+- GitHub: https://github.com/visancal
+- Strava: https://strava.app.link/qXSmcgCTZ2b
 
 ## Technical skills
 
@@ -33,6 +40,12 @@ Based in Valencia, Spain. Languages: Spanish (native), Catalan (native), English
 - Java, GeoTools, Spring
 - Kafka
 - Scrum, Jira, Confluence
+
+## Languages
+
+- Spanish: Native
+- English: Upper-Intermediate
+- Catalan: Native
 
 ## Employment history
 
@@ -246,3 +259,49 @@ Technologies: Java
 URL: http://www.gvsig.com/es
 
 Development of extensions for gvSIG 1.x and gvSIG 2.x: Geocoding, Oracle Connector (2.x), Phone Cache and GeoResources.
+
+## Trips
+
+Places shown on the interactive map at https://vicentsanjaime.net/trips.
+
+### Visited
+
+- Vietnam: Hanoi
+- Thailand: Chiang Mai, Chiang Rai, Bangkok, Ao Nang
+- Singapore: Singapore
+- United Arab Emirates: Dubai
+- Qatar: Doha
+- Dominican Republic: Samaná, Santo Domingo
+- Martinique: Fort-de-France
+- Guadeloupe: Pointe-à-Pitre
+- Venezuela: Isla Margarita
+- Cuba: Havana, Varadero, Cayo Santa María, Cienfuegos
+- United States: New York, Los Angeles, Las Vegas, San Francisco
+- South Africa: Cape Town
+- Spain: La Palma, Madrid, Barcelona, Girona, Tarifa, Sevilla, Bilbao, San Sebastián, Torla, Cáceres, Finisterre, Ávila, Segovia, A Coruña, Santander, Teruel, Cádiz, Palma, Son Bou, Cala Llonga, Formentera
+- Portugal: Lagos
+- France: Paris, Dune du Pilat
+- Andorra: Andorra
+- Monaco: Monaco
+- United Kingdom: Manchester, London, Edinburgh
+- Norway: Tromsø
+- Ireland: Dublin
+- Italy: Milan, Venice, Pisa, Florence, Rome, Capri, Amalfi, Pompeii
+- Malta: Malta
+- Serbia: Novi Sad, Belgrade
+
+### Highlights
+
+- South Africa: Cape of Good Hope
+- United States: Grand Canyon, Yosemite, Death Valley
+- Cambodia: Angkor Wat
+- Norway: North Cape, Lofoten Islands
+
+### Wishlist
+
+- Zambia / Zimbabwe: Victoria Falls
+- Philippines: Philippines
+- Peru: Peru
+- China: Tibet
+- Portugal: Azores
+- Egypt: Cairo

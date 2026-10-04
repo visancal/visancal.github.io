@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import type { Employment } from '../data/content';
 
 interface Props {
@@ -8,48 +9,19 @@ interface Props {
 const { info } = Astro.props;
 ---
 
-<div class="vs-card-wrap">
-  <article class="vs-card">
-    <img class="vs-card-img" src={info.img} alt={info.center} loading="lazy" />
-    <div class="vs-card-body">
-      <h3 class="vs-card-title">{info.title}</h3>
-      <div class="vs-card-subtitle">
-        <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-center-link">
-          {info.center}
-        </a>
-      </div>
-      <div class="vs-date-chip">
-        <i class="mdi mdi-calendar-month"></i>
-        {info.date}
-      </div>
-      <ul class="vs-task-list">
-        {info.tasks.map((task) => <li>{task}</li>)}
-      </ul>
-    </div>
-  </article>
-</div>
+<article class="vs-card">
+  <img class="vs-card-img" src={info.img} alt="" loading="lazy" decoding="async" />
+  <div class="vs-card-body">
+    <h3 class="vs-card-title">{info.title}</h3>
+    <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-card-link">{info.center}</a>
+    <span class="vs-chip vs-chip--date"><Icon name="calendar" />{info.date}</span>
+    <ul class="vs-task-list">
+      {info.tasks.map((task) => <li>{task}</li>)}
+    </ul>
+  </div>
+</article>
 
 <style>
-  .vs-card-wrap {
-    width: 100%;
-    padding: 8px;
-  }
-
-  .vs-card {
-    background: var(--color-surface);
-    border-radius: var(--radius-card);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-    height: 100%;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-
-  .vs-card:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
-
   .vs-card-img {
     width: 100%;
     height: 90px;
@@ -64,47 +36,22 @@ const { info } = Astro.props;
   }
 
   .vs-card-title {
-    color: var(--color-text);
-    font-family: var(--font-display);
-    font-weight: 500;
     font-size: 1.1rem;
-    letter-spacing: -0.01em;
-    margin-bottom: 6px;
     line-height: 1.4;
+    margin-bottom: 6px;
   }
 
-  .vs-card-subtitle {
+  .vs-card-link {
+    display: block;
     margin-bottom: 10px;
   }
 
-  .vs-center-link {
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    transition: color 0.15s;
-  }
-
-  .vs-center-link:hover {
-    color: var(--color-accent-dk);
-  }
-
-  .vs-date-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(var(--color-accent-rgb), 0.12);
-    color: var(--color-accent);
-    font-size: 0.72rem;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+  .vs-chip {
     margin-bottom: 14px;
   }
 
   .vs-task-list {
+    list-style: disc;
     padding-left: 1.3em;
   }
 
@@ -115,15 +62,7 @@ const { info } = Astro.props;
     color: var(--color-text-sec);
   }
 
-  @media (min-width: 768px) {
-    .vs-card-wrap {
-      width: 50%;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .vs-card-wrap {
-      width: 33.333%;
-    }
+  .vs-task-list li::marker {
+    color: var(--color-accent);
   }
 </style>

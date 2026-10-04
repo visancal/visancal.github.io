@@ -1,4 +1,6 @@
 ---
+import SocialLinks from './SocialLinks.astro';
+
 interface Props {
   currentPage?: 'home' | 'background' | 'projects' | 'trips';
 }
@@ -19,7 +21,6 @@ const navItems = [
   <!-- Main bar -->
   <div class="vs-appbar">
     <a href="/" class="vs-title">Vicent Sanjaime</a>
-    <div class="vs-spacer"></div>
 
     <!-- Desktop nav -->
     <nav class="vs-nav-desktop" aria-label="Main navigation">
@@ -33,8 +34,8 @@ const navItems = [
       ))}
     </nav>
 
-    <!-- Mobile hamburger — inline SVG so MDI is not render-critical -->
-    <button class="vs-hamburger" id="menu-toggle" aria-label="Open menu">
+    <!-- Mobile hamburger -->
+    <button class="vs-hamburger" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
            fill="none" stroke="currentColor" stroke-width="2"
            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -48,22 +49,7 @@ const navItems = [
   <!-- Social bar (only on home page) -->
   {isHome && (
     <div class="vs-social-bar">
-      <div class="vs-spacer"></div>
-      <a href="https://twitter.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="vs-social-btn">
-        <i class="mdi mdi-twitter"></i>
-      </a>
-      <a href="https://www.instagram.com/visancal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="vs-social-btn">
-        <i class="mdi mdi-instagram"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/vsanjaime/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="vs-social-btn">
-        <i class="mdi mdi-linkedin"></i>
-      </a>
-      <a href="https://github.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="vs-social-btn">
-        <i class="mdi mdi-github"></i>
-      </a>
-      <a href="https://strava.app.link/qXSmcgCTZ2b" target="_blank" rel="noopener noreferrer" aria-label="Strava" class="vs-social-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
-      </a>
+      <SocialLinks linkClass="vs-social-btn" />
     </div>
   )}
 
@@ -86,33 +72,25 @@ const navItems = [
 
 <script>
   function initDrawer() {
-    const toggle = document.getElementById('menu-toggle') as HTMLButtonElement | null;
+    const toggle = document.getElementById('menu-toggle');
     const drawer = document.getElementById('mobile-drawer');
     const overlay = document.getElementById('drawer-overlay');
+    if (!toggle || !drawer || !overlay) return;
 
-    function openDrawer() {
-      drawer?.classList.add('open');
-      overlay?.classList.add('open');
-      drawer?.removeAttribute('inert');
-      drawer?.setAttribute('aria-hidden', 'false');
-      toggle?.setAttribute('aria-label', 'Close menu');
-    }
+    const setOpen = (open: boolean) => {
+      drawer.classList.toggle('open', open);
+      overlay.classList.toggle('open', open);
+      drawer.toggleAttribute('inert', !open);
+      drawer.setAttribute('aria-hidden', String(!open));
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
 
-    function closeDrawer() {
-      drawer?.classList.remove('open');
-      overlay?.classList.remove('open');
-      drawer?.setAttribute('inert', '');
-      drawer?.setAttribute('aria-hidden', 'true');
-      toggle?.setAttribute('aria-label', 'Open menu');
-    }
-
-    toggle?.addEventListener('click', () => {
-      drawer?.classList.contains('open') ? closeDrawer() : openDrawer();
-    });
-    overlay?.addEventListener('click', closeDrawer);
+    toggle.addEventListener('click', () => setOpen(!drawer.classList.contains('open')));
+    overlay.addEventListener('click', () => setOpen(false));
   }
 
-  // Se re-ejecuta en cada navegación con View Transitions (ClientRouter)
+  // Re-run after every ClientRouter navigation (the header is swapped)
   document.addEventListener('astro:page-load', initDrawer);
 </script>
 
@@ -138,13 +116,9 @@ const navItems = [
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 1.5rem;
-    cursor: pointer;
     color: var(--color-text);
     letter-spacing: -0.01em;
-  }
-
-  .vs-spacer {
-    flex: 1;
+    margin-right: auto;
   }
 
   .vs-nav-desktop {
@@ -202,22 +176,22 @@ const navItems = [
   .vs-social-bar {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     height: 32px;
     padding: 0 24px;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-surface-translucent-soft);
   }
 
-  .vs-social-btn {
+  .vs-social-bar :global(.vs-social-btn) {
     color: var(--color-text-sec);
     font-size: 17px;
     margin-right: 12px;
     display: inline-flex;
-    align-items: center;
     transition: color 0.15s;
   }
 
-  .vs-social-btn:hover {
+  .vs-social-bar :global(.vs-social-btn:hover) {
     color: var(--color-accent);
   }
 
@@ -227,7 +201,6 @@ const navItems = [
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.4rem;
     color: var(--color-text);
     padding: 8px;
   }
@@ -236,17 +209,18 @@ const navItems = [
   .vs-drawer {
     position: fixed;
     top: 0;
-    left: -300px;
+    left: 0;
     width: 280px;
-    height: 100vh;
+    height: 100%;
+    transform: translateX(-100%);
     background: var(--color-bg);
     border-right: 1px solid var(--color-border);
     z-index: 20000;
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .vs-drawer.open {
-    left: 0;
+    transform: none;
   }
 
   .vs-overlay {

@@ -2,18 +2,26 @@
 
 > GIS developer and consultant at CARTO Professional Services, based in Valencia, Spain. 20+ years of experience in geospatial web applications, mapping libraries and spatial databases.
 
-Personal portfolio site of Vicent Sanjaime Calvet. This file follows the llms.txt convention
-(https://llmstxt.org/) to help AI agents and LLMs navigate the site. See `/llms-full.txt`
-for the complete bio, employment history, education, skills and project list inlined as a
-single plain-text document.
+Personal portfolio site of Vicent Sanjaime Calvet (also known as Vicente Sanjaime). This file
+follows the llms.txt convention (https://llmstxt.org/) to help AI agents and LLMs navigate the
+site. See `/llms-full.txt` for the complete bio, skills, employment history, education,
+languages, projects and trips inlined as a single plain-text document.
 
 ## Pages
 
-- [Home](https://vicentsanjaime.net/): Landing page with intro photos.
-- [Background](https://vicentsanjaime.net/background): Bio, technical skills, employment history and education.
-- [Projects](https://vicentsanjaime.net/projects): Timeline of professional and personal projects.
-- [Trips](https://vicentsanjaime.net/trips): Interactive deck.gl map of places visited, highlighted standout places and wishlist destinations.
+- [Home](https://vicentsanjaime.net/): Landing page with intro photos and links to social profiles.
+- [Background](https://vicentsanjaime.net/background): Bio, technical skills, education, employment history and languages.
+- [Projects](https://vicentsanjaime.net/projects): Timeline of professional, personal and R&D projects with the technologies used.
+- [Trips](https://vicentsanjaime.net/trips): Interactive deck.gl globe/map of places visited, highlighted places and wishlist destinations.
 
 ## Full content
 
-- [llms-full.txt](https://vicentsanjaime.net/llms-full.txt): All site content (bio, employment, education, skills, projects) inlined for LLM consumption.
+- [llms-full.txt](https://vicentsanjaime.net/llms-full.txt): All site content inlined as plain text for LLM consumption.
+
+## Profiles
+
+- [Twitter](https://twitter.com/visancal)
+- [Instagram](https://www.instagram.com/visancal/)
+- [LinkedIn](https://www.linkedin.com/in/vsanjaime/)
+- [GitHub](https://github.com/visancal)
+- [Strava](https://strava.app.link/qXSmcgCTZ2b)

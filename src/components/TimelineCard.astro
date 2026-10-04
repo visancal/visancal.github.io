@@ -1,4 +1,5 @@
 ---
+import ProjectMeta from './ProjectMeta.astro';
 import type { Project } from '../data/content';
 
 interface Props {
@@ -6,58 +7,35 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const companyColor = project.company === 'Personal' ? 'var(--color-badge-personal)' : 'var(--color-accent)';
 ---
 
-<div class="vs-card">
-  <p class="vs-project-title">{project.title}</p>
+<article class="vs-card vs-project">
+  <h2 class="vs-card-title vs-project-title">{project.title}</h2>
   {project.description && <p class="vs-project-desc">{project.description}</p>}
   {project.url && (
-    <a href={project.url} target="_blank" rel="noopener noreferrer" class="vs-project-url">
-      {project.url}
-    </a>
+    <a href={project.url} target="_blank" rel="noopener noreferrer" class="vs-project-url">{project.url}</a>
   )}
 
-  <!-- Mobile-only chips (date + company shown inside card on small screens) -->
-  <div class="vs-mobile-chips">
-    <span class="vs-chip vs-chip--date">
-      <i class="mdi mdi-calendar-month"></i>{project.date}
-    </span>
-    <span class="vs-chip" style={`background-color: ${companyColor}`}>
-      {project.company}
-    </span>
-    {project.rd && <span class="vs-chip vs-chip--rd">R&amp;D</span>}
-  </div>
+  <!-- Date + company live inside the card only on mobile (opposite side on desktop) -->
+  <ProjectMeta project={project} class="vs-mobile-meta" />
 
   <div class="vs-tech-chips">
-    {project.technologies.map((tech) => (
-      <span class="vs-chip vs-chip--tech">{tech}</span>
-    ))}
+    {project.technologies.map((tech) => <span class="vs-chip vs-chip--tech">{tech}</span>)}
   </div>
-</div>
+</article>
 
 <style>
-  .vs-card {
-    background: var(--color-surface);
-    border-radius: var(--radius-card);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-card);
+  .vs-project {
     padding: 20px;
-    transition: box-shadow 0.2s, transform 0.2s;
   }
 
-  .vs-card:hover {
-    box-shadow: var(--shadow-card-hover);
+  .vs-project:hover {
     transform: translateY(-1px);
   }
 
   .vs-project-title {
-    font-family: var(--font-display);
-    font-weight: 500;
     font-size: 1.25rem;
-    color: var(--color-text);
     line-height: 1.35;
-    letter-spacing: -0.01em;
     margin-bottom: 10px;
   }
 
@@ -76,7 +54,6 @@ const companyColor = project.company === 'Personal' ? 'var(--color-badge-persona
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 10px;
-    max-width: 100%;
     transition: color 0.15s;
   }
 
@@ -84,7 +61,7 @@ const companyColor = project.company === 'Personal' ? 'var(--color-badge-persona
     color: var(--color-accent-dk);
   }
 
-  .vs-mobile-chips {
+  .vs-project :global(.vs-mobile-meta) {
     display: none;
     flex-wrap: wrap;
     gap: 6px;
@@ -98,37 +75,8 @@ const companyColor = project.company === 'Personal' ? 'var(--color-badge-persona
     margin-top: 12px;
   }
 
-  .vs-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: white;
-  }
-
-  .vs-chip--date {
-    background: rgba(var(--color-accent-rgb), 0.15);
-    color: var(--color-accent);
-    border: 1px solid rgba(var(--color-accent-rgb), 0.3);
-  }
-
-  .vs-chip--rd {
-    background: var(--color-badge-rd-bg);
-    color: var(--color-badge-rd-text);
-    border: 1px solid var(--color-badge-rd-border);
-  }
-
-  .vs-chip--tech {
-    background: var(--color-badge-type-bg);
-    color: var(--color-badge-type-text);
-    border: 1px solid var(--color-badge-type-border);
-  }
-
   @media (max-width: 600px) {
-    .vs-mobile-chips {
+    .vs-project :global(.vs-mobile-meta) {
       display: flex;
     }
   }

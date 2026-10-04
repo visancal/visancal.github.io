@@ -1,0 +1,1 @@
+import"./rotator.BGjABM1a.js";document.addEventListener(`astro:page-load`,()=>{let e=document.querySelector(`.vs-banner`),t=e?.parentElement?.querySelector(`main`);t?.addEventListener(`scroll`,()=>e.classList.toggle(`is-scrolled`,t.scrollTop>5),{passive:!0})});

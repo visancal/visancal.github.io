@@ -1,3 +1,34 @@
+import type { IconName } from './icons';
+
+export const SITE_URL = 'https://vicentsanjaime.net';
+
+export interface Social {
+  label: string;
+  url: string;
+  icon: IconName;
+}
+
+export const socials: Social[] = [
+  { label: 'Twitter', url: 'https://twitter.com/visancal', icon: 'twitter' },
+  { label: 'Instagram', url: 'https://www.instagram.com/visancal/', icon: 'instagram' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/vsanjaime/', icon: 'linkedin' },
+  { label: 'GitHub', url: 'https://github.com/visancal', icon: 'github' },
+  { label: 'Strava', url: 'https://strava.app.link/qXSmcgCTZ2b', icon: 'strava' },
+];
+
+export interface Language {
+  name: string;
+  /** Proficiency bar width, 0–100 */
+  value: number;
+  label: string;
+}
+
+export const languages: Language[] = [
+  { name: 'Spanish', value: 100, label: 'Native' },
+  { name: 'English', value: 70, label: 'Upper-Intermediate' },
+  { name: 'Catalan', value: 100, label: 'Native' },
+];
+
 export interface Employment {
   center: string;
   url: string;

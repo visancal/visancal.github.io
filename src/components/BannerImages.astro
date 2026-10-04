@@ -1,51 +1,46 @@
 ---
-interface Image {
-  src: string;
-}
-
 interface Props {
-  images: Image[];
+  images: string[];
   interval?: number;
-  bannerId: string;
 }
 
-const { images, interval = 10000, bannerId } = Astro.props;
+const { images, interval = 10000 } = Astro.props;
 ---
 
-<div class="vs-banner" id={bannerId} data-banner data-interval={interval}>
-  {images.map((image, i) => (
-    <div
-      class:list={['vs-banner-slide', { 'vs-banner-slide--active': i === 0 }]}
-      style={`background-image: url('${image.src}')`}
-    ></div>
+<div class="vs-banner" data-rotator data-interval={interval}>
+  {images.map((src, i) => (
+    <img
+      class:list={['vs-banner-slide', { 'is-active': i === 0 }]}
+      data-slide
+      src={i === 0 ? src : undefined}
+      data-src={i === 0 ? undefined : src}
+      alt=""
+      decoding="async"
+    />
   ))}
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-banner]').forEach((el) => {
-    const slides = el.querySelectorAll<HTMLElement>('.vs-banner-slide');
-    const ms = parseInt(el.dataset.interval ?? '10000', 10);
-    let cur = 0;
+  import '../scripts/rotator';
 
-    setInterval(() => {
-      slides[cur].classList.remove('vs-banner-slide--active');
-      cur = (cur + 1) % slides.length;
-      slides[cur].classList.add('vs-banner-slide--active');
-    }, ms);
+  // Drop a shadow under the banner once the sibling <main> is scrolled
+  document.addEventListener('astro:page-load', () => {
+    const banner = document.querySelector('.vs-banner');
+    const main = banner?.parentElement?.querySelector('main');
+    main?.addEventListener('scroll', () => banner!.classList.toggle('is-scrolled', main.scrollTop > 5), { passive: true });
   });
 </script>
 
 <style>
   .vs-banner {
     position: relative;
-    width: 100%;
     height: 140px;
     overflow: hidden;
     flex-shrink: 0;
     transition: box-shadow 0.3s ease;
   }
 
-  .vs-banner.vs-banner--scrolled {
+  .vs-banner.is-scrolled {
     box-shadow: -2px 10px 5px -6px rgba(138, 134, 138, 1);
     z-index: 10;
   }
@@ -53,15 +48,16 @@ const { images, interval = 10000, bannerId } = Astro.props;
   .vs-banner-slide {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    /* Warm the images to match the earthy cream palette */
+    /* Warm the images to match the earthy palette */
     filter: saturate(0.45) sepia(0.45) brightness(0.92);
   }
 
-  .vs-banner-slide--active {
+  .vs-banner-slide.is-active {
     opacity: 1;
   }
 

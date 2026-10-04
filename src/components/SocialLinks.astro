@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import { socials } from '../data/content';
+
+interface Props {
+  /** Class applied to each link, styled by the parent component */
+  linkClass: string;
+}
+
+const { linkClass } = Astro.props;
+---
+
+{socials.map((s) => (
+  <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} class={linkClass}>
+    <Icon name={s.icon} />
+  </a>
+))}

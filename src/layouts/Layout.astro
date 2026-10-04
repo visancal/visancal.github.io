@@ -1,11 +1,8 @@
 ---
-import ClientRouter from 'astro/components/ClientRouter.astro';
-
-interface PreloadImage {
-  href: string;
-  /** CSS media query, e.g. "(max-width: 600px)" */
-  media?: string;
-}
+import { ClientRouter } from 'astro:transitions';
+import { Font } from 'astro:assets';
+import { SITE_URL } from '../data/content';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -14,11 +11,8 @@ interface Props {
   canonicalPath?: string;
   /** Optional JSON-LD schema objects to inject alongside the default Person schema */
   schemas?: object[];
-  /** Critical images to preload — add the LCP image from each page */
-  preloadImages?: PreloadImage[];
 }
 
-const SITE_URL  = 'https://vicentsanjaime.net';
 const SITE_NAME = 'Vicent Sanjaime';
 
 const {
@@ -27,7 +21,6 @@ const {
   ogImage     = `${SITE_URL}/img/home/intro.webp`,
   canonicalPath = '',
   schemas = [],
-  preloadImages = [],
 } = Astro.props;
 
 const canonical = `${SITE_URL}${canonicalPath}`;
@@ -89,17 +82,41 @@ const personSchema = {
     'PostGIS', 'GeoServer', 'CARTO', 'BigQuery', 'Docker', 'Kubernetes',
   ],
 };
-
-const allSchemas = [personSchema, ...schemas];
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#D97757" />
+
+    <!--
+      Random theme pick — once per browser session, applied before first paint
+      to avoid a flash. Default (no attribute) is warm; "sage" is the green theme.
+    -->
+    <script is:inline>
+      (function () {
+        function pickTheme() {
+          var theme;
+          try { theme = sessionStorage.getItem('vs-theme'); } catch (e) {}
+          if (theme !== 'warm' && theme !== 'sage') {
+            theme = Math.random() < 0.5 ? 'warm' : 'sage';
+            try { sessionStorage.setItem('vs-theme', theme); } catch (e) {}
+          }
+          return theme;
+        }
+        function applyTheme(doc) {
+          var theme = pickTheme();
+          doc.documentElement.setAttribute('data-theme', theme);
+          var meta = doc.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', theme === 'sage' ? '#2F7D6B' : '#D97757');
+        }
+        applyTheme(document);
+        // Apply to the incoming document before it is swapped in (no flash between pages)
+        document.addEventListener('astro:before-swap', function (e) { applyTheme(e.newDocument); });
+      })();
+    </script>
 
     <!-- Primary SEO -->
     <title>{title}</title>
@@ -107,6 +124,8 @@ const allSchemas = [personSchema, ...schemas];
     <meta name="author" content="Vicent Sanjaime Calvet" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
 
     <!-- Open Graph (LinkedIn, Facebook, WhatsApp…) -->
     <meta property="og:type"        content="website" />
@@ -128,217 +147,17 @@ const allSchemas = [personSchema, ...schemas];
     <meta name="twitter:image:alt"   content={title} />
 
     <!-- Structured data (Person + any page-specific schemas) -->
-    {allSchemas.map((schema) => (
+    {[personSchema, ...schemas].map((schema) => (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
+    <!-- Self-hosted fonts (see astro.config.mjs) -->
+    <Font cssVariable="--font-main" preload={[{ weight: '400' }]} />
+    <Font cssVariable="--font-display" preload />
+
     <ClientRouter />
-
-    <!--
-      Random theme pick — once per browser session (sessionStorage), applied
-      before first paint to avoid a flash of the wrong theme. Default (no
-      attribute) is the warm theme; "sage" switches to the green theme.
-    -->
-    <script is:inline>
-      (function () {
-        function applyTheme(theme) {
-          document.documentElement.setAttribute('data-theme', theme);
-          var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', theme === 'sage' ? '#2F7D6B' : '#D97757');
-        }
-        function pickTheme() {
-          try {
-            var stored = sessionStorage.getItem('vs-theme');
-            if (stored === 'warm' || stored === 'sage') return stored;
-          } catch (e) {}
-          var theme = Math.random() < 0.5 ? 'warm' : 'sage';
-          try { sessionStorage.setItem('vs-theme', theme); } catch (e) {}
-          return theme;
-        }
-        applyTheme(pickTheme());
-        document.addEventListener('astro:after-swap', function () {
-          applyTheme(pickTheme());
-        });
-      })();
-    </script>
-
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/favicon.ico" />
-
-    <!-- Preconnect to external origins (warms TCP+TLS before requests land) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-
-    <!-- Preload critical above-the-fold images (LCP candidates) -->
-    {preloadImages.map((img) => (
-      <link
-        rel="preload"
-        as="image"
-        href={img.href}
-        {...(img.media ? { media: img.media } : {})}
-        fetchpriority="high"
-      />
-    ))}
-
-    <!--
-      Fonts — loaded asynchronously to avoid render-blocking.
-      The onload trick: preload fires, then the callback swaps rel to stylesheet.
-      <noscript> covers the rare no-JS case.
-    -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
-      />
-    </noscript>
-
-    <!--
-      Material Design Icons — also async.
-      The hamburger button uses an inline SVG so this is no longer render-critical.
-    -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css"
-      />
-    </noscript>
   </head>
   <body>
     <slot />
   </body>
 </html>
-
-<style is:global>
-  @keyframes vs-slide-out {
-    from { opacity: 1; transform: translateX(0) scale(1); }
-    to   { opacity: 0; transform: translateX(-40px) scale(0.97); }
-  }
-
-  @keyframes vs-slide-in {
-    from { opacity: 0; transform: translateX(40px) scale(0.97); }
-    to   { opacity: 1; transform: translateX(0) scale(1); }
-  }
-
-  ::view-transition-old(root) {
-    animation: 200ms cubic-bezier(0.4, 0, 1, 1) both vs-slide-out;
-  }
-
-  ::view-transition-new(root) {
-    animation: 300ms cubic-bezier(0, 0, 0.2, 1) both vs-slide-in;
-  }
-
-  :root {
-    /* Anthropic-inspired palette ("warm") */
-    --color-bg:        #F5EFE3;   /* warm cream */
-    --color-surface:   #FDFAF4;   /* lighter cream for cards */
-    --color-text:      #1A1008;   /* warm near-black */
-    --color-text-sec:  #6E6760;   /* warm gray */
-    --color-accent:    #D97757;   /* coral / terracotta (UI elements, buttons, icons) */
-    --color-accent-dk: #B85E3A;   /* darker coral for hover */
-    --color-accent-rgb: 217, 119, 87;
-    --color-border:    #E8E2D6;   /* warm light border */
-    --color-link-text: #923D1E;   /* accessible coral for inline text links — 6.3:1 on cream */
-
-    /* Legacy aliases used in components */
-    --color-primary:   #1A1008;
-    --color-secondary: #D97757;
-    --color-link:      #D97757;
-
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-main:    'Inter', system-ui, sans-serif;
-
-    --radius-card: 16px;
-    --radius-pill: 9999px;
-    --radius-sm:   8px;
-
-    --shadow-card:       0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
-    --shadow-card-hover: 0 4px 8px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
-
-    /* Translucent surfaces (header blur, hover tints, drawer scrim) */
-    --color-surface-translucent:      rgba(245, 239, 227, 0.82);
-    --color-surface-translucent-soft: rgba(245, 239, 227, 0.6);
-    --color-hover-tint:               rgba(26, 16, 8, 0.06);
-    --color-overlay-scrim:            rgba(26, 16, 8, 0.35);
-
-    /* Project-badge accents (independent of the main theme accent) */
-    --color-badge-rd-bg:     rgba(239, 108, 0, 0.12);
-    --color-badge-rd-text:   #C85C00;
-    --color-badge-rd-border: rgba(239, 108, 0, 0.25);
-
-    --color-badge-type-bg:     rgba(74, 96, 144, 0.08);
-    --color-badge-type-text:   #4A6090;
-    --color-badge-type-border: rgba(74, 96, 144, 0.25);
-
-    --color-badge-personal: #0277BD;
-  }
-
-  /* "Sage" theme — light, fresh green-teal. Picked at random alongside the
-     warm theme (see the inline script above). Same fonts as warm. */
-  :root[data-theme='sage'] {
-    --color-bg:        #F6F9F4;   /* very pale sage */
-    --color-surface:   #FFFFFF;   /* white cards */
-    --color-text:      #14201C;   /* deep green-black ink */
-    --color-text-sec:  #5B6B64;   /* muted green-gray */
-    --color-accent:    #2F7D6B;   /* teal green */
-    --color-accent-dk: #1F5C4E;   /* darker on hover */
-    --color-accent-rgb: 47, 125, 107;
-    --color-border:    #D8E0D6;
-    --color-link-text: #1F5C4E;
-
-    --color-surface-translucent:      rgba(246, 249, 244, 0.82);
-    --color-surface-translucent-soft: rgba(246, 249, 244, 0.6);
-    --color-hover-tint:               rgba(20, 32, 28, 0.06);
-    --color-overlay-scrim:            rgba(20, 32, 28, 0.35);
-  }
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html {
-    overflow-y: hidden;
-    font-weight: 400;
-  }
-
-  body {
-    font-family: var(--font-main);
-    font-weight: 400;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  ul {
-    list-style: none;
-  }
-
-  ul li::before {
-    content: '\2022';
-    color: var(--color-accent);
-    font-weight: bold;
-    display: inline-block;
-    width: 1.4em;
-    margin-left: -1.3em;
-  }
-</style>

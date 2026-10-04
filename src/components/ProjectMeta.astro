@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/content';
+
+interface Props {
+  project: Project;
+  class?: string;
+}
+
+const { project, class: className } = Astro.props;
+const companyColor = project.company === 'Personal' ? 'var(--color-badge-personal)' : 'var(--color-accent)';
+---
+
+<div class={className}>
+  <span class="vs-chip vs-chip--date"><Icon name="calendar" />{project.date}</span>
+  <span class="vs-chip" style={`background-color: ${companyColor}`}>{project.company}</span>
+  {project.rd && <span class="vs-chip vs-chip--rd">R&amp;D</span>}
+</div>
