@@ -12,6 +12,7 @@ single plain-text document.
 - [Home](https://vicentsanjaime.net/): Landing page with intro photos.
 - [Background](https://vicentsanjaime.net/background): Bio, technical skills, employment history and education.
 - [Projects](https://vicentsanjaime.net/projects): Timeline of professional and personal projects.
+- [Trips](https://vicentsanjaime.net/trips): Interactive deck.gl map of places visited, highlighted standout places and wishlist destinations.
 
 ## Full content
 
