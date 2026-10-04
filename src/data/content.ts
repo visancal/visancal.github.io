@@ -644,6 +644,7 @@ export const highlights: Trip[] = [
   { name: 'Angkor Wat', country: 'KH', coordinates: [103.867, 13.4125] },
   { name: 'North Cape', country: 'NO', coordinates: [25.7836, 71.1685] },
   { name: 'Lofoten Islands', country: 'NO', coordinates: [13.95, 68.2] },
+  { name: 'Mont-Saint-Michel', country: 'FR', coordinates: [-1.5115, 48.6361] },
 ];
 
 /** Destinations on the wishlist, drawn as red markers. */
