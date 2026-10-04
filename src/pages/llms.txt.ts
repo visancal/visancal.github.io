@@ -16,6 +16,7 @@ single plain-text document.
 - [Home](${SITE_URL}/): Landing page with intro photos.
 - [Background](${SITE_URL}/background): Bio, technical skills, employment history and education.
 - [Projects](${SITE_URL}/projects): Timeline of professional and personal projects.
+- [Trips](${SITE_URL}/trips): Interactive deck.gl map of places visited, highlighted standout places and wishlist destinations.
 
 ## Full content
 

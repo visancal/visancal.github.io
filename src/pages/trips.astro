@@ -1,0 +1,424 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { trips, highlights, wishlist } from '../data/content';
+---
+
+<Layout
+  title="Trips | Vicent Sanjaime — GIS Developer & Consultant"
+  description="Places visited by Vicent Sanjaime around the world, shown on an interactive deck.gl map: Europe, the United States, the Middle East, Southeast Asia, the Caribbean and South Africa."
+  canonicalPath="/trips"
+  schemas={[{
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vicentsanjaime.net' },
+      { '@type': 'ListItem', position: 2, name: 'Trips', item: 'https://vicentsanjaime.net/trips' },
+    ],
+  }]}
+>
+  <div class="vs-page">
+    <Header currentPage="trips" />
+
+    <main class="vs-content">
+      <div class="vs-intro">
+        <span class="vs-page-title">Trips</span>
+        <p class="vs-intro-text">A few of the places I have been lucky enough to visit, and some still on my list. Click a marker to zoom in.</p>
+      </div>
+
+      <div class="vs-trips">
+        <div class="vs-map-wrap">
+          <div id="trips-map" class="vs-map" data-trips={JSON.stringify(trips)} data-highlights={JSON.stringify(highlights)} data-wishlist={JSON.stringify(wishlist)}></div>
+          <ul class="vs-legend">
+            <li><span class="vs-legend-dot vs-legend-dot--visited"></span>Visited</li>
+            <li><span class="vs-legend-dot vs-legend-dot--highlight"></span>Highlights</li>
+            <li><span class="vs-legend-dot vs-legend-dot--wishlist"></span>Wishlist</li>
+          </ul>
+          <div class="vs-view-toggle" role="group" aria-label="Map view">
+            <button type="button" data-mode="2d" aria-pressed="false">2D</button>
+            <button type="button" data-mode="3d" aria-pressed="true">3D</button>
+          </div>
+          <p class="vs-attribution">
+            © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
+
+<script>
+  import { Deck, MapView, _GlobeView as GlobeView, FlyToInterpolator, LinearInterpolator } from '@deck.gl/core';
+  import { ScatterplotLayer, BitmapLayer, SolidPolygonLayer } from '@deck.gl/layers';
+  import { TileLayer } from '@deck.gl/geo-layers';
+  import type { Trip } from '../data/content';
+
+  type ViewMode = '2d' | '3d';
+  const VIEW_MODE_KEY = 'trips-view-mode';
+
+  const WORLD_VIEW = { longitude: 10, latitude: 30, maxZoom: 14 };
+  const MIN_ZOOM: Record<ViewMode, number> = { '2d': 1, '3d': 0.8 };
+  // Ocean colour of the tinted basemap, used for the globe sphere so the poles (beyond the
+  // ±85° Web Mercator tile range) are filled instead of showing holes.
+  const OCEAN_COLOR: [number, number, number] = [191, 200, 193];
+  // Markers float slightly above the surface so they don't z-fight with the basemap tiles
+  // while still being hidden by the globe when they are on its far side.
+  const MARKER_ALTITUDE = 5000; // metres
+  const position = (d: Trip): [number, number, number] => [...d.coordinates, MARKER_ALTITUDE];
+
+  // Public browser key for CARTO basemaps. It is domain-restricted: from any other origin
+  // (localhost dev/preview, www., github.io) it is rejected with 403 and no CORS header, and
+  // without it CARTO serves "API KEY REQUIRED" watermark tiles. So CARTO is only used on the
+  // production domain; everywhere else falls back to OpenStreetMap tiles.
+  const CARTO_BASEMAPS_KEY = 'cb1_48rg_1_2790f976dc0f99bb8b20773c';
+  const USE_CARTO = location.hostname === 'vicentsanjaime.net';
+  const BASEMAP_URL = USE_CARTO
+    ? `https://basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}@2x.png?key=${CARTO_BASEMAPS_KEY}`
+    : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const BASEMAP_TILE_SIZE = USE_CARTO ? 512 : 256; // @2x tiles are 512px
+
+  let deck: Deck | null = null;
+  let resizeObserver: ResizeObserver | null = null;
+
+  function initTripsMap() {
+    const el = document.getElementById('trips-map');
+    if (!el || !el.dataset.trips) return;
+
+    deck?.finalize();
+    let mode: ViewMode = '3d';
+    try {
+      if (localStorage.getItem(VIEW_MODE_KEY) === '2d') mode = '2d';
+    } catch {}
+
+    // Initial zoom that fits the world in the container. Globe: at zoom z its radius is
+    // roughly 72·2^z px. Flat map: the world is 512·2^z px wide.
+    const fitZoom = (m: ViewMode) =>
+      Math.max(
+        MIN_ZOOM[m],
+        m === '3d'
+          ? Math.log2((0.42 * Math.min(el.clientWidth, el.clientHeight)) / 72)
+          : Math.log2(el.clientWidth / 512) + 0.35,
+      );
+    let viewState: Record<string, any> = { ...WORLD_VIEW, minZoom: MIN_ZOOM[mode], zoom: fitZoom(mode) };
+    const trips: Trip[] = JSON.parse(el.dataset.trips);
+    const highlights: Trip[] = JSON.parse(el.dataset.highlights ?? '[]');
+    const wishlist: Trip[] = JSON.parse(el.dataset.wishlist ?? '[]');
+    const visitedColor: [number, number, number] = [251, 188, 4]; // Google Maps star yellow (#FBBC04)
+    const highlightColor: [number, number, number] = [52, 168, 83]; // Google green (#34A853)
+    const wishlistColor: [number, number, number] = [234, 67, 53]; // Google red (#EA4335)
+    let hovered = ''; // `${layerId}:${index}` of the hovered marker
+
+    const markerLayers = (id: string, data: Trip[], color: [number, number, number]) => [
+      new ScatterplotLayer<Trip>({
+        id: `${id}-halo`,
+        data,
+        getPosition: position,
+        getFillColor: [...color, 60],
+        radiusUnits: 'pixels',
+        billboard: true, // face the camera instead of lying flat on the globe
+        getRadius: 8,
+      }),
+      new ScatterplotLayer<Trip>({
+        id: `${id}-points`,
+        data,
+        pickable: true,
+        getPosition: position,
+        getFillColor: [...color, 255],
+        getLineColor: [255, 255, 255, 255],
+        stroked: true,
+        lineWidthUnits: 'pixels',
+        getLineWidth: 1,
+        radiusUnits: 'pixels',
+        billboard: true, // face the camera instead of lying flat on the globe
+        getRadius: (_d, { index }) => (hovered === `${id}-points:${index}` ? 5 : 3.5),
+        updateTriggers: { getRadius: hovered },
+        transitions: { getRadius: 150 },
+      }),
+    ];
+
+    const layers = () => [
+      mode === '3d' && new SolidPolygonLayer({
+        id: 'globe-sphere',
+        data: [[[-180, 90], [0, 90], [180, 90], [180, -90], [0, -90], [-180, -90]]],
+        getPolygon: (d) => d,
+        getFillColor: OCEAN_COLOR,
+        // Drawn first as a backdrop without writing depth, so tiles never z-fight with it
+        parameters: { depthWriteEnabled: false, depthCompare: 'always' },
+      }),
+      new TileLayer({
+        id: 'basemap',
+        data: BASEMAP_URL,
+        minZoom: 0,
+        maxZoom: 18,
+        tileSize: BASEMAP_TILE_SIZE,
+        renderSubLayers: (props: any) => {
+          const { west, south, east, north } = props.tile.bbox;
+          return new BitmapLayer(props, {
+            data: undefined,
+            image: props.data,
+            bounds: [west, south, east, north],
+            tintColor: [255, 246, 232], // warm cream tint to match the site palette
+            desaturate: 0.6,
+          });
+        },
+      }),
+      ...markerLayers('trip', trips, visitedColor),
+      ...markerLayers('highlights', highlights, highlightColor),
+      ...markerLayers('wishlist', wishlist, wishlistColor),
+    ];
+
+    function flyTo(trip: Trip) {
+      deck?.setProps({
+        initialViewState: {
+          ...WORLD_VIEW,
+          minZoom: MIN_ZOOM[mode],
+          longitude: trip.coordinates[0],
+          latitude: trip.coordinates[1],
+          zoom: 8,
+          transitionDuration: 1600,
+          // FlyToInterpolator assumes Web Mercator, so the globe uses a plain linear camera move
+          transitionInterpolator:
+            mode === '3d'
+              ? new LinearInterpolator(['longitude', 'latitude', 'zoom'])
+              : new FlyToInterpolator({ speed: 1.6 }),
+        },
+      });
+    }
+
+    const viewProps = () =>
+      mode === '3d'
+        ? {
+            views: new GlobeView({ resolution: 5 }),
+            parameters: { cullMode: 'back' as const }, // hide tiles and markers on the far side
+          }
+        : { views: new MapView({ repeat: true }), parameters: { cullMode: 'none' as const } };
+
+    const toggleButtons = el.parentElement?.querySelectorAll<HTMLButtonElement>('.vs-view-toggle button') ?? [];
+    const syncToggle = () =>
+      toggleButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+
+    function setMode(next: ViewMode) {
+      if (next === mode) return;
+      mode = next;
+      try {
+        localStorage.setItem(VIEW_MODE_KEY, mode);
+      } catch {}
+      syncToggle();
+      // Keep looking at the same place, just switch the projection
+      const minZoom = MIN_ZOOM[mode];
+      deck?.setProps({
+        ...viewProps(),
+        initialViewState: { ...viewState, minZoom, zoom: Math.max(minZoom, viewState.zoom) },
+        layers: layers(),
+      });
+    }
+
+    toggleButtons.forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode as ViewMode)));
+    syncToggle();
+
+    deck = new Deck({
+      parent: el,
+      ...viewProps(),
+      initialViewState: viewState,
+      controller: true,
+      onViewStateChange: ({ viewState: next }) => {
+        viewState = next;
+      },
+      layers: layers(),
+      getCursor: ({ isHovering }) => (isHovering ? 'pointer' : 'grab'),
+      getTooltip: ({ object }) =>
+        object && { text: `${(object as Trip).name}, ${(object as Trip).country}` },
+      onHover: ({ layer, index }) => {
+        const key = layer && index >= 0 ? `${layer.id}:${index}` : '';
+        if (key !== hovered) {
+          hovered = key;
+          deck?.setProps({ layers: layers() });
+        }
+      },
+      onClick: ({ object }) => object && flyTo(object as Trip),
+    });
+
+    // deck.gl keeps the canvas size from init if the container resizes later (e.g. after web
+    // fonts reflow the intro text), which stretches the globe into an oval. Track it explicitly.
+    resizeObserver?.disconnect();
+    resizeObserver = new ResizeObserver(() => {
+      deck?.setProps({ width: el.clientWidth, height: el.clientHeight });
+    });
+    resizeObserver.observe(el);
+
+  }
+
+  document.addEventListener('astro:page-load', initTripsMap);
+  document.addEventListener('astro:before-swap', () => {
+    resizeObserver?.disconnect();
+    resizeObserver = null;
+    deck?.finalize();
+    deck = null;
+  });
+</script>
+
+<style>
+  .vs-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .vs-content {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 16px 16px;
+  }
+
+  .vs-intro {
+    margin: 8px 0 12px;
+  }
+
+  .vs-page-title {
+    display: block;
+    color: var(--color-text);
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .vs-intro-text {
+    font-size: 0.9rem;
+    color: var(--color-text-sec);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .vs-trips {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+  }
+
+  .vs-map-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .vs-map {
+    position: absolute;
+    inset: 0;
+  }
+
+  .vs-legend {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 6px 10px;
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--color-text);
+    background: var(--color-surface-translucent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+  }
+
+  .vs-legend li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .vs-legend li::before {
+    content: none;
+  }
+
+  .vs-legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+  }
+
+  .vs-legend-dot--visited {
+    background: #FBBC04;
+    box-shadow: 0 0 0 3px rgba(251, 188, 4, 0.25);
+  }
+
+  .vs-legend-dot--highlight {
+    background: #34A853;
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.25);
+  }
+
+  .vs-legend-dot--wishlist {
+    background: #EA4335;
+    box-shadow: 0 0 0 3px rgba(234, 67, 53, 0.25);
+  }
+
+  .vs-view-toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    padding: 3px;
+    gap: 2px;
+    background: var(--color-surface-translucent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+  }
+
+  .vs-view-toggle button {
+    min-width: 40px;
+    padding: 4px 10px;
+    font: 600 0.75rem var(--font-main);
+    color: var(--color-text-sec);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .vs-view-toggle button:hover {
+    color: var(--color-text);
+  }
+
+  .vs-view-toggle button[aria-pressed='true'] {
+    color: #fff;
+    background: var(--color-accent);
+  }
+
+  .vs-attribution {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 2px 8px;
+    font-size: 0.65rem;
+    color: var(--color-text-sec);
+    background: var(--color-surface-translucent);
+    border-top-left-radius: var(--radius-sm);
+    pointer-events: auto;
+  }
+
+  .vs-attribution a {
+    color: inherit;
+    text-decoration: underline;
+  }
+</style>
