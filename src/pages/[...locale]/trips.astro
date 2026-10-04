@@ -39,6 +39,13 @@ const localise = (places: Trip[]) => JSON.stringify(places.map((p) => ({ ...p, c
             <button type="button" data-mode="2d" aria-pressed="false">2D</button>
             <button type="button" data-mode="3d" aria-pressed="true">3D</button>
           </div>
+          <button type="button" class="vs-north" aria-label={text.resetNorth} title={text.resetNorth}>
+            <!-- Needle rotates with the map bearing; red tip points to north -->
+            <svg class="vs-north-needle" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3l4 9h-8z" fill="#EA4335" />
+              <path d="M12 21l-4-9h8z" fill="currentColor" opacity="0.45" />
+            </svg>
+          </button>
           <p class="vs-attribution">
             © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> {text.contributors} © <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>
           </p>
@@ -72,13 +79,15 @@ const localise = (places: Trip[]) => JSON.stringify(places.map((p) => ({ ...p, c
   // Public browser key for CARTO basemaps. It is domain-restricted: from any other origin
   // (localhost dev/preview, www., github.io) it is rejected with 403 and no CORS header, and
   // without it CARTO serves "API KEY REQUIRED" watermark tiles. So CARTO is only used on the
-  // production domain; everywhere else falls back to OpenStreetMap tiles.
+  // production domain; everywhere else falls back to Esri's shaded relief, which (unlike
+  // OpenStreetMap) has no labels and needs no key.
   const CARTO_BASEMAPS_KEY = 'cb1_48rg_1_2790f976dc0f99bb8b20773c';
   const USE_CARTO = location.hostname === 'vicentsanjaime.net';
   const BASEMAP_URL = USE_CARTO
     ? `https://basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}@2x.png?key=${CARTO_BASEMAPS_KEY}`
-    : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+    : 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}';
   const BASEMAP_TILE_SIZE = USE_CARTO ? 512 : 256; // @2x tiles are 512px
+  const BASEMAP_MAX_ZOOM = USE_CARTO ? 18 : 13; // the relief service stops at z13
 
   let deck: Deck | null = null;
   let resizeObserver: ResizeObserver | null = null;
@@ -152,7 +161,7 @@ const localise = (places: Trip[]) => JSON.stringify(places.map((p) => ({ ...p, c
         id: 'basemap',
         data: BASEMAP_URL,
         minZoom: 0,
-        maxZoom: 18,
+        maxZoom: BASEMAP_MAX_ZOOM,
         tileSize: BASEMAP_TILE_SIZE,
         renderSubLayers: (props: any) => {
           const { west, south, east, north } = props.tile.bbox;
@@ -219,6 +228,22 @@ const localise = (places: Trip[]) => JSON.stringify(places.map((p) => ({ ...p, c
     toggleButtons.forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode as ViewMode)));
     syncToggle();
 
+    // Compass: the needle follows the bearing, and a click turns the camera back north-up
+    const northButton = el.parentElement?.querySelector<HTMLButtonElement>('.vs-north');
+    const needle = northButton?.querySelector<SVGElement>('.vs-north-needle');
+    const syncNeedle = () => needle?.style.setProperty('transform', `rotate(${-(viewState.bearing ?? 0)}deg)`);
+    northButton?.addEventListener('click', () => {
+      deck?.setProps({
+        initialViewState: {
+          ...viewState,
+          bearing: 0,
+          pitch: 0,
+          transitionDuration: 600,
+          transitionInterpolator: new LinearInterpolator(['bearing', 'pitch']),
+        },
+      });
+    });
+
     deck = new Deck({
       parent: el,
       ...viewProps(),
@@ -226,6 +251,7 @@ const localise = (places: Trip[]) => JSON.stringify(places.map((p) => ({ ...p, c
       controller: true,
       onViewStateChange: ({ viewState: next }) => {
         viewState = next;
+        syncNeedle();
       },
       layers: layers(),
       getCursor: ({ isHovering }) => (isHovering ? 'pointer' : 'grab'),
@@ -371,6 +397,28 @@ const localise = (places: Trip[]) => JSON.stringify(places.map((p) => ({ ...p, c
   .vs-view-toggle button[aria-pressed='true'] {
     color: #fff;
     background: var(--color-accent);
+  }
+
+  .vs-north {
+    position: absolute;
+    top: 52px;
+    right: 12px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    color: var(--color-text-sec);
+    background: var(--color-surface-translucent);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .vs-north:hover {
+    color: var(--color-text);
+    background: var(--color-surface);
   }
 
   .vs-attribution {
