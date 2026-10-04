@@ -3,13 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import BannerImages from '../components/BannerImages.astro';
 import TimelineCard from '../components/TimelineCard.astro';
+import ProjectMeta from '../components/ProjectMeta.astro';
 import Footer from '../components/Footer.astro';
 import { projects } from '../data/content';
 
-const images = [
-  { src: '/img/back/back5.webp' },
-  { src: '/img/back/back6.webp' },
-];
+const images = ['/img/back/back5.webp', '/img/back/back6.webp'];
 ---
 
 <Layout
@@ -28,50 +26,29 @@ const images = [
 >
   <div class="vs-page">
     <Header currentPage="projects" />
-    <BannerImages images={images} interval={10000} bannerId="projects-banner" />
+    <BannerImages images={images} />
 
-    <main class="vs-content" id="vs-timeline-info">
+    <main class="vs-content">
       <div class="vs-container">
         <div class="vs-intro">
-          <span class="vs-page-title">Projects</span>
+          <h1 class="vs-page-title">Projects</h1>
           <p class="vs-intro-text">
             Throughout my professional career I have had the opportunity to work on a wide range of GIS projects using diverse technologies. The timeline below highlights the main projects I have been involved in and the technologies used, including personal and R&amp;D work.
           </p>
         </div>
 
-        <!-- Timeline -->
-        <div class="vs-timeline">
-          {projects.map((project, index) => {
-            const isEven = index % 2 === 0;
-            const companyColor = project.company === 'Personal' ? 'var(--color-badge-personal)' : 'var(--color-accent)';
-            return (
-              <div class:list={['vs-timeline-item', isEven ? 'vs-item--right' : 'vs-item--left']}>
-                <!-- Opposite chips (desktop only) -->
-                <div class:list={['vs-opp', isEven ? 'vs-opp--end' : 'vs-opp--start']}>
-                  <span class="vs-chip vs-chip--date">
-                    <i class="mdi mdi-calendar-month"></i>{project.date}
-                  </span>
-                  <span class="vs-chip" style={`background-color: ${companyColor}`}>
-                    {project.company}
-                  </span>
-                  {project.rd && <span class="vs-chip vs-chip--rd">R&amp;D</span>}
-                </div>
-
-                <!-- Center dot -->
-                <div class="vs-dot-wrap">
-                  <div class="vs-dot"></div>
-                </div>
-
-                <!-- Card -->
-                <div class="vs-card-wrap">
-                  <TimelineCard project={project} />
-                </div>
+        <!-- Timeline: cards alternate right (even) / left (odd) of the centre line -->
+        <ol class="vs-timeline">
+          {projects.map((project, index) => (
+            <li class:list={['vs-timeline-item', { 'vs-item--left': index % 2 === 1 }]}>
+              <ProjectMeta project={project} class="vs-opp" />
+              <div class="vs-dot"></div>
+              <div class="vs-card-wrap">
+                <TimelineCard project={project} />
               </div>
-            );
-          })}
-        </div>
-
-        <div style="height: 20px"></div>
+            </li>
+          ))}
+        </ol>
       </div>
     </main>
 
@@ -79,61 +56,25 @@ const images = [
   </div>
 </Layout>
 
-<script>
-  const banner = document.getElementById('projects-banner');
-  const content = document.getElementById('vs-timeline-info');
-
-  content?.addEventListener('scroll', () => {
-    banner?.classList.toggle('vs-banner--scrolled', (content.scrollTop ?? 0) > 5);
-  });
-</script>
-
 <style>
-  .vs-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .vs-content {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
   .vs-container {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 8px;
+    padding: 0 8px 20px;
   }
 
   .vs-intro {
     margin: 8px 8px 0;
   }
 
-  .vs-page-title {
-    display: block;
-    color: var(--color-text);
-    font-size: 1.75rem;
-    font-weight: 500;
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-  }
-
   .vs-intro-text {
-    font-size: 0.9rem;
-    color: var(--color-text-sec);
-    line-height: 1.6;
     margin-bottom: 8px;
-    max-width: 600px;
   }
 
-  /* Timeline */
   .vs-timeline {
     position: relative;
     padding: 16px 0;
+    list-style: none;
   }
 
   .vs-timeline::before {
@@ -144,7 +85,6 @@ const images = [
     bottom: 0;
     width: 1px;
     background: var(--color-border);
-    transform: translateX(-50%);
   }
 
   .vs-timeline-item {
@@ -153,44 +93,31 @@ const images = [
     margin: 10px 0;
   }
 
-  .vs-item--right {
-    flex-direction: row;
-  }
-
   .vs-item--left {
     flex-direction: row-reverse;
   }
 
-  .vs-opp {
+  .vs-timeline-item > :global(.vs-opp) {
     width: calc(50% - 20px);
     padding: 16px 12px;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 6px;
   }
 
-  .vs-opp--end {
-    align-items: flex-end;
-  }
-
-  .vs-opp--start {
+  .vs-item--left > :global(.vs-opp) {
     align-items: flex-start;
   }
 
-  .vs-dot-wrap {
-    width: 40px;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    padding-top: 22px;
-  }
-
+  /* 40px column centred on the line */
   .vs-dot {
     width: 10px;
     height: 10px;
+    margin: 22px 15px 0;
+    flex-shrink: 0;
     border-radius: 50%;
     background: var(--color-accent);
-    flex-shrink: 0;
     border: 2px solid var(--color-bg);
     box-shadow: 0 0 0 1px var(--color-accent);
   }
@@ -200,46 +127,18 @@ const images = [
     padding: 8px;
   }
 
-  /* Chips */
-  .vs-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    font-size: 0.7rem;
-    font-weight: 500;
-  }
-
-  .vs-chip--date {
-    background: rgba(var(--color-accent-rgb), 0.12);
-    color: var(--color-accent);
-    border: 1px solid rgba(var(--color-accent-rgb), 0.25);
-  }
-
-  .vs-chip--rd {
-    background: var(--color-badge-rd-bg);
-    color: var(--color-badge-rd-text);
-    border: 1px solid var(--color-badge-rd-border);
-  }
-
-  /* Mobile: single column */
+  /* Mobile: single column, line on the left */
   @media (max-width: 600px) {
     .vs-timeline::before {
       left: 20px;
     }
 
-    .vs-item--right,
     .vs-item--left {
       flex-direction: row;
     }
 
-    .vs-opp {
+    .vs-timeline-item > :global(.vs-opp) {
       display: none;
-    }
-
-    .vs-dot-wrap {
-      width: 40px;
     }
 
     .vs-card-wrap {

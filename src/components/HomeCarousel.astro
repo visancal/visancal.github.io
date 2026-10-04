@@ -1,12 +1,15 @@
 ---
+import Icon from './Icon.astro';
+import SocialLinks from './SocialLinks.astro';
+
 interface Slide {
   src: string;
-  srcMobile?: string;
-  credits: string;
-  link: string;
+  srcMobile: string;
   place: string;
-  bgPosition?: string;
-  bgPositionMobile?: string;
+  credits: string;
+  link?: string;
+  /** Desktop object-position (mobile always uses 85% 50%) */
+  position?: string;
 }
 
 interface Props {
@@ -17,95 +20,54 @@ interface Props {
 const { slides, interval = 7000 } = Astro.props;
 ---
 
-<div class="vs-carousel" data-carousel data-interval={interval}>
-  {slides.map((slide, i) => (
-    <div
-      class:list={['vs-slide', { 'vs-slide--active': i === 0 }]}
-      style={i === 0
-        /* First slide: no CSS bg-image — a real <picture> handles it (LCP-friendly) */
-        ? `--bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`
-        : `--bg-src: url('${slide.src}'); ${slide.srcMobile ? `--bg-src-mobile: url('${slide.srcMobile}');` : ''} --bg-pos: ${slide.bgPosition ?? 'center'}; --bg-pos-mobile: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'};`
-      }
-    >
-      {i === 0 && (
-        /* Real <picture> element: discoverable by the preload scanner, eligible as LCP */
-        <picture class="vs-slide-picture">
-          {slide.srcMobile && <source srcset={slide.srcMobile} media="(max-width: 600px)" />}
+<div class="vs-carousel" data-rotator data-interval={interval} style={`--kb-duration: ${interval}ms`}>
+  {slides.map((slide, i) => {
+    // Only the first image is in the initial HTML (LCP); the rest are loaded by rotator.ts
+    const first = i === 0;
+    return (
+      <figure class:list={['vs-slide', { 'is-active': first }]} data-slide>
+        <picture>
+          <source
+            media="(max-width: 600px)"
+            srcset={first ? slide.srcMobile : undefined}
+            data-srcset={first ? undefined : slide.srcMobile}
+          />
           <img
-            src={slide.src}
+            src={first ? slide.src : undefined}
+            data-src={first ? undefined : slide.src}
             alt=""
-            class="vs-slide-img"
-            style={`--img-pos: ${slide.bgPosition ?? 'center'}; --img-pos-m: ${slide.bgPositionMobile ?? slide.bgPosition ?? 'center'}`}
-            fetchpriority="high"
-            loading="eager"
-            decoding="async"
             width="1920"
             height="1080"
+            style={slide.position && `--pos: ${slide.position}`}
+            fetchpriority={first ? 'high' : 'low'}
+            decoding="async"
           />
         </picture>
-      )}
-      {i === 0 && (
-        <div class="vs-slide-content">
-          <h1 class="vs-hello">Hey, I'm Vicent</h1>
-          <p class="vs-description">GIS developer, AI enthusiast, travel &amp; cycling lover based in Valencia, Spain</p>
-          <div class="vs-actions">
-            <a href="/background" class="vs-btn-more">About Vicent</a>
+        <figcaption class="vs-credits">
+          <div>{slide.place}</div>
+          <div>
+            <Icon name="camera" class="vs-credits-cam" />
+            {slide.link
+              ? <a href={slide.link} target="_blank" rel="noopener noreferrer">{slide.credits}</a>
+              : <span>{slide.credits}</span>}
           </div>
-          <div class="vs-social-mobile">
-            <a href="https://twitter.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="vs-social-icon"><i class="mdi mdi-twitter"></i></a>
-            <a href="https://www.instagram.com/visancal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="vs-social-icon"><i class="mdi mdi-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/vsanjaime/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="vs-social-icon"><i class="mdi mdi-linkedin"></i></a>
-            <a href="https://github.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="vs-social-icon"><i class="mdi mdi-github"></i></a>
-            <a href="https://strava.app.link/qXSmcgCTZ2b" target="_blank" rel="noopener noreferrer" aria-label="Strava" class="vs-social-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg></a>
-          </div>
-        </div>
-      )}
-      {i !== 0 && (
-        <div class="vs-slide-content">
-          <h1 class="vs-hello">Hey, I'm Vicent</h1>
-          <p class="vs-description">GIS developer, AI enthusiast, travel &amp; cycling lover based in Valencia, Spain</p>
-          <div class="vs-actions">
-            <a href="/background" class="vs-btn-more">About Vicent</a>
-          </div>
-          <div class="vs-social-mobile">
-            <a href="https://twitter.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="vs-social-icon"><i class="mdi mdi-twitter"></i></a>
-            <a href="https://www.instagram.com/visancal/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="vs-social-icon"><i class="mdi mdi-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/vsanjaime/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="vs-social-icon"><i class="mdi mdi-linkedin"></i></a>
-            <a href="https://github.com/visancal" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="vs-social-icon"><i class="mdi mdi-github"></i></a>
-            <a href="https://strava.app.link/qXSmcgCTZ2b" target="_blank" rel="noopener noreferrer" aria-label="Strava" class="vs-social-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg></a>
-          </div>
-        </div>
-      )}
-      {(slide.place || slide.credits) && (
-        <div class="vs-credits">
-          {slide.place && <div>{slide.place}</div>}
-          {slide.credits && (
-            <div>
-              <i class="mdi mdi-camera vs-credits-cam"></i>
-              {slide.link
-                ? <a href={slide.link} target="_blank" rel="noopener noreferrer">{slide.credits}</a>
-                : <span>{slide.credits}</span>
-              }
-            </div>
-          )}
-        </div>
-      )}
+        </figcaption>
+      </figure>
+    );
+  })}
+
+  <div class="vs-hero">
+    <h1 class="vs-hello">Hey, I'm Vicent</h1>
+    <p class="vs-description">GIS developer, AI enthusiast, travel &amp; cycling lover based in Valencia, Spain</p>
+    <a href="/background" class="vs-btn-more">About Vicent</a>
+    <div class="vs-social-mobile">
+      <SocialLinks linkClass="vs-social-icon" />
     </div>
-  ))}
+  </div>
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((el) => {
-    const slides = el.querySelectorAll<HTMLElement>('.vs-slide');
-    const ms = parseInt(el.dataset.interval ?? '15000', 10);
-    let cur = 0;
-
-    setInterval(() => {
-      slides[cur].classList.remove('vs-slide--active');
-      cur = (cur + 1) % slides.length;
-      slides[cur].classList.add('vs-slide--active');
-    }, ms);
-  });
+  import '../scripts/rotator';
 </script>
 
 <style>
@@ -122,97 +84,60 @@ const { slides, interval = 7000 } = Astro.props;
     transition: opacity 1.2s ease-in-out;
   }
 
-  /* Background image lives on its own layer so the Ken Burns zoom scales
-     only the photo, never the text above it */
-  .vs-slide::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--bg-src);
-    background-size: cover;
-    background-position: var(--bg-pos, center);
+  .vs-slide.is-active {
+    opacity: 1;
   }
 
-  .vs-slide::before,
-  .vs-slide-picture {
-    transform-origin: center;
-    will-change: transform;
-    animation: vs-kenburns 20s ease-in-out infinite alternate;
-  }
-
-  @keyframes vs-kenburns {
-    from { transform: scale(1); }
-    to   { transform: scale(1.08); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .vs-slide::before,
-    .vs-slide-picture {
-      animation: none;
-    }
-  }
-
-  /* First-slide real image element (LCP candidate) */
-  .vs-slide-picture {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-
-  .vs-slide-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: var(--img-pos, center);
-  }
-
-  @media (max-width: 600px) {
-    .vs-slide-img {
-      object-position: var(--img-pos-m, center);
-    }
-  }
-
-  /* Warm earthy overlay — tints the image without affecting text (text sits above via z-index) */
+  /* Warm wash + dark gradient for text readability */
   .vs-slide::after {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      /* Warm amber colour wash */
       linear-gradient(rgba(180, 100, 40, 0.12), rgba(160, 85, 30, 0.12)),
-      /* Dark gradient for text readability */
-      linear-gradient(
-        to bottom,
-        rgba(70, 38, 12, 0.52) 0%,
-        rgba(50, 25, 8, 0.18) 48%,
-        rgba(70, 38, 12, 0.65) 100%
-      );
+      linear-gradient(to bottom, rgba(70, 38, 12, 0.52) 0%, rgba(50, 25, 8, 0.18) 48%, rgba(70, 38, 12, 0.65) 100%);
   }
 
-  .vs-slide--active {
-    opacity: 1;
+  .vs-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--pos, center);
+    /* Ken Burns: only the active slide animates; it ends at the resting scale so
+       the outgoing slide holds still while it fades out */
+    transform: scale(1.08);
   }
 
-  .vs-slide-content {
+  .vs-slide.is-active img {
+    animation: vs-kenburns var(--kb-duration) linear both;
+  }
+
+  @keyframes vs-kenburns {
+    from { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vs-slide img { transform: none; }
+    .vs-slide.is-active img { animation: none; }
+  }
+
+  .vs-hero {
     position: relative;
     z-index: 1;
-    margin-top: 180px;
-    margin-left: 64px;
+    margin: 180px 0 0 64px;
     max-width: 620px;
   }
 
   .vs-hello {
     font-family: var(--font-display);
     font-size: 3.8rem;
-    color: #ffffff;
+    color: #fff;
     line-height: 1.1;
     font-weight: 500;
     letter-spacing: -0.02em;
     margin-bottom: 20px;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
   }
 
   .vs-description {
@@ -229,7 +154,7 @@ const { slides, interval = 7000 } = Astro.props;
     display: inline-block;
     padding: 12px 28px;
     background: var(--color-accent);
-    color: #ffffff;
+    color: #fff;
     font-size: 0.95rem;
     font-weight: 500;
     border-radius: var(--radius-pill);
@@ -247,44 +172,39 @@ const { slides, interval = 7000 } = Astro.props;
     bottom: 16px;
     left: 16px;
     z-index: 1;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255, 255, 255, 0.75);
     background: rgba(0, 0, 0, 0.25);
     border-radius: var(--radius-pill);
     font-size: 0.68rem;
-    font-weight: 400;
     padding: 3px 10px;
     backdrop-filter: blur(4px);
   }
 
-  .vs-credits-cam {
+  .vs-credits :global(.vs-credits-cam) {
     color: var(--color-accent);
     font-size: 0.8rem;
-    vertical-align: middle;
   }
 
   .vs-credits a {
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
     margin-left: 4px;
   }
 
   .vs-credits a:hover {
-    color: #ffffff;
+    color: #fff;
   }
 
-  /* Social icons — hidden on desktop (shown in header), visible on mobile */
+  /* Social icons — in the header on desktop, here on mobile */
   .vs-social-mobile {
     display: none;
   }
 
   @media (max-width: 600px) {
-    .vs-slide::before {
-      background-image: var(--bg-src-mobile, var(--bg-src));
-      background-position: var(--bg-pos-mobile, var(--bg-pos, center));
+    .vs-slide img {
+      object-position: 85% 50%;
     }
-    .vs-slide-content {
-      margin-top: 160px;
-      margin-left: 28px;
-      margin-right: 28px;
+    .vs-hero {
+      margin: 160px 28px 0;
     }
     .vs-hello {
       font-size: 2.2rem;
@@ -297,17 +217,16 @@ const { slides, interval = 7000 } = Astro.props;
       gap: 4px;
       margin-top: 24px;
     }
-    .vs-social-icon {
+    .vs-social-mobile :global(.vs-social-icon) {
       color: rgba(255, 255, 255, 0.85);
       font-size: 1.4rem;
       display: inline-flex;
-      align-items: center;
       padding: 6px 8px;
       border-radius: var(--radius-pill);
       transition: color 0.15s, background 0.15s;
     }
-    .vs-social-icon:hover {
-      color: #ffffff;
+    .vs-social-mobile :global(.vs-social-icon:hover) {
+      color: #fff;
       background: rgba(255, 255, 255, 0.15);
     }
   }

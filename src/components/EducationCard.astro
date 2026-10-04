@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import type { Education } from '../data/content';
 
 interface Props {
@@ -8,46 +9,20 @@ interface Props {
 const { info } = Astro.props;
 ---
 
-<div class="vs-card-wrap">
-  <article class="vs-card">
-    <img class="vs-card-img" src={info.img} alt={info.center} loading="lazy" />
-    <div class="vs-card-body">
-      <h3 class="vs-card-title">{info.title}</h3>
-      <p class="vs-card-subtitle">{info.subtitle}</p>
-      <div class="vs-card-text">
-        <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-center-link">
-          {info.center}
-        </a>
-        <div class="vs-date-chip">
-          <i class="mdi mdi-calendar-month"></i>
-          {info.date}
-        </div>
-        <img class="vs-edu-icon" src={info.icon} alt={info.center} loading="lazy" />
-      </div>
+<article class="vs-card">
+  <img class="vs-card-img" src={info.img} alt="" loading="lazy" decoding="async" />
+  <div class="vs-card-body">
+    <h3 class="vs-card-title">{info.title}</h3>
+    <p class="vs-card-subtitle">{info.subtitle}</p>
+    <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-card-link">{info.center}</a>
+    <div class="vs-card-footer">
+      <span class="vs-chip vs-chip--date"><Icon name="calendar" />{info.date}</span>
+      <img class="vs-edu-icon" src={info.icon} alt={info.center} loading="lazy" decoding="async" />
     </div>
-  </article>
-</div>
+  </div>
+</article>
 
 <style>
-  .vs-card-wrap {
-    width: 100%;
-    padding: 8px;
-  }
-
-  .vs-card {
-    background: var(--color-surface);
-    border-radius: var(--radius-card);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-
-  .vs-card:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
-
   .vs-card-img {
     width: 100%;
     height: 120px;
@@ -58,15 +33,10 @@ const { info } = Astro.props;
 
   .vs-card-body {
     padding: 20px;
-    position: relative;
   }
 
   .vs-card-title {
-    color: var(--color-text);
-    font-family: var(--font-display);
-    font-weight: 500;
     font-size: 1.15rem;
-    letter-spacing: -0.01em;
     margin-bottom: 6px;
   }
 
@@ -77,62 +47,27 @@ const { info } = Astro.props;
     line-height: 1.5;
   }
 
-  .vs-card-text {
-    position: relative;
-    padding-bottom: 65px;
-  }
-
-  .vs-center-link {
-    color: var(--color-accent);
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  .vs-card-link {
     display: block;
     margin-bottom: 10px;
-    transition: color 0.15s;
   }
 
-  .vs-center-link:hover {
-    color: var(--color-accent-dk);
-  }
-
-  .vs-date-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(var(--color-accent-rgb), 0.12);
-    color: var(--color-accent);
-    font-size: 0.72rem;
-    font-weight: 500;
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    border: 1px solid rgba(var(--color-accent-rgb), 0.25);
+  .vs-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .vs-edu-icon {
     width: 90px;
     height: 36px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    margin-top: 50px;
     border-radius: var(--radius-card);
     object-fit: contain;
     background: rgba(255, 255, 255, 0.92);
     border: 1px solid var(--color-border);
     padding: 4px 6px;
     filter: saturate(0.65) sepia(0.2) brightness(0.95);
-  }
-
-  @media (min-width: 768px) {
-    .vs-card-wrap {
-      width: 50%;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .vs-card-wrap {
-      width: 33.333%;
-    }
   }
 </style>

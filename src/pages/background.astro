@@ -5,19 +5,10 @@ import BannerImages from '../components/BannerImages.astro';
 import SectionBackground from '../components/SectionBackground.astro';
 import EducationCard from '../components/EducationCard.astro';
 import EmploymentCard from '../components/EmploymentCard.astro';
-import { employment, education, skills } from '../data/content';
+import Icon from '../components/Icon.astro';
+import { employment, education, skills, languages } from '../data/content';
 
-const images = [
-  { src: '/img/back/back5.webp' },
-  { src: '/img/back/back1.webp' },
-  { src: '/img/back/back2.webp' },
-];
-
-const languages = [
-  { name: 'Spanish',  value: 100, label: 'Native' },
-  { name: 'English',  value: 70,  label: 'Upper-Intermediate' },
-  { name: 'Catalan',  value: 100, label: 'Native' },
-];
+const images = ['/img/back/back5.webp', '/img/back/back1.webp', '/img/back/back2.webp'];
 ---
 
 <Layout
@@ -36,9 +27,9 @@ const languages = [
 >
   <div class="vs-page">
     <Header currentPage="background" />
-    <BannerImages images={images} interval={10000} bannerId="background-banner" />
+    <BannerImages images={images} />
 
-    <main class="vs-content" id="vs-bio-info">
+    <main class="vs-content">
       <div class="vs-container">
 
         <!-- Bio -->
@@ -70,9 +61,8 @@ const languages = [
               {skills.map((group) => (
                 <li class="vs-skills-row">
                   {group.techs.map((tech) => (
-                    <span class="vs-skill-chip" style={`background-color: ${group.color}`}>
-                      <i class="mdi mdi-label"></i>
-                      {tech}
+                    <span class="vs-chip vs-skill-chip" style={`background-color: ${group.color}`}>
+                      <Icon name="label" />{tech}
                     </span>
                   ))}
                 </li>
@@ -110,41 +100,16 @@ const languages = [
             ))}
           </div>
         </SectionBackground>
-
-        <div style="height: 100px"></div>
       </div>
     </main>
   </div>
 </Layout>
 
-<!-- Shadow on banner when content is scrolled -->
-<script>
-  const banner = document.getElementById('background-banner');
-  const content = document.getElementById('vs-bio-info');
-
-  content?.addEventListener('scroll', () => {
-    banner?.classList.toggle('vs-banner--scrolled', (content.scrollTop ?? 0) > 5);
-  });
-</script>
-
 <style>
-  .vs-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .vs-content {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
   .vs-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 16px 100px;
   }
 
   /* Bio text */
@@ -176,16 +141,6 @@ const languages = [
     font-weight: 500;
   }
 
-  /* Skills list: override global ul li::before */
-  .vs-skills-list {
-    padding-left: 0;
-  }
-
-  .vs-skills-list li::before {
-    content: '' !important;
-    display: none;
-  }
-
   .vs-skills-row {
     display: flex;
     flex-wrap: wrap;
@@ -194,14 +149,7 @@ const languages = [
   }
 
   .vs-skill-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    color: white;
-    font-size: 0.72rem;
-    font-weight: 500;
     padding: 4px 12px;
-    border-radius: var(--radius-pill);
     opacity: 0.92;
     transition: opacity 0.15s, transform 0.15s;
   }
@@ -211,11 +159,19 @@ const languages = [
     transform: translateY(-1px);
   }
 
-  /* Cards grid */
+  /* Cards grid: 1 → 2 → 3 columns */
   .vs-cards-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 4px;
+    display: grid;
+    gap: 16px;
+    margin: 0 12px;
+  }
+
+  @media (min-width: 768px) {
+    .vs-cards-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1280px) {
+    .vs-cards-row { grid-template-columns: repeat(3, 1fr); }
   }
 
   /* Languages */
