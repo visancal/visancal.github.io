@@ -267,7 +267,7 @@ Places shown on the interactive map at https://vicentsanjaime.net/trips.
 
 ### Visited
 
-- Vietnam: Hanoi
+- Vietnam: Hanoi, Ho Chi Minh City
 - Thailand: Chiang Mai, Chiang Rai, Bangkok, Ao Nang
 - Singapore: Singapore
 - United Arab Emirates: Dubai
@@ -296,6 +296,7 @@ Places shown on the interactive map at https://vicentsanjaime.net/trips.
 - South Africa: Cape of Good Hope
 - United States: Grand Canyon, Yosemite, Death Valley
 - Cambodia: Angkor Wat
+- Vietnam: Ha Long Bay
 - Norway: North Cape, Lofoten Islands
 - France: Mont-Saint-Michel
 
