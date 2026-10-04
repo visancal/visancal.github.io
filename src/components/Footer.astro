@@ -1,5 +1,8 @@
 ---
 import SocialLinks from './SocialLinks.astro';
+import { getLang, ui } from '../data/i18n';
+
+const text = ui[getLang(Astro.url)];
 ---
 
 <footer class="vs-footer">
@@ -7,7 +10,7 @@ import SocialLinks from './SocialLinks.astro';
     <SocialLinks linkClass="vs-social-btn" />
   </div>
   <div class="vs-footer-end">
-    Developed with <span class="vs-love">&hearts;</span> by Vicent
+    {text.footerBefore} <span class="vs-love">&hearts;</span> {text.footerAfter}
   </div>
 </footer>
 

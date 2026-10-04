@@ -6,7 +6,12 @@ export default defineConfig({
   site: 'https://vicentsanjaime.net',
   output: 'static',
   outDir: 'docs',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // hreflang alternates for the /es/ and /va/ copies of every page (see src/data/i18n.ts)
+      i18n: { defaultLocale: 'en', locales: { en: 'en', es: 'es', va: 'ca' } },
+    }),
+  ],
   // Self-hosted at build time: no third-party font requests at runtime
   fonts: [
     {

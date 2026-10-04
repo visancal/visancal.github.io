@@ -1,17 +1,20 @@
 ---
 import ProjectMeta from './ProjectMeta.astro';
 import type { Project } from '../data/content';
+import { getLang, t } from '../data/i18n';
 
 interface Props {
   project: Project;
 }
 
 const { project } = Astro.props;
+const lang = getLang(Astro.url);
+const description = t(project.description, lang);
 ---
 
 <article class="vs-card vs-project">
-  <h2 class="vs-card-title vs-project-title">{project.title}</h2>
-  {project.description && <p class="vs-project-desc">{project.description}</p>}
+  <h2 class="vs-card-title vs-project-title">{t(project.title, lang)}</h2>
+  {description && <p class="vs-project-desc">{description}</p>}
   {project.url && (
     <a href={project.url} target="_blank" rel="noopener noreferrer" class="vs-project-url">{project.url}</a>
   )}

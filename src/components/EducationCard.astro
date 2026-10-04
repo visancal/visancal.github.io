@@ -1,23 +1,26 @@
 ---
 import Icon from './Icon.astro';
 import type { Education } from '../data/content';
+import { getLang, t } from '../data/i18n';
 
 interface Props {
   info: Education;
 }
 
 const { info } = Astro.props;
+const lang = getLang(Astro.url);
+const center = t(info.center, lang);
 ---
 
 <article class="vs-card">
   <img class="vs-card-img" src={info.img} alt="" loading="lazy" decoding="async" />
   <div class="vs-card-body">
-    <h3 class="vs-card-title">{info.title}</h3>
-    <p class="vs-card-subtitle">{info.subtitle}</p>
-    <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-card-link">{info.center}</a>
+    <h3 class="vs-card-title">{t(info.title, lang)}</h3>
+    <p class="vs-card-subtitle">{t(info.subtitle, lang)}</p>
+    <a href={info.url} target="_blank" rel="noopener noreferrer" class="vs-card-link">{center}</a>
     <div class="vs-card-footer">
       <span class="vs-chip vs-chip--date"><Icon name="calendar" />{info.date}</span>
-      <img class="vs-edu-icon" src={info.icon} alt={info.center} loading="lazy" decoding="async" />
+      <img class="vs-edu-icon" src={info.icon} alt={center} loading="lazy" decoding="async" />
     </div>
   </div>
 </article>

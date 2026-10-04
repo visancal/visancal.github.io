@@ -1,46 +1,46 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { trips, highlights, wishlist } from '../data/content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { trips, highlights, wishlist, type Trip } from '../../data/content';
+import { breadcrumbSchema, countryName, getLang, localeStaticPaths, ui } from '../../data/i18n';
+
+export const getStaticPaths = localeStaticPaths;
+
+const lang = getLang(Astro.url);
+const text = ui[lang].trips;
+// Country codes → names in the page language, for the marker tooltips
+const localise = (places: Trip[]) => JSON.stringify(places.map((p) => ({ ...p, country: countryName(p.country, lang) })));
 ---
 
 <Layout
-  title="Trips | Vicent Sanjaime — GIS Developer & Consultant"
-  description="Places visited by Vicent Sanjaime around the world, shown on an interactive deck.gl map: Europe, the United States, the Middle East, Southeast Asia, the Caribbean and South Africa."
-  canonicalPath="/trips"
-  schemas={[{
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vicentsanjaime.net' },
-      { '@type': 'ListItem', position: 2, name: 'Trips', item: 'https://vicentsanjaime.net/trips' },
-    ],
-  }]}
+  title={text.title}
+  description={text.description}
+  schemas={[breadcrumbSchema(lang, 'trips')]}
 >
   <div class="vs-page">
     <Header currentPage="trips" />
 
     <main class="vs-content">
       <div class="vs-intro">
-        <h1 class="vs-page-title">Trips</h1>
-        <p class="vs-intro-text">A few of the places I have been lucky enough to visit, and some still on my list. Click a marker to zoom in.</p>
+        <h1 class="vs-page-title">{text.heading}</h1>
+        <p class="vs-intro-text">{text.intro}</p>
       </div>
 
       <div class="vs-trips">
         <div class="vs-map-wrap">
-          <div id="trips-map" class="vs-map" data-trips={JSON.stringify(trips)} data-highlights={JSON.stringify(highlights)} data-wishlist={JSON.stringify(wishlist)}></div>
+          <div id="trips-map" class="vs-map" data-trips={localise(trips)} data-highlights={localise(highlights)} data-wishlist={localise(wishlist)}></div>
           <ul class="vs-legend">
-            <li><span class="vs-legend-dot vs-legend-dot--visited"></span>Visited</li>
-            <li><span class="vs-legend-dot vs-legend-dot--highlight"></span>Highlights</li>
-            <li><span class="vs-legend-dot vs-legend-dot--wishlist"></span>Wishlist</li>
+            <li><span class="vs-legend-dot vs-legend-dot--visited"></span>{text.visited}</li>
+            <li><span class="vs-legend-dot vs-legend-dot--highlight"></span>{text.highlights}</li>
+            <li><span class="vs-legend-dot vs-legend-dot--wishlist"></span>{text.wishlist}</li>
           </ul>
-          <div class="vs-view-toggle" role="group" aria-label="Map view">
+          <div class="vs-view-toggle" role="group" aria-label={text.mapView}>
             <button type="button" data-mode="2d" aria-pressed="false">2D</button>
             <button type="button" data-mode="3d" aria-pressed="true">3D</button>
           </div>
           <p class="vs-attribution">
-            © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>
+            © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> {text.contributors} © <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>
           </p>
         </div>
       </div>
@@ -54,7 +54,7 @@ import { trips, highlights, wishlist } from '../data/content';
   import { Deck, MapView, _GlobeView as GlobeView, FlyToInterpolator, LinearInterpolator } from '@deck.gl/core';
   import { ScatterplotLayer, BitmapLayer, SolidPolygonLayer } from '@deck.gl/layers';
   import { TileLayer } from '@deck.gl/geo-layers';
-  import type { Trip } from '../data/content';
+  import type { Trip } from '../../data/content';
 
   type ViewMode = '2d' | '3d';
   const VIEW_MODE_KEY = 'trips-view-mode';
