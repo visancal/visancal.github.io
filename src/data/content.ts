@@ -364,3 +364,98 @@ export const projects: Project[] = [
     rd: false,
   },
 ];
+
+export interface Trip {
+  name: string;
+  country: string;
+  /** [longitude, latitude] */
+  coordinates: [number, number];
+}
+
+export const trips: Trip[] = [
+  { name: 'Hanoi', country: 'Vietnam', coordinates: [105.8542, 21.0285] },
+  { name: 'Chiang Mai', country: 'Thailand', coordinates: [98.9853, 18.7883] },
+  { name: 'Chiang Rai', country: 'Thailand', coordinates: [99.8325, 19.9105] },
+  { name: 'Bangkok', country: 'Thailand', coordinates: [100.5018, 13.7563] },
+  { name: 'Ao Nang', country: 'Thailand', coordinates: [98.8226, 8.0322] },
+  { name: 'Singapore', country: 'Singapore', coordinates: [103.8198, 1.3521] },
+  { name: 'Dubai', country: 'United Arab Emirates', coordinates: [55.2708, 25.2048] },
+  { name: 'Doha', country: 'Qatar', coordinates: [51.531, 25.2854] },
+  { name: 'Samaná', country: 'Dominican Republic', coordinates: [-69.3364, 19.2058] },
+  { name: 'Santo Domingo', country: 'Dominican Republic', coordinates: [-69.9312, 18.4861] },
+  { name: 'Fort-de-France', country: 'Martinique', coordinates: [-61.0742, 14.6161] },
+  { name: 'Pointe-à-Pitre', country: 'Guadeloupe', coordinates: [-61.5331, 16.2411] },
+  { name: 'Isla Margarita', country: 'Venezuela', coordinates: [-63.9, 11.0] },
+  { name: 'Havana', country: 'Cuba', coordinates: [-82.3666, 23.1136] },
+  { name: 'Varadero', country: 'Cuba', coordinates: [-81.2449, 23.1539] },
+  { name: 'Cayo Santa María', country: 'Cuba', coordinates: [-78.995, 22.66] },
+  { name: 'Cienfuegos', country: 'Cuba', coordinates: [-80.4356, 22.1461] },
+  { name: 'New York', country: 'United States', coordinates: [-74.006, 40.7128] },
+  { name: 'Los Angeles', country: 'United States', coordinates: [-118.2437, 34.0522] },
+  { name: 'Cape Town', country: 'South Africa', coordinates: [18.4241, -33.9249] },
+  { name: 'La Palma', country: 'Spain', coordinates: [-17.8647, 28.6835] },
+  { name: 'Madrid', country: 'Spain', coordinates: [-3.7038, 40.4168] },
+  { name: 'Barcelona', country: 'Spain', coordinates: [2.1734, 41.3851] },
+  { name: 'Girona', country: 'Spain', coordinates: [2.8214, 41.9794] },
+  { name: 'Tarifa', country: 'Spain', coordinates: [-5.6045, 36.0143] },
+  { name: 'Sevilla', country: 'Spain', coordinates: [-5.9845, 37.3891] },
+  { name: 'Bilbao', country: 'Spain', coordinates: [-2.935, 43.263] },
+  { name: 'San Sebastián', country: 'Spain', coordinates: [-1.9812, 43.3183] },
+  { name: 'Torla', country: 'Spain', coordinates: [-0.1107, 42.6276] },
+  { name: 'Cáceres', country: 'Spain', coordinates: [-6.3724, 39.4753] },
+  { name: 'Finisterre', country: 'Spain', coordinates: [-9.2651, 42.9078] },
+  { name: 'Ávila', country: 'Spain', coordinates: [-4.6812, 40.6565] },
+  { name: 'Segovia', country: 'Spain', coordinates: [-4.1184, 40.9429] },
+  { name: 'A Coruña', country: 'Spain', coordinates: [-8.4115, 43.3623] },
+  { name: 'Santander', country: 'Spain', coordinates: [-3.8044, 43.4623] },
+  { name: 'Teruel', country: 'Spain', coordinates: [-1.1065, 40.3456] },
+  { name: 'Cádiz', country: 'Spain', coordinates: [-6.2885, 36.5271] },
+  { name: 'Lagos', country: 'Portugal', coordinates: [-8.6732, 37.1028] },
+  { name: 'Palma', country: 'Spain', coordinates: [2.6502, 39.5696] },
+  { name: 'Son Bou', country: 'Spain', coordinates: [4.0775, 39.8987] },
+  { name: 'Cala Llonga', country: 'Spain', coordinates: [1.5233, 38.9551] },
+  { name: 'Formentera', country: 'Spain', coordinates: [1.4436, 38.7053] },
+  { name: 'Paris', country: 'France', coordinates: [2.3522, 48.8566] },
+  { name: 'Dune du Pilat', country: 'France', coordinates: [-1.2131, 44.5893] },
+  { name: 'Andorra', country: 'Andorra', coordinates: [1.5218, 42.5063] },
+  { name: 'Monaco', country: 'Monaco', coordinates: [7.4246, 43.7384] },
+  { name: 'Manchester', country: 'United Kingdom', coordinates: [-2.2426, 53.4808] },
+  { name: 'London', country: 'United Kingdom', coordinates: [-0.1278, 51.5074] },
+  { name: 'Edinburgh', country: 'United Kingdom', coordinates: [-3.1883, 55.9533] },
+  { name: 'Tromsø', country: 'Norway', coordinates: [18.9553, 69.6492] },
+  { name: 'Dublin', country: 'Ireland', coordinates: [-6.2603, 53.3498] },
+  { name: 'Milan', country: 'Italy', coordinates: [9.19, 45.4642] },
+  { name: 'Venice', country: 'Italy', coordinates: [12.3155, 45.4408] },
+  { name: 'Pisa', country: 'Italy', coordinates: [10.4017, 43.7228] },
+  { name: 'Florence', country: 'Italy', coordinates: [11.2558, 43.7696] },
+  { name: 'Rome', country: 'Italy', coordinates: [12.4964, 41.9028] },
+  { name: 'Capri', country: 'Italy', coordinates: [14.2425, 40.5532] },
+  { name: 'Amalfi', country: 'Italy', coordinates: [14.6027, 40.634] },
+  { name: 'Pompeii', country: 'Italy', coordinates: [14.4848, 40.7489] },
+  { name: 'Malta', country: 'Malta', coordinates: [14.5146, 35.8997] },
+  { name: 'Novi Sad', country: 'Serbia', coordinates: [19.8335, 45.2671] },
+  { name: 'Belgrade', country: 'Serbia', coordinates: [20.4489, 44.7866] },
+  { name: 'Las Vegas', country: 'United States', coordinates: [-115.1398, 36.1699] },
+  { name: 'San Francisco', country: 'United States', coordinates: [-122.4194, 37.7749] },
+];
+
+/** Standout places worth highlighting, drawn as green markers. */
+export const highlights: Trip[] = [
+  { name: 'Cape of Good Hope', country: 'South Africa', coordinates: [18.4733, -34.3568] },
+  { name: 'Grand Canyon', country: 'United States', coordinates: [-112.1129, 36.1069] },
+  { name: 'Yosemite', country: 'United States', coordinates: [-119.5383, 37.8651] },
+  { name: 'Death Valley', country: 'United States', coordinates: [-116.8231, 36.5054] },
+  { name: 'Angkor Wat', country: 'Cambodia', coordinates: [103.867, 13.4125] },
+  { name: 'North Cape', country: 'Norway', coordinates: [25.7836, 71.1685] },
+  { name: 'Lofoten Islands', country: 'Norway', coordinates: [13.95, 68.2] },
+];
+
+/** Destinations on the wishlist, drawn as red markers. */
+export const wishlist: Trip[] = [
+  { name: 'Victoria Falls', country: 'Zambia / Zimbabwe', coordinates: [25.8572, -17.9243] },
+  { name: 'Philippines', country: 'Philippines', coordinates: [121.774, 12.8797] },
+  { name: 'Peru', country: 'Peru', coordinates: [-75.0152, -9.19] },
+  { name: 'Tibet', country: 'China', coordinates: [91.1172, 29.6525] },
+  { name: 'Azores', country: 'Portugal', coordinates: [-25.5, 37.78] },
+  { name: 'Cairo', country: 'Egypt', coordinates: [31.2357, 30.0444] },
+];

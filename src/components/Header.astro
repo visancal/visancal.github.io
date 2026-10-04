@@ -1,6 +1,6 @@
 ---
 interface Props {
-  currentPage?: 'home' | 'background' | 'projects';
+  currentPage?: 'home' | 'background' | 'projects' | 'trips';
 }
 
 const { currentPage = 'home' } = Astro.props;
@@ -11,6 +11,7 @@ const navItems = [
   { key: 'home', href: '/', label: 'Home', paths: ['M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M9 22V12h6v10'] },
   { key: 'background', href: '/background', label: 'Background', paths: ['M4 7h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z', 'M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'] },
   { key: 'projects', href: '/projects', label: 'Projects', paths: ['M12 2L2 7l10 5 10-5-10-5z', 'M2 17l10 5 10-5', 'M2 12l10 5 10-5'] },
+  { key: 'trips', href: '/trips', label: 'Trips', paths: ['M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z', 'M12 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'] },
 ] as const;
 ---
 
