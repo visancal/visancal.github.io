@@ -1,7 +1,8 @@
 # Vicent Sanjaime — Full site content
 
 > This document inlines all content from https://vicentsanjaime.net as plain text for AI agents and LLMs.
-> See /llms.txt for a short index of the site's pages.
+> See /llms.txt for a short index of the site's pages. Spanish and Valencian versions of the
+> pages are under https://vicentsanjaime.net/es/ and https://vicentsanjaime.net/va/.
 
 ## Bio
 
@@ -45,7 +46,7 @@ Based in Valencia, Spain. Interests: GIS, AI, travel and cycling.
 
 - Spanish: Native
 - English: Upper-Intermediate
-- Catalan: Native
+- Catalan (Valencian): Native
 
 ## Employment history
 
@@ -296,6 +297,7 @@ Places shown on the interactive map at https://vicentsanjaime.net/trips.
 - United States: Grand Canyon, Yosemite, Death Valley
 - Cambodia: Angkor Wat
 - Norway: North Cape, Lofoten Islands
+- France: Mont-Saint-Michel
 
 ### Wishlist
 

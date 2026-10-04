@@ -14,6 +14,9 @@ languages, projects and trips inlined as a single plain-text document.
 - [Projects](https://vicentsanjaime.net/projects): Timeline of professional, personal and R&D projects with the technologies used.
 - [Trips](https://vicentsanjaime.net/trips): Interactive deck.gl globe/map of places visited, highlighted places and wishlist destinations.
 
+Every page is also available in Spanish under `/es/` (e.g. https://vicentsanjaime.net/es/projects) and in
+Valencian (Catalan) under `/va/` (e.g. https://vicentsanjaime.net/va/projects).
+
 ## Full content
 
 - [llms-full.txt](https://vicentsanjaime.net/llms-full.txt): All site content inlined as plain text for LLM consumption.
