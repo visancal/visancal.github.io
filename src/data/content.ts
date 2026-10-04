@@ -570,6 +570,7 @@ export interface Trip {
 
 export const trips: Trip[] = [
   { name: 'Hanoi', country: 'VN', coordinates: [105.8542, 21.0285] },
+  { name: 'Ho Chi Minh City', country: 'VN', coordinates: [106.6297, 10.8231] },
   { name: 'Chiang Mai', country: 'TH', coordinates: [98.9853, 18.7883] },
   { name: 'Chiang Rai', country: 'TH', coordinates: [99.8325, 19.9105] },
   { name: 'Bangkok', country: 'TH', coordinates: [100.5018, 13.7563] },
@@ -642,6 +643,7 @@ export const highlights: Trip[] = [
   { name: 'Yosemite', country: 'US', coordinates: [-119.5383, 37.8651] },
   { name: 'Death Valley', country: 'US', coordinates: [-116.8231, 36.5054] },
   { name: 'Angkor Wat', country: 'KH', coordinates: [103.867, 13.4125] },
+  { name: 'Ha Long Bay', country: 'VN', coordinates: [107.0843, 20.9101] },
   { name: 'North Cape', country: 'NO', coordinates: [25.7836, 71.1685] },
   { name: 'Lofoten Islands', country: 'NO', coordinates: [13.95, 68.2] },
   { name: 'Mont-Saint-Michel', country: 'FR', coordinates: [-1.5115, 48.6361] },
