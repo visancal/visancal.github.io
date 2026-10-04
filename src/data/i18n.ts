@@ -98,6 +98,7 @@ const en = {
     highlights: 'Highlights',
     wishlist: 'Wishlist',
     mapView: 'Map view',
+    resetNorth: 'Reset north',
     contributors: 'contributors',
   },
 };
@@ -156,6 +157,7 @@ const es: UI = {
     highlights: 'Destacados',
     wishlist: 'Pendientes',
     mapView: 'Vista del mapa',
+    resetNorth: 'Orientar al norte',
     contributors: 'colaboradores',
   },
 };
@@ -212,6 +214,7 @@ const va: UI = {
     highlights: 'Destacats',
     wishlist: 'Pendents',
     mapView: 'Vista del mapa',
+    resetNorth: 'Orientar al nord',
     contributors: 'col·laboradors',
   },
 };

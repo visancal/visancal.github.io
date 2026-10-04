@@ -99,7 +99,7 @@ The rest carry `data-src` / `data-srcset` and `rotator.ts` loads each one a slid
 - **Home** — `HomeCarousel` (absolute, behind) + `Header` (semi-transparent with backdrop blur, on top). There is one `<h1>` in the hero, and the slides only hold images and photo credits.
 - **Background / Projects / Trips** — global `.vs-page` flex column (`100dvh`): Header → BannerImages (140px, 50px on mobile; not on Trips) → scrollable `<main class="vs-content">` → Footer.
 - **Projects timeline** — `<ol>` of flex rows. Even items have the card on the right, odd items (`.vs-item--left`, `row-reverse`) on the left, and a centre line from `.vs-timeline::before`. `ProjectMeta` (date/company/R&D chips) renders opposite the card on desktop and inside `TimelineCard` on mobile.
-- **Trips** — deck.gl `GlobeView` (3D, default) / `MapView` (2D) toggle, remembered in `localStorage`. The basemap is CARTO tiles on the production domain only (the API key is domain-restricted) and OpenStreetMap everywhere else. Marker data is passed through `data-*` attributes.
+- **Trips** — deck.gl `GlobeView` (3D, default) / `MapView` (2D) toggle, remembered in `localStorage`. The basemap is CARTO tiles without labels on the production domain only (the API key is domain-restricted) and Esri's label-free shaded relief everywhere else. Marker data is passed through `data-*` attributes.
 
 ## Client-side JS and View Transitions
 
