@@ -17,6 +17,6 @@
     "@deck.gl/core": "^9.4.0",
     "@deck.gl/geo-layers": "^9.4.0",
     "@deck.gl/layers": "^9.4.0",
-    "astro": "7.3.5"
+    "astro": "7.4.7"
   }
 }
